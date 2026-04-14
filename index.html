@@ -1,1 +1,22 @@
-testing
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Pokemon AR</title>
+</head>
+<body>
+    <!-- 1️⃣ Load the library -->
+    <script src="code.js"></script>
+
+    <!-- 2️⃣ Init with your models. DONE! -->
+    <script>
+    PokemonAR.init({
+        pokemon: [
+            { name: 'BULBASAUR',  dex: '#001', type: 'GRASS / POISON', color: '#4CAF50', model: 'https://github.com/YOUR_USER/YOUR_REPO/releases/download/v1.0/bulbasaur.glb' },
+            { name: 'CHARMANDER', dex: '#004', type: 'FIRE',           color: '#FF5722', model: 'https://github.com/YOUR_USER/YOUR_REPO/releases/download/v1.0/charmander.glb' },
+            { name: 'SQUIRTLE',   dex: '#007', type: 'WATER',          color: '#2196F3', model: 'https://digimarketingai.github.io/pokemon3d/squirtle_s.glb' }
+        ]
+    });
+    </script>
+</body>
+</html>
