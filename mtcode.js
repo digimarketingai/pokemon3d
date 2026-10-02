@@ -3,6 +3,11 @@
  *  PokemonAR.js v5 — Photo Capture · i18n · Touch Rotate
  * ==========================================================
  */
+/**
+ * ==========================================================
+ *  PokemonAR.js v5 — Photo Capture · i18n · Touch Rotate
+ * ==========================================================
+ */
 (function () {
   "use strict";
 
@@ -63,20 +68,20 @@
     },
     appeared: {
       en: "✨ Wild {n} appeared!",
-      zh_tw: "✨ 野生的 {n} 出現了！",
+      zh_tw: "✨ 野生的 {名} 出現了！",
       zh_cn: "✨ 野生的 {n} 出现了！",
     },
     loading_name: {
       en: "⏳ Loading {n}…",
       zh_tw: "⏳ 正在載入 {n}…",
-      zh_cn: "⏳ 正在加载 {n}…",
+      zh_cn: "⏳ 正在載入 {n}…",
     },
     model_failed: {
       en: "❌ Model failed to load",
       zh_tw: "❌ 模型載入失敗",
       zh_cn: "❌ 模型加载失败",
     },
-    spin_on: { en: "Spin ON", zh_tw: "旋轉 開", zh_cn: "旋转 开" },
+    spin_on: { en: "Spin ON", zh_tw: "旋轉 在", zh_cn: "旋转 开" },
     spin_off: { en: "Spin OFF", zh_tw: "旋轉 關", zh_cn: "旋转 关" },
     loading_title: {
       en: "Loading Pokémon AR…",
@@ -111,14 +116,14 @@
     drag_hint: {
       en: "👆 Drag to rotate model",
       zh_tw: "👆 拖動以旋轉模型",
-      zh_cn: "👆 拖动以旋转模型",
+      zh_cn: "👆 拖动以旋转模特",
     },
     photo_saved: {
       en: "📸 Photo captured!",
       zh_tw: "📸 已拍照！",
       zh_cn: "📸 已拍照！",
     },
-    photo_save: { en: "💾 Save", zh_tw: "💾 儲存", zh_cn: "💾 保存" },
+    photo_save: { en: "💾 Save", zh_tw: "💾 拯救", zh_cn: "💾 保存" },
     photo_share: { en: "📤 Share", zh_tw: "📤 分享", zh_cn: "📤 分享" },
     photo_close: { en: "✕ Close", zh_tw: "✕ 關閉", zh_cn: "✕ 关闭" },
     photo_retake: { en: "🔄 Retake", zh_tw: "🔄 重拍", zh_cn: "🔄 重拍" },
