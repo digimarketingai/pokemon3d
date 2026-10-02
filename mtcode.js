@@ -594,21 +594,19 @@
 
   /* ============================================================
      LOAD DEPENDENCIES
-     (Local files. On Liveweave, use the CDN links instead:
-       https://aframe.io/releases/1.4.0/aframe.min.js
-       https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js
-       https://unpkg.com/meshoptimizer@0.18/meshopt_decoder.js )
      ============================================================ */
   async function loadDeps() {
     if (!window.AFRAME) {
-      await loadScript("aframe.min.js");
+      await loadScript("https://aframe.io/releases/1.4.0/aframe.min.js");
     }
     if (!window.AFRAME || !AFRAME.components["arjs-look-controls"]) {
-      await loadScript("aframe-ar.js");
+      await loadScript(
+        "https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"
+      );
     }
     log("A-Frame " + (window.AFRAME ? AFRAME.version : "N/A"));
 
-    await loadScript("meshopt_decoder.js");
+    await loadScript("https://unpkg.com/meshoptimizer@0.18/meshopt_decoder.js");
     if (window.MeshoptDecoder) {
       try {
         await MeshoptDecoder.ready;
