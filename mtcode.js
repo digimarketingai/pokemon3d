@@ -1,7 +1,6 @@
 /**
  * ==========================================================
  *  PokemonAR.js v5 — Photo Capture · i18n · Touch Rotate
- *  ⚠ L10n LAB EDITION — some Chinese strings are raw MT
  * ==========================================================
  */
 (function () {
@@ -56,20 +55,15 @@
   var LANG_CYCLE = ["en", "zh_tw", "zh_cn"];
   var LANG_LABELS = { en: "EN", zh_tw: "繁體", zh_cn: "简体" };
 
-  /* ============================================================
-     🎓 STUDENT POST-EDITING ZONE
-     Fix the Chinese (zh_tw / zh_cn) only.
-     Do NOT change: en, keys, quotes " ", commas, {n}, emoji
-     ============================================================ */
   var UI = {
     point_camera: {
       en: "📷 Point camera at Hiro marker",
-      zh_tw: "📷 系統偵測不到標記，請您將行動裝置的相機鏡頭重新對準印在紙張上面的黑色方形 Hiro 標記圖案，並保持手機穩定不要晃動，以便繼續進行遊戲",
+      zh_tw: "📷 將相機對準 Hiro 標記",
       zh_cn: "📷 将相机对准 Hiro 标记",
     },
     appeared: {
       en: "✨ Wild {n} appeared!",
-      zh_tw: "✨ 野生的 {名字} 出現了！",
+      zh_tw: "✨ 野生的 {n} 出現了！",
       zh_cn: "✨ 野生的 {n} 出现了！",
     },
     loading_name: {
@@ -86,7 +80,7 @@
     spin_off: { en: "Spin OFF", zh_tw: "旋轉 關", zh_cn: "旋转 关" },
     loading_title: {
       en: "Loading Pokémon AR…",
-      zh_tw: "正在載入 口袋妖怪 AR…",
+      zh_tw: "正在載入 Pokémon AR…",
       zh_cn: "正在加载 Pokémon AR…",
     },
     requesting_camera: {
@@ -120,26 +114,21 @@
       zh_cn: "👆 拖动以旋转模型",
     },
     photo_saved: {
-      en: "📸 Nailed it!",
-      zh_tw: "📸 釘住了！",
-      zh_cn: "📸 拍得好！",
+      en: "📸 Photo captured!",
+      zh_tw: "📸 已拍照！",
+      zh_cn: "📸 已拍照！",
     },
     photo_save: { en: "💾 Save", zh_tw: "💾 儲存", zh_cn: "💾 保存" },
-    photo_share: { en: "📤 Share", zh_tw: "📤 股份", zh_cn: "📤 分享" },
+    photo_share: { en: "📤 Share", zh_tw: "📤 分享", zh_cn: "📤 分享" },
     photo_close: { en: "✕ Close", zh_tw: "✕ 關閉", zh_cn: "✕ 关闭" },
     photo_retake: { en: "🔄 Retake", zh_tw: "🔄 重拍", zh_cn: "🔄 重拍" },
-    capture: {
-      en: "Capture",
-      zh_tw: "按此按鈕即可拍攝照片並儲存到您的裝置相簿中",
-      zh_cn: "拍照",
-    },
+    capture: { en: "Capture", zh_tw: "拍照", zh_cn: "拍照" },
     photo_watermark: {
       en: "Caught with Pokémon AR",
       zh_tw: "使用 Pokémon AR 捕捉",
       zh_cn: "使用 Pokémon AR 捕捉",
     },
   };
-  /* ================= END STUDENT ZONE ================= */
 
   /* ============================================================
      i18n HELPERS
