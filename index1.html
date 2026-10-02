@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html>
+<head>
+                <style>/* =========================================================
+   AR L10n Lab · style.css  (high-contrast, bilingual)
+   ========================================================= */
+:root{
+  --red:#e3350d; --red-d:#b4260a; --yellow:#ffcb05; --yellow-l:#fff4c2;
+  --blue:#1d5fa8; --navy:#0b1d3a; --navy2:#16305c;
+  --teal:#0f766e; --purple:#6d28d9; --green:#15803d; --orange:#c2410c;
+  --ink:#111827; --ink2:#334155; --muted:#475569;
+  --bg:#f6f8fc; --alt:#eaf0fa; --card:#ffffff; --line:#d5dce8;
+  --good:#166534; --good-bg:#e3f5e9; --bad:#b91c1c; --bad-bg:#fde8e8; --warn:#b45309;
+  --r:14px; --accent:var(--blue);
+}
+
+/* ---------- Robust base colours (beat host/preview stylesheets) ---------- */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;color-scheme:light;background:var(--bg)}
+html body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:Inter,"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;
+}
+body :is(h1,h2,h3,h4,h5,h6,p,li,ul,ol,td,th,label,summary,details,span,strong,b,em,i,small,div,section,header,main,footer,nav,dl,dt,dd,pre){color:inherit}
+body a{color:var(--blue);font-weight:600}
+body code{font-family:"JetBrains Mono",ui-monospace,Consolas,monospace;background:#e8edff;color:#312e81;padding:.05rem .35rem;border-radius:5px;font-size:.86em}
+body pre code{background:none;color:inherit;padding:0}
+body h1,body h2,body h3,body h4,body h5{color:var(--navy);line-height:1.3}
+body h3{margin:2.2rem 0 .8rem;font-size:1.25rem}
+body h4{margin:.2rem 0 .4rem}
+
+/* ---------- Bilingual modes ---------- */
+.zh{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+body.m-en .zh{display:none!important}
+body.m-zh .en{display:none!important}
+body.m-both :is(h1,h2,h3,h4,h5,p,li,td,summary,.bi,.rule,.lead,.caption,.tl-body,.sub)>.zh{display:block}
+body.m-both :is(p,li,td,.bi,.rule,.lead,.tl-body,.sub)>.zh{color:var(--ink2);margin-top:.2rem}
+body.m-both :is(h2)>.zh{font-size:.68em;color:var(--accent);margin-top:.15rem}
+body.m-both :is(h3,h4)>.zh{font-size:.82em;color:var(--ink2)}
+body.m-both :is(button,th,.chip,.tag,label,b,strong,.pill,.sev,a)>.zh::before{content:" / ";opacity:.55}
+body.m-both #nav a>.zh{display:block;font-size:.7rem;font-weight:500}
+body.m-both #nav a>.zh::before{content:none}
+
+/* ---------- NAV ---------- */
+#nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:1rem;justify-content:space-between;
+  padding:.5rem 1.2rem;background:#ffffff;border-bottom:3px solid var(--yellow);box-shadow:0 2px 12px rgba(11,29,58,.08)}
+#nav .brand{font-weight:800;display:flex;align-items:center;gap:.5rem;color:var(--navy);white-space:nowrap}
+.ball{width:22px;height:22px;border-radius:50%;background:linear-gradient(var(--red) 0 46%,#111 46% 54%,#fff 54%);border:2px solid #111}
+#nav ul{list-style:none;display:flex;gap:.25rem;margin:0;padding:0;overflow-x:auto}
+#nav a{display:block;text-decoration:none;color:var(--navy);font-weight:700;font-size:.86rem;padding:.3rem .55rem;border-radius:8px;text-align:center;white-space:nowrap}
+#nav a:hover{background:var(--yellow-l)}
+#nav a.on{background:var(--navy);color:#fff}
+.lang-switch{display:flex;border:2px solid var(--navy);border-radius:999px;overflow:hidden;flex-shrink:0}
+.lang-switch button{border:none;background:#fff;color:var(--navy);font-weight:800;padding:.3rem .7rem;cursor:pointer;font-size:.8rem}
+.lang-switch button.on{background:var(--navy);color:var(--yellow)}
+
+/* ---------- HERO ---------- */
+.hero{display:grid;grid-template-columns:1.35fr 1fr;gap:2rem;align-items:center;padding:4.5rem 6vw;color:#fff;
+  background:radial-gradient(circle at 85% 20%,rgba(255,203,5,.35) 0,transparent 35%),linear-gradient(135deg,#0b1d3a 0%,#16305c 55%,#1d5fa8 100%)}
+.hero h1{color:#fff;font-size:clamp(2rem,4.6vw,3.3rem);margin:.4rem 0 1rem;font-weight:900}
+.hero h1 em{font-style:normal;color:var(--yellow)}
+body.m-both .hero h1>.zh{font-size:.62em;color:#dbe7ff}
+.kicker{text-transform:uppercase;letter-spacing:2px;font-weight:800;font-size:.8rem;margin:0;color:var(--yellow)}
+body.m-both .kicker>.zh::before{content:" · "}
+.hero-lead{color:#e6edfb;font-size:1.06rem;max-width:720px}
+body.m-both .hero-lead>.zh{color:#c9d7f2}
+.hero-btns{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.4rem}
+.hero-card{text-align:center}
+.mini-phone{width:220px;height:380px;margin:auto;border:10px solid #050b17;border-radius:32px;overflow:hidden;box-shadow:0 24px 48px rgba(0,0,0,.45)}
+.mini-cam{height:100%;background:linear-gradient(160deg,#6b8f71,#2f4234);position:relative}
+.mini-poke{font-size:90px;position:absolute;top:26%;left:50%;transform:translateX(-50%);animation:bob 1.5s infinite alternate}
+@keyframes bob{to{transform:translate(-50%,-12px)}}
+.mini-card{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.82);color:#fff;border-radius:12px;padding:8px 12px;width:86%;display:flex;flex-direction:column;font-size:.8rem;outline:2px dashed #ff6b6b}
+.mini-card b,.mini-card small,.mini-card em{color:#fff}
+.hero .caption{color:#dbe7ff;font-size:.9rem}
+
+/* ---------- BUTTONS ---------- */
+.btn{display:inline-block;border:2px solid var(--navy);background:#fff;color:var(--navy);padding:.6rem 1.15rem;border-radius:999px;font-weight:800;text-decoration:none;cursor:pointer;font-size:.92rem;transition:.15s;font-family:inherit}
+.btn:hover{transform:translateY(-2px);box-shadow:0 4px 0 var(--navy)}
+.btn.primary{background:var(--red);border-color:var(--red);color:#fff}
+.btn.primary:hover{box-shadow:0 4px 0 var(--red-d)}
+.btn.light{background:transparent;border-color:#fff;color:#fff}
+.btn.sm{padding:.35rem .8rem;font-size:.8rem;margin:.2rem .2rem .2rem 0}
+
+/* ---------- SECTIONS ---------- */
+section{padding:4.5rem 6vw;background:var(--bg)}
+section.alt{background:var(--alt)}
+section[data-accent=blue]{--accent:var(--blue)}
+section[data-accent=red]{--accent:var(--red)}
+section[data-accent=purple]{--accent:var(--purple)}
+section[data-accent=teal]{--accent:var(--teal)}
+section[data-accent=green]{--accent:var(--green)}
+section[data-accent=navy]{--accent:var(--navy2)}
+section[data-accent=orange]{--accent:var(--orange)}
+.sec-head{display:flex;gap:1rem;align-items:flex-start;border-bottom:4px solid var(--accent);padding-bottom:.8rem;margin-bottom:1.2rem}
+.sec-head h2{margin:0;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900}
+.num{flex-shrink:0;background:var(--accent);color:#fff;border-radius:10px;padding:.15rem .6rem;font-weight:900;font-size:1.4rem}
+.lead{font-size:1.07rem;max-width:960px;color:var(--ink)}
+.note,.tiny{color:var(--muted);font-size:.86rem}
+.hint{color:var(--ink2);font-weight:600}
+.bi{max-width:960px}
+
+.grid{display:grid;gap:1rem}
+.grid.six{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.grid.three{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.grid.four{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.card{background:var(--card);color:var(--ink);border-radius:var(--r);padding:1.1rem 1.2rem;border:1px solid var(--line);border-top:5px solid var(--accent);box-shadow:0 3px 12px rgba(11,29,58,.06)}
+.card p{margin:0;font-size:.94rem}
+.ico{font-size:1.9rem}
+.callout{margin-top:1.5rem;padding:1rem 1.2rem;border-left:6px solid var(--yellow);background:#fffbe6;color:var(--ink);border-radius:10px}
+.callout.warn{border-left-color:var(--orange);background:#fff3ea}
+
+/* ---------- TIMELINE / PIPELINE ---------- */
+.timeline{border-left:4px solid var(--accent);margin-left:.6rem;padding-left:1.3rem}
+.tl{position:relative;margin-bottom:1.1rem;background:#fff;border-radius:10px;padding:.7rem 1rem;border:1px solid var(--line)}
+.tl::before{content:"";position:absolute;left:-1.95rem;top:.9rem;width:16px;height:16px;border-radius:50%;background:#fff;border:4px solid var(--accent)}
+.tl b{color:var(--accent)}
+.pipeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;margin-top:.8rem}
+.step{background:#fff;border-radius:var(--r);padding:1.1rem 1rem .9rem;position:relative;border:1px solid var(--line)}
+.step .sn{position:absolute;top:-13px;left:12px;background:var(--navy);color:#fff;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:.8rem}
+.step h5{margin:.4rem 0 .3rem;font-size:.96rem;color:var(--navy)}
+.step p{margin:0;font-size:.86rem}
+.step.core{border:2px solid var(--red);background:#fff1ed}
+.step.core .sn{background:var(--red)}
+
+/* ---------- TABLES ---------- */
+.tbl-wrap{overflow-x:auto;border-radius:var(--r);box-shadow:0 3px 12px rgba(11,29,58,.06)}
+.tbl{width:100%;border-collapse:collapse;background:#fff;font-size:.9rem}
+.tbl th{background:var(--navy);color:#fff;text-align:left;padding:.7rem .75rem;font-weight:700;white-space:nowrap}
+.tbl td{padding:.65rem .75rem;border-top:1px solid #e3e8f0;vertical-align:top;color:var(--ink)}
+.tbl tbody tr:nth-child(even) td{background:#f5f8fd}
+.tbl td.bad{color:var(--bad);font-weight:800;background:var(--bad-bg)!important}
+.tbl td.good{color:var(--good);font-weight:800;background:var(--good-bg)!important}
+.tbl td.k{font-weight:700;color:var(--navy)}
+.pill{display:inline-block;font-size:.72rem;font-weight:800;padding:.1rem .5rem;border-radius:999px;background:#e0f2f1;color:var(--teal);margin-top:.3rem}
+.pill.obs{background:#fff1d6;color:var(--warn)}
+.filter{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0}
+.chip{border:2px solid var(--accent);background:#fff;color:var(--accent);border-radius:999px;padding:.3rem .9rem;cursor:pointer;font-weight:700;font-family:inherit}
+.chip.active{background:var(--accent);color:#fff}
+
+/* ---------- RESEARCH ---------- */
+.rcard{background:#fff;border-radius:var(--r);padding:1.1rem 1.2rem;border:1px solid var(--line);border-left:6px solid var(--teal)}
+.rcard .big{font-size:1.6rem;font-weight:900;color:var(--teal);line-height:1.2}
+.rcard h4{margin:.3rem 0}
+.rcard p{margin:.3rem 0;font-size:.92rem}
+.rcard .cite{font-size:.78rem;color:var(--muted);font-style:italic}
+
+/* ---------- POST-EDITING ---------- */
+.pe-levels{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.pe-levels>div{background:#fff;border-radius:var(--r);padding:1rem 1.1rem;border:2px solid var(--line)}
+.pe-levels .hl{border-color:var(--green);background:#effaf2}
+.pe-levels .gold{border-color:var(--yellow);background:#fffbe6}
+.op{background:#fff;border-radius:var(--r);padding:.9rem 1rem;border:1px solid var(--line);border-top:5px solid var(--green)}
+.op .ex{font-size:.88rem;margin-top:.4rem;background:#f5f8fd;border-radius:8px;padding:.4rem .6rem}
+.op .ex del{color:var(--bad)} .op .ex ins{color:var(--good);text-decoration:none;font-weight:800}
+.strategies{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1rem}
+.strat{background:#fff;border-radius:var(--r);padding:1.1rem;border:1px solid var(--line);cursor:pointer;transition:.2s;position:relative}
+.strat:hover{box-shadow:0 10px 22px rgba(11,29,58,.12);transform:translateY(-3px)}
+.strat .tag{position:absolute;top:12px;right:12px;font-size:.7rem;background:var(--yellow);color:#3d2e00;padding:.12rem .55rem;border-radius:999px;font-weight:800}
+.strat h4{padding-right:5.5rem}
+.strat .rule{font-size:.9rem;margin:0 0 .6rem}
+.strat .ex{border-radius:10px;padding:.6rem .8rem;transition:.2s}
+.strat .ex .lbl{font-size:.7rem;font-weight:900;letter-spacing:1px}
+.strat .ex .src{font-size:.8rem;color:var(--muted)}
+.strat .ex .txt{font-size:1.08rem;font-weight:800}
+.strat .ex.mt{background:var(--bad-bg);border:2px dashed var(--bad)}
+.strat .ex.mt .lbl,.strat .ex.mt .txt{color:var(--bad)}
+.strat .ex.pe{background:var(--good-bg);border:2px solid var(--good)}
+.strat .ex.pe .lbl,.strat .ex.pe .txt{color:var(--good)}
+.strat ul{margin:.6rem 0 0;padding-left:1.1rem;font-size:.86rem;color:var(--ink2)}
+.flow{background:#fff;border-radius:var(--r);padding:1.2rem 1.2rem 1.2rem 2.6rem;border:1px solid var(--line)}
+.flow li{margin:.5rem 0}
+
+/* ---------- CODE ---------- */
+pre.code{background:#0f172a;color:#e2e8f0;padding:1rem;border-radius:10px;overflow:auto;font-size:.78rem;max-height:280px;font-family:"JetBrains Mono",ui-monospace,Consolas,monospace;line-height:1.5}
+pre.code.tall{max-height:440px}
+
+/* ---------- SANDBOX ---------- */
+.sandbox{display:grid;grid-template-columns:1.25fr 1fr;gap:1.4rem;margin-top:1rem}
+.toolbar{display:flex;flex-wrap:wrap;margin-bottom:.4rem}
+#jsonEditor{width:100%;height:580px;border-radius:var(--r);border:3px solid var(--navy);padding:1rem;font-size:.82rem;line-height:1.5;background:#0f172a;color:#e2e8f0;resize:vertical;tab-size:2;font-family:"JetBrains Mono",ui-monospace,Consolas,monospace}
+#jsonEditor:focus{outline:none;border-color:var(--yellow)}
+.status{margin-top:.4rem;font-size:.86rem;font-weight:700}
+.status.ok{color:var(--good)} .status.err{color:var(--bad)}
+.preview-col{display:flex;flex-direction:column;align-items:center}
+.lang-tabs{display:flex;gap:.3rem;margin-bottom:.4rem}
+.lang-tabs button{border:2px solid var(--navy);background:#fff;color:var(--navy);padding:.3rem .9rem;border-radius:8px;font-weight:800;cursor:pointer}
+.lang-tabs button.active{background:var(--navy);color:var(--yellow)}
+.opts{display:flex;gap:.8rem;font-size:.82rem;margin-bottom:.5rem;flex-wrap:wrap;justify-content:center;font-weight:600}
+
+/* Phone simulator: mirrors PokemonAR.js CSS */
+.phone{width:320px;height:620px;border:12px solid #0a0f1c;border-radius:40px;position:relative;overflow:hidden;color:#fff;
+  background:linear-gradient(170deg,#7d8c74 0,#55644f 50%,#3a4237 100%);
+  font-family:-apple-system,"Segoe UI",Roboto,"Noto Sans TC","Noto Sans SC","PingFang TC",sans-serif;box-shadow:0 18px 40px rgba(0,0,0,.3)}
+.phone .marker{position:absolute;top:44%;left:50%;width:120px;height:120px;transform:translate(-50%,-50%) perspective(300px) rotateX(55deg);background:#fff;color:#000;border:18px solid #000;display:grid;place-items:center;font-weight:900;font-size:22px}
+.phone .poke3d{position:absolute;top:30%;left:50%;transform:translateX(-50%);font-size:84px;animation:bob2 1.5s infinite alternate;filter:drop-shadow(0 10px 6px rgba(0,0,0,.4))}
+.phone .poke3d.still{animation:none}
+@keyframes bob2{to{transform:translate(-50%,-10px)}}
+.p-btns{position:absolute;top:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px;flex-wrap:wrap;justify-content:center;padding:4px;width:100%}
+.p-btns button{padding:7px 10px;border:none;border-radius:16px;font-size:11px;font-weight:700;color:#fff;opacity:.85;white-space:nowrap;min-height:34px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.p-btns button.active{opacity:1;transform:scale(1.06)}
+.p-lang{position:absolute;top:96px;left:8px;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.7);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700}
+.p-ctrl{position:absolute;top:96px;right:8px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.p-ctrl i{width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.7);color:#fff;display:grid;place-items:center;font-style:normal;font-size:17px}
+.p-ctrl span{color:#fff;font-size:10px;background:rgba(0,0,0,.55);border-radius:10px;padding:2px 7px;white-space:nowrap}
+.p-info{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.82);color:#fff;padding:10px 16px;border-radius:14px;text-align:center;max-width:72%;min-width:130px}
+.p-info .pname{font-size:15px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.p-info .pdex{font-size:11px;opacity:.7}
+.p-info .ptype{font-size:12px;font-weight:600}
+.p-info .pstatus{font-size:11px;opacity:.7;margin-top:4px}
+.p-shutter{position:absolute;bottom:12px;right:10px;display:flex;flex-direction:column;align-items:center}
+.p-shutter i{width:52px;height:52px;border:3px solid #fff;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:22px;font-style:normal}
+.p-shutter span{display:block;color:#fff;font-size:10px;margin-top:3px;text-shadow:0 1px 4px rgba(0,0,0,.7);white-space:nowrap}
+.p-preview{position:absolute;inset:0;background:rgba(0,0,0,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:12px;z-index:5}
+.p-preview .shot{width:88%;height:52%;border-radius:10px;background:linear-gradient(170deg,#7d8c74,#3a4237);position:relative;overflow:hidden;display:grid;place-items:center;font-size:64px}
+.p-preview .wm{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.45);color:#fff;font-size:11px;padding:5px 8px;text-align:left;white-space:nowrap;overflow:hidden}
+.p-preview .wm small{display:block;opacity:.7;font-size:9px}
+.p-preview .actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.p-preview .actions b{padding:8px 12px;border-radius:18px;font-size:12px;color:#fff;white-space:nowrap}
+.flag{outline:2px dashed #ff4d4d!important;outline-offset:2px}
+
+/* ---------- QA ---------- */
+.qa-panel{margin-top:2rem}
+.score{font-size:.9rem;padding:.15rem .7rem;border-radius:999px;margin-left:.5rem;vertical-align:middle;font-weight:800}
+.score.pass{background:var(--good-bg);color:var(--good)} .score.fail{background:var(--bad-bg);color:var(--bad)}
+.sev{font-weight:800;font-size:.72rem;padding:.12rem .5rem;border-radius:6px;color:#fff;white-space:nowrap;display:inline-block}
+.sev.critical{background:var(--bad)} .sev.major{background:var(--warn)} .sev.minor{background:var(--blue)}
+
+/* ---------- LAB ---------- */
+.steps{display:flex;flex-direction:column;gap:1.2rem}
+.lstep{display:flex;gap:1rem;background:#fff;border-radius:var(--r);padding:1.2rem;border:1px solid var(--line);border-left:6px solid var(--orange)}
+.lstep>.sn{flex:0 0 42px;height:42px;border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;font-weight:900;font-size:1.1rem}
+.lstep>div{flex:1;min-width:0}
+.hiro{width:150px;border:1px solid var(--line);border-radius:6px;background:#fff}
+.missions .card{border-top-color:var(--orange)}
+details{margin-top:.6rem}
+details summary{cursor:pointer;font-weight:800;color:var(--navy)}
+.answer{margin-top:2rem;background:#fff;border-radius:var(--r);padding:1rem 1.2rem;border:2px dashed var(--navy)}
+.refs{background:#fff;border-radius:var(--r);padding:1.2rem 1.2rem 1.2rem 2.6rem;border:1px solid var(--line)}
+.refs li{margin:.5rem 0;font-size:.92rem}
+
+html body .site-foot{padding:2rem 6vw;background:var(--navy);color:#dbe3f4;font-size:.82rem;text-align:center}
+.site-foot p{color:#dbe3f4}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--navy);color:#fff;padding:.6rem 1.2rem;border-radius:999px;transition:.3s;z-index:99;font-weight:700;border:2px solid var(--yellow)}
+#toast.show{transform:translateX(-50%) translateY(0)}
+
+@media (max-width:960px){
+  .hero,.sandbox{grid-template-columns:1fr}
+  #nav{flex-wrap:wrap}
+  #nav ul{order:3;width:100%}
+  #jsonEditor{height:400px}
+}</style>
+            </head>
+            <body class="m-both">
+                <script>(function installLiveweaveConsoleBridge() {
+        if (window.__liveweaveConsoleBridge) return;
+        window.__liveweaveConsoleBridge = true;
+
+        function format(value) {
+            if (typeof value === 'string') return value;
+            if (typeof value === 'undefined') return 'undefined';
+            if (typeof value === 'function') return value.toString();
+            if (value instanceof Error) return value.name + ': ' + value.message;
+            if (value instanceof Element) return value.outerHTML;
+            try {
+                var seen = [];
+                return JSON.stringify(value, function(key, item) {
+                    if (typeof item === 'object' && item !== null) {
+                        if (seen.indexOf(item) !== -1) return '[Circular]';
+                        seen.push(item);
+                    }
+                    return item;
+                }, 2);
+            } catch (err) {
+                return String(value);
+            }
+        }
+
+        function send(type, values, id) {
+            parent.postMessage({
+                source: 'liveweave-preview-console',
+                type: type,
+                id: id || '',
+                values: (values || []).map(format)
+            }, '*');
+        }
+
+        ['log', 'info', 'warn', 'error', 'debug'].forEach(function(level) {
+            var original = console[level];
+            console[level] = function() {
+                var args = Array.prototype.slice.call(arguments);
+                send(level === 'log' || level === 'debug' ? 'log' : level, args);
+                if (original) original.apply(console, args);
+            };
+        });
+
+        window.addEventListener('error', function(event) {
+            send('error', [event.message + (event.lineno ? ' (line ' + event.lineno + ')' : '')]);
+        });
+        window.addEventListener('unhandledrejection', function(event) {
+            send('error', ['Unhandled promise rejection:', event.reason]);
+        });
+        window.addEventListener('message', function(event) {
+            var message = event.data || {};
+            if (event.source !== parent || message.source !== 'liveweave-parent-console' || message.type !== 'evaluate') return;
+            try {
+                var result = (0, eval)(message.code);
+                Promise.resolve(result).then(function(value) {
+                    send('result', [value], message.id);
+                }, function(error) {
+                    send('error', [error], message.id);
+                });
+            } catch (error) {
+                send('error', [error], message.id);
+            }
+        });
+        send('ready', []);
+    })();</script>
+                <script>(function installPreviewLinkGuard() {
+        var noticeTimer;
+
+        function showNotice(message) {
+            var notice = document.getElementById('lw-preview-link-notice');
+            if (!notice) {
+                notice = document.createElement('div');
+                notice.id = 'lw-preview-link-notice';
+                notice.setAttribute('role', 'status');
+                notice.style.cssText = 'position:fixed;left:12px;bottom:12px;z-index:2147483647;max-width:calc(100% - 24px);padding:10px 14px;border-radius:9px;background:#17212d;color:#fff;font:13px/1.4 system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.25);pointer-events:none;';
+                document.body.appendChild(notice);
+            }
+            notice.textContent = message;
+            notice.hidden = false;
+            clearTimeout(noticeTimer);
+            noticeTimer = setTimeout(function() { notice.hidden = true; }, 3500);
+        }
+
+        document.addEventListener('click', function(event) {
+            var link = event.target.closest && event.target.closest('a[href]');
+            if (!link || event.defaultPrevented) return;
+
+            var href = (link.getAttribute('href') || '').trim();
+            if (href.charAt(0) === '#') {
+                event.preventDefault();
+                var fragment = href.slice(1);
+                if (!fragment) {
+                    window.scrollTo(0, 0);
+                    return;
+                }
+                try { fragment = decodeURIComponent(fragment); } catch (error) {}
+                var target = document.getElementById(fragment) || document.getElementsByName(fragment)[0];
+                if (target) target.scrollIntoView();
+                return;
+            }
+
+            if (/^(https?:)?\/\//i.test(href)) {
+                event.preventDefault();
+                window.open(href, '_blank', 'noopener,noreferrer');
+                return;
+            }
+
+            if (/^(mailto:|tel:)/i.test(href)) return;
+
+            event.preventDefault();
+            showNotice('This page cannot be opened in the preview.');
+        }, true);
+    })();</script>
+                
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>AR Game Localisation Lab · AR 遊戲在地化實驗室</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet">
+  <!-- In Liveweave these two lines are harmless; CSS/JS panels are injected automatically -->
+  <link rel="stylesheet" href="style.css">
+
+
+
+<!-- ===================== NAV ===================== -->
+<nav id="nav">
+  <div class="brand"><span class="ball"></span><span class="brand-t">AR L10n Lab</span></div>
+  <ul>
+    <li><a href="#intro" class=""><span class="en">Intro</span><span class="zh">導論</span></a></li>
+    <li><a href="#framework" class=""><span class="en">Pokémon GO</span><span class="zh">框架</span></a></li>
+    <li><a href="#errors" class=""><span class="en">MT Errors</span><span class="zh">機翻錯誤</span></a></li>
+    <li><a href="#llm" class=""><span class="en">LLM Issues</span><span class="zh">大模型問題</span></a></li>
+    <li><a href="#strategies" class=""><span class="en">Post-Editing ★</span><span class="zh">譯後編輯 ★</span></a></li>
+    <li><a href="#sandbox" class=""><span class="en">Sandbox</span><span class="zh">沙盒</span></a></li>
+    <li><a href="#lab" class=""><span class="en">Lab</span><span class="zh">實作</span></a></li>
+    <li><a href="#refs" class="on"><span class="en">Sources</span><span class="zh">文獻</span></a></li>
+  </ul>
+  <div class="lang-switch" role="group" aria-label="Language">
+    <button data-m="en">EN</button><button data-m="zh">中</button><button data-m="both" class="on">EN+中</button>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="hero-text">
+    <p class="kicker"><span class="en">Translation Technology · Game Localisation</span><span class="zh">翻譯科技 · 遊戲在地化</span></p>
+    <h1><span class="en">Localising <em>AR Games</em> the Pokémon GO Way</span><span class="zh">以 Pokémon GO 為例：<em>AR 遊戲</em>在地化</span></h1>
+    <p class="hero-lead">
+      <span class="en">Learn how AR games adapt text for players worldwide, why raw machine translation and LLM output break game UI, and how professional <b>post-editors</b> fix it. Then post-edit a real AR app and test it on your own phone.</span>
+      <span class="zh">認識 AR 遊戲如何為全球玩家調整文字、為何機器翻譯與大型語言模型（LLM）的原始輸出會破壞遊戲介面，以及專業<b>譯後編輯</b>如何修正。最後親手修改一個 AR 應用程式，並在自己的手機上測試。</span>
+    </p>
+    <div class="hero-btns">
+      <a class="btn primary" href="#strategies"><span class="en">Post-Editing Strategies →</span><span class="zh">譯後編輯策略 →</span></a>
+      <a class="btn light" href="#lab"><span class="en">Jump to the Lab</span><span class="zh">前往實作</span></a>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="mini-phone">
+      <div class="mini-cam">
+        <div class="mini-poke">🐢</div>
+        <div class="mini-card"><b>杰尼龜</b><small>#007</small><em>✨ 狂野的 杰尼龜 出現了！</em></div>
+      </div>
+    </div>
+    <p class="caption"><span class="en">Raw MT: wrong script + broken game formula. Spot both?</span><span class="zh">機翻原稿：字形錯誤＋破壞系列句式。你找到兩個錯誤了嗎？</span></p>
+  </div>
+</header>
+
+<main>
+
+<!-- ===================== 01 INTRO ===================== -->
+<section id="intro" data-accent="blue">
+  <div class="sec-head"><span class="num">01</span>
+    <h2><span class="en">What is AR Game Localisation?</span><span class="zh">什麼是 AR 遊戲在地化？</span></h2></div>
+  <p class="lead">
+    <span class="en"><b>Localisation (L10n)</b> means adapting a product so it feels native to a target market, not just translating words. In <b>augmented reality</b>, text sits on a live camera view, moves with 3-D objects and competes with the real world for attention. That adds constraints ordinary software does not have.</span>
+    <span class="zh"><b>在地化（L10n）</b>是讓產品在目標市場顯得「本來就是當地產品」，而不只是翻譯文字。在<b>擴增實境</b>中，文字疊在即時相機畫面上、隨 3D 物件移動，還要與真實世界爭奪玩家注意力，限制比一般軟體更多。</span>
+  </p>
+  <div class="grid six" id="introCards"><div class="card"><div class="ico">🧩</div><h4><span class="en">UI strings</span><span class="zh">介面字串</span></h4><p><span class="en">Buttons, menus, toasts and loading text. Space is tiny, so every character counts.</span><span class="zh">按鈕、選單、提示與載入文字。空間極小，每一個字都要精打細算。</span></p></div><div class="card"><div class="ico">🏷️</div><h4><span class="en">In-world AR labels</span><span class="zh">AR 場景標籤</span></h4><p><span class="en">Name tags and info cards float over a live camera feed and must stay readable on any background.</span><span class="zh">名稱標籤與資訊卡疊在即時相機畫面上，任何背景下都必須清楚易讀。</span></p></div><div class="card"><div class="ico">📖</div><h4><span class="en">Narrative &amp; lore</span><span class="zh">敘事與世界觀</span></h4><p><span class="en">Pokédex entries, research tasks and event text: tone and franchise voice matter.</span><span class="zh">圖鑑說明、調查任務與活動文案：語氣與系列風格至關重要。</span></p></div><div class="card"><div class="ico">™️</div><h4><span class="en">Terminology &amp; IP</span><span class="zh">術語與智慧財產</span></h4><p><span class="en">Official character, item and move names belong to the licence holder; translators may not invent their own.</span><span class="zh">角色、道具、招式的官方譯名屬於版權方，譯者不得自創。</span></p></div><div class="card"><div class="ico">🌏</div><h4><span class="en">Locale variants</span><span class="zh">地區變體</span></h4><p><span class="en">zh-TW, zh-HK and zh-CN differ in script, vocabulary and cultural memory.</span><span class="zh">台灣、香港與中國大陸在字形、用詞與文化記憶上各有不同。</span></p></div><div class="card"><div class="ico">⚙️</div><h4><span class="en">i18n engineering</span><span class="zh">國際化工程</span></h4><p><span class="en">String keys, placeholders, fonts and text expansion: the code must be ready for every language.</span><span class="zh">字串鍵值、佔位符、字型、文字長度伸縮——程式必須先為多語言做好準備。</span></p></div></div>
+  <div class="callout" id="keyTerms"><div class="bi"><span class="en"><b>Key terms:</b> <code>i18n</code> = making code ready for many languages · <code>L10n</code> = adapting content for one locale · <code>MT</code> = machine translation · <code>LLM</code> = large language model · <code>MTPE</code> = MT + post-editing · <code>LQA</code> = linguistic quality assurance in context · <code>DNT</code> = do-not-translate · <code>TM</code> = translation memory</span><span class="zh"><b>關鍵詞：</b><code>i18n</code>＝國際化（讓程式支援多語言）· <code>L10n</code>＝在地化（為特定地區調整內容）· <code>MT</code>＝機器翻譯 · <code>LLM</code>＝大型語言模型 · <code>MTPE</code>＝機器翻譯＋譯後編輯 · <code>LQA</code>＝情境語言品質檢測 · <code>DNT</code>＝不翻譯詞 · <code>TM</code>＝翻譯記憶</span></div></div>
+</section>
+
+<!-- ===================== 02 FRAMEWORK ===================== -->
+<section id="framework" class="alt" data-accent="red">
+  <div class="sec-head"><span class="num">02</span>
+    <h2><span class="en">The Pokémon GO Localisation Framework</span><span class="zh">Pokémon GO 在地化框架</span></h2></div>
+  <p class="lead">
+    <span class="en">Pokémon GO launched in July 2016, developed by Niantic with Nintendo and The Pokémon Company (TPC); Scopely took over the game business in 2025. Its localisation serves one global live game, players in 14 languages, and a powerful IP owner.</span>
+    <span class="zh">Pokémon GO 於 2016 年 7 月推出，由 Niantic 與任天堂、寶可夢公司（TPC）合作開發；2025 年起遊戲業務由 Scopely 接手。其在地化必須同時服務一款全球同步營運的遊戲、14 種語言的玩家，以及強勢的版權方。</span>
+  </p>
+  <h3><span class="en">🗓️ Real milestones</span><span class="zh">🗓️ 真實里程碑</span></h3>
+  <div class="timeline" id="timeline"><div class="tl"><b><span class="en">Jul 2016</span><span class="zh">2016 年 7 月</span></b><div class="tl-body"><span class="en">Global launch by Niantic with Nintendo and The Pokémon Company (TPC), rolled out country by country.</span><span class="zh">Niantic 與任天堂、寶可夢公司（TPC）合作推出，逐國陸續上架。</span></div></div><div class="tl"><b><span class="en">2016</span><span class="zh">2016 年</span></b><div class="tl-body"><span class="en">TPC unifies Chinese names across regions: “Pokémon” becomes 精靈寶可夢 and Hong Kong's 比卡超 becomes 皮卡丘. Hong Kong fans protest, because the Mandarin-based name sounds nothing like “Pikachu” in Cantonese.</span><span class="zh">TPC 統一華語地區譯名：「Pokémon」定為「精靈寶可夢」，香港的「比卡超」改為「皮卡丘」。香港玩家抗議，因為以普通話為基礎的新名稱用粵語讀起來與「Pikachu」相去甚遠。</span></div></div><div class="tl"><b><span class="en">Apr 2017</span><span class="zh">2017 年 4 月</span></b><div class="tl-body"><span class="en">Update 0.61.0 (iOS 1.31.0) adds Traditional Chinese and includes “minor text fixes”.</span><span class="zh">0.61.0 版（iOS 1.31.0）新增繁體中文，並附「細部文字修正」。</span></div></div><div class="tl"><b><span class="en">Today</span><span class="zh">現今</span></b><div class="tl-body"><span class="en">The official site lists 14 languages including Traditional Chinese. There is no Simplified Chinese because the game is not released in mainland China; the lab's zh_cn column is a training extension.</span><span class="zh">官方列出 14 種語言，包含繁體中文。由於未在中國大陸上架，並無簡體中文版；本實驗的 zh_cn 欄位僅作練習延伸。</span></div></div></div>
+
+  <h3><span class="en">🔁 The localisation pipeline (teaching model)</span><span class="zh">🔁 在地化流程（教學模型）</span></h3>
+  <p class="note"><span class="en">Niantic's internal tools are not public. This model combines what is visible in the game with standard live-service industry practice.</span><span class="zh">Niantic 的內部工具並未公開。本模型結合遊戲中可觀察到的現象與業界持續營運遊戲的常見做法。</span></p>
+  <div class="pipeline" id="pipeline"><div class="step"><span class="sn">1</span><h5><span class="en">String externalisation</span><span class="zh">字串外部化</span></h5><p><span class="en">Text lives outside the code as key → value pairs, e.g. <code>appeared: “Wild {n} appeared!”</code></span><span class="zh">文字以「鍵 → 值」形式存放在程式之外，例如 <code>appeared：“Wild {n} appeared!”</code></span></p></div><div class="step"><span class="sn">2</span><h5><span class="en">Official termbase</span><span class="zh">官方術語庫</span></h5><p><span class="en">The IP owner supplies locked names (妙蛙種子, 小火龍, 傑尼龜…).</span><span class="zh">版權方提供鎖定譯名（妙蛙種子、小火龍、傑尼龜……），不得更動。</span></p></div><div class="step"><span class="sn">3</span><h5><span class="en">TM + MT / LLM draft</span><span class="zh">翻譯記憶＋機翻／大模型初稿</span></h5><p><span class="en">Recurring event text and UI strings are pre-filled automatically.</span><span class="zh">重複出現的活動文字與介面字串由系統自動預填。</span></p></div><div class="step core"><span class="sn">4</span><h5><span class="en">Human post-editing ★</span><span class="zh">人工譯後編輯 ★</span></h5><p><span class="en">Fix meaning, terms, placeholders, length and locale.</span><span class="zh">修正語意、術語、佔位符、長度與地區用語。</span></p></div><div class="step"><span class="sn">5</span><h5><span class="en">In-context LQA</span><span class="zh">情境語言品質檢測</span></h5><p><span class="en">Test on real devices, over the camera view, in every language.</span><span class="zh">在真機與真實相機畫面上，逐一語言測試。</span></p></div><div class="step"><span class="sn">6</span><h5><span class="en">Live-ops release</span><span class="zh">營運上線</span></h5><p><span class="en">Weekly events mean tight deadlines; the cycle repeats constantly.</span><span class="zh">每週都有活動、時程緊迫，流程不斷循環。</span></p></div></div>
+
+  <h3><span class="en">🎯 What makes Pokémon GO special?</span><span class="zh">🎯 Pokémon GO 的特殊之處</span></h3>
+  <div id="featTable"><div class="tbl-wrap"><table class="tbl "><thead><tr><th><span class="en">Feature</span><span class="zh">特點</span></th><th><span class="en">Localisation impact</span><span class="zh">在地化影響</span></th><th><span class="en">Example</span><span class="zh">例子</span></th></tr></thead><tbody><tr><td class="k"><span class="en">AR camera overlay</span><span class="zh">AR 相機疊加</span></td><td><span class="en">Short, high-contrast text; long strings cover the Pokémon.</span><span class="zh">文字須簡短清楚；過長會遮住寶可夢。</span></td><td><span class="en">Encounter text, AR+ prompts</span><span class="zh">遭遇訊息、AR+ 提示</span></td></tr><tr><td class="k"><span class="en">Fixed franchise formulas</span><span class="zh">系列固定句式</span></td><td><span class="en">Reuse canonical phrasing from the main games.</span><span class="zh">沿用正傳遊戲的既有說法。</span></td><td><span class="en">“Wild {Pokémon} appeared!” → 野生的 {寶可夢} 出現了！</span><span class="zh">同左</span></td></tr><tr><td class="k"><span class="en">IP-owned terminology</span><span class="zh">版權方術語</span></td><td><span class="en">Follow the TPC termbase, even when fans disagree.</span><span class="zh">即使玩家反對，也須依從 TPC 術語。</span></td><td><span class="en">比卡超 → 皮卡丘 (2016)</span><span class="zh">比卡超 → 皮卡丘（2016）</span></td></tr><tr><td class="k"><span class="en">Player-generated locations</span><span class="zh">玩家提交的地點內容</span></td><td><span class="en">PokéStop and Gym names are submitted by players and usually stay in the original language.</span><span class="zh">補給站與道館名稱多由玩家提交，通常保留原文。</span></td><td><span class="en">An English-titled PokéStop in Hong Kong</span><span class="zh">香港的英文名補給站</span></td></tr><tr><td class="k"><span class="en">Live service</span><span class="zh">持續營運</span></td><td><span class="en">Fast turnaround suits TM + MT + post-editing.</span><span class="zh">交期短，適合「翻譯記憶＋機翻＋譯後編輯」。</span></td><td><span class="en">Community Day news</span><span class="zh">社群日公告</span></td></tr><tr><td class="k"><span class="en">Variables everywhere</span><span class="zh">大量變數</span></td><td><span class="en">Placeholders, plurals and measure words.</span><span class="zh">佔位符、複數與量詞。</span></td><td><span class="en">Catch {count} Pokémon → 捕捉 {count} 隻寶可夢</span><span class="zh">同左</span></td></tr></tbody></table></div></div>
+</section>
+
+<!-- ===================== 03 MT ERRORS ===================== -->
+<section id="errors" data-accent="purple">
+  <div class="sec-head"><span class="num">03</span>
+    <h2><span class="en">Common Machine-Translation Errors in AR Game UI</span><span class="zh">AR 遊戲介面常見的機器翻譯錯誤</span></h2></div>
+  <p class="lead">
+    <span class="en">MT translates one string at a time with <b>no screen, no character and no context</b>. These error types appear in the lab.</span>
+    <span class="zh">機器翻譯逐條處理字串，<b>看不到畫面、不認識角色、也沒有情境</b>。以下錯誤類型都會在實作中出現。</span>
+  </p>
+  <div class="filter" id="mtFilter">
+    <button class="chip active" data-f="all"><span class="en">All</span><span class="zh">全部</span></button>
+    <button class="chip" data-f="term"><span class="en">Terminology</span><span class="zh">術語</span></button>
+    <button class="chip" data-f="sense"><span class="en">Meaning</span><span class="zh">語意</span></button>
+    <button class="chip" data-f="tech"><span class="en">Technical</span><span class="zh">技術</span></button>
+    <button class="chip" data-f="locale"><span class="en">Locale / Fit</span><span class="zh">地區／版面</span></button>
+  </div>
+  <div id="mtTable"><div class="tbl-wrap"><table class="tbl errors"><thead><tr><th>#</th><th><span class="en">Error type</span><span class="zh">錯誤類型</span></th><th><span class="en">Source (EN)</span><span class="zh">原文</span></th><th><span class="en">Raw MT ❌</span><span class="zh">機翻原稿 ❌</span></th><th><span class="en">Post-edited ✅</span><span class="zh">譯後編輯 ✅</span></th><th><span class="en">Why MT failed</span><span class="zh">失誤原因</span></th></tr></thead><tbody><tr data-c="term"><td>1</td><td class="k"><span class="en">Character name literalised</span><span class="zh">角色名被拆字直譯</span></td><td>BULBASAUR</td><td class="bad">鱗莖龍</td><td class="good">妙蛙種子</td><td><span class="en">Translated the word parts “bulb + saur” instead of using the official name.</span><span class="zh">拆字直譯「球莖＋龍」，沒有使用官方譯名。</span></td></tr><tr data-c="term"><td>2</td><td class="k"><span class="en">Name transliterated</span><span class="zh">角色名被音譯</span></td><td>CHARMANDER</td><td class="bad">查曼德</td><td class="good">小火龙</td><td><span class="en">Guessed a phonetic form; official names are not phonetic.</span><span class="zh">自行音譯；官方譯名並非音譯。</span></td></tr><tr data-c="term"><td>3</td><td class="k"><span class="en">Legacy / unofficial brand name</span><span class="zh">使用舊稱或非官方品牌名</span></td><td>Pokémon</td><td class="bad">口袋妖怪</td><td class="good">Pokémon / 寶可夢</td><td><span class="en">Picked an old fan name from its training data.</span><span class="zh">取用了訓練資料中的舊稱。</span></td></tr><tr data-c="term"><td>4</td><td class="k"><span class="en">DNT term translated</span><span class="zh">不翻譯詞被翻譯</span></td><td>Point camera at Hiro marker</td><td class="bad">将相机指向英雄标记</td><td class="good">将相机对准 Hiro 标记</td><td><span class="en">“Hiro” is a marker ID, not “hero”.</span><span class="zh">「Hiro」是標記名稱，不是「英雄」。</span></td></tr><tr data-c="sense"><td>5</td><td class="k"><span class="en">Polysemy</span><span class="zh">一詞多義</span></td><td>Share</td><td class="bad">股份</td><td class="good">分享</td><td><span class="en">“Share” read as stock shares.</span><span class="zh">把 Share 誤解為股票的「股份」。</span></td></tr><tr data-c="sense"><td>6</td><td class="k"><span class="en">Polysemy</span><span class="zh">一詞多義</span></td><td>Close</td><td class="bad">靠近</td><td class="good">关闭</td><td><span class="en">Read as the adjective “near”, not the verb “shut”.</span><span class="zh">把動詞「關閉」誤解為形容詞「接近」。</span></td></tr><tr data-c="sense"><td>7</td><td class="k"><span class="en">Polysemy</span><span class="zh">一詞多義</span></td><td>Save</td><td class="bad">救</td><td class="good">保存 / 儲存</td><td><span class="en">“Save a life” instead of “save a file”.</span><span class="zh">誤解為「拯救」而非「儲存檔案」。</span></td></tr><tr data-c="sense"><td>8</td><td class="k"><span class="en">Wrong domain sense</span><span class="zh">領域意義錯誤</span></td><td>Model failed to load</td><td class="bad">模特兒載入失敗</td><td class="good">模型載入失敗</td><td><span class="en">Fashion model instead of 3-D model.</span><span class="zh">誤譯為時裝模特兒，而非 3D 模型。</span></td></tr><tr data-c="sense"><td>9</td><td class="k"><span class="en">Toggle state taken literally</span><span class="zh">開關狀態被直譯</span></td><td>Spin ON / OFF</td><td class="bad">旋轉 在 / 旋转 离开</td><td class="good">旋轉 開 / 旋转 关</td><td><span class="en">“On” read as a preposition, “off” as “leave”.</span><span class="zh">把 on 當介詞「在」、off 當「離開」。</span></td></tr><tr data-c="sense"><td>10</td><td class="k"><span class="en">Game type mistranslated</span><span class="zh">屬性被誤譯</span></td><td>FIRE (type)</td><td class="bad">開火</td><td class="good">火</td><td><span class="en">Read as the command “open fire”.</span><span class="zh">誤為射擊指令「開火」。</span></td></tr><tr data-c="sense"><td>11</td><td class="k"><span class="en">Wrong voice / agency</span><span class="zh">語態錯誤</span></td><td>Caught with Pokémon AR</td><td class="bad">被 Pokémon AR 抓住了</td><td class="good">使用 Pokémon AR 捕捉</td><td><span class="en">The 被 passive sounds like “you got arrested”.</span><span class="zh">「被」字句聽起來像「被逮捕了」。</span></td></tr><tr data-c="sense"><td>12</td><td class="k"><span class="en">Broken franchise formula</span><span class="zh">破壞系列固定句式</span></td><td>Wild {n} appeared!</td><td class="bad">狂野的 {n} 出現了！</td><td class="good">野生的 {n} 出現了！</td><td><span class="en">“Wild” read as “crazy”; MT does not know the canonical phrase.</span><span class="zh">把 wild 譯成「狂野」；機翻不知道系列慣用說法。</span></td></tr><tr data-c="tech"><td>13</td><td class="k"><span class="en">Placeholder corruption</span><span class="zh">佔位符損毀</span></td><td>Wild {n} appeared!</td><td class="bad">野生的 {名字} 出现了！</td><td class="good">野生的 {n} 出现了！</td><td><span class="en">Variable translated; the code cannot fill it and players see {名字}.</span><span class="zh">變數被翻譯，程式無法代入，玩家會看到「{名字}」。</span></td></tr><tr data-c="tech"><td>14</td><td class="k"><span class="en">Missing measure word</span><span class="zh">缺少量詞</span></td><td>Catch {count} Pokémon</td><td class="bad">捕捉 {count} 寶可夢</td><td class="good">捕捉 {count} 隻寶可夢</td><td><span class="en">Chinese needs a classifier between number and noun.</span><span class="zh">中文數詞與名詞之間需要量詞。</span></td></tr><tr data-c="locale"><td>15</td><td class="k"><span class="en">Length expansion → overflow</span><span class="zh">文字膨脹 → 溢出</span></td><td>Capture</td><td class="bad">捕捉寶可夢並保存至您的設備相冊</td><td class="good">拍照</td><td><span class="en">A 7-letter button label became a sentence that overflows the 64 px shutter.</span><span class="zh">7 個字母的按鈕變成整句話，塞不進 64 px 快門鈕。</span></td></tr><tr data-c="locale"><td>16</td><td class="k"><span class="en">Script &amp; vocabulary mixing</span><span class="zh">字形與用詞混用</span></td><td>SQUIRTLE (zh_tw) / device album</td><td class="bad">杰尼龜 / 設備相冊</td><td class="good">傑尼龜 / 裝置相簿</td><td><span class="en">Simplified characters and mainland terms leaked into Taiwan copy.</span><span class="zh">台灣版混入簡體字與大陸用語。</span></td></tr></tbody></table></div></div>
+</section>
+
+<!-- ===================== 04 LLM ISSUES ===================== -->
+<section id="llm" class="alt" data-accent="teal">
+  <div class="sec-head"><span class="num">04</span>
+    <h2><span class="en">LLM Translation Problems: Claude, Gemini, GPT &amp; Co.</span><span class="zh">大型語言模型翻譯問題：Claude、Gemini、GPT 等</span></h2></div>
+  <p class="lead">
+    <span class="en">Studios increasingly draft localisation with LLMs instead of classic neural MT. The latest evidence shows LLMs are now the <b>strongest</b> translation systems overall, but their errors are <b>different</b> and often <b>harder to see</b>, because they are fluent.</span>
+    <span class="zh">越來越多遊戲公司改用大型語言模型（而非傳統神經機器翻譯）產生在地化初稿。最新研究顯示，LLM 整體已是<b>最強</b>的翻譯系統，但其錯誤<b>類型不同</b>，而且因為譯文流暢而<b>更難察覺</b>。</span>
+  </p>
+  <h3><span class="en">📚 Latest research findings (2023–2025)</span><span class="zh">📚 最新研究發現（2023–2025）</span></h3>
+  <div class="grid three" id="research"><div class="rcard"><div class="big">WMT24</div><h4><span class="en">“The LLM Era Is Here but MT Is Not Solved Yet”</span><span class="zh">「LLM 時代已來，但機器翻譯尚未解決」</span></h4><p class="bi"><span class="en">Claude-3.5-Sonnet was the best system overall, winning 9 language pairs; Unbabel Tower70B was the best participant (8 pairs). English→Spanish was near-flawless, while other pairs and domains were not. Human evaluation used the new Error Span Annotation (ESA) protocol.</span><span class="zh">Claude-3.5-Sonnet 整體表現最佳，贏得 9 個語言對；最佳參賽系統為 Unbabel Tower70B（8 個語言對）。英譯西班牙文近乎完美，其他語言對與領域則不然。人工評估採用新的錯誤片段標註（ESA）協定。</span></p><div class="cite">Kocmi et al., 2024 (WMT24 Findings)</div></div><div class="rcard"><div class="big">WMT25</div><h4><span class="en">Gemini 2.5 Pro best overall, on harder tests</span><span class="zh">更難的測試中，Gemini 2.5 Pro 整體最佳</span></h4><p class="bi"><span class="en">60 systems, 30 language pairs, test sets deliberately sampled to be difficult. Gemini 2.5 Pro was in the top cluster for 14 language pairs. Human reference translations reached the winning cluster in only 6 of 15 pairs. Speech-domain texts were the hardest.</span><span class="zh">共 60 個系統、30 個語言對，測試集刻意挑選難譯文本。Gemini 2.5 Pro 在 14 個語言對名列第一群組。人工參考譯文僅在 15 個語言對中的 6 個進入勝出群組。語音領域文本最難。</span></p><div class="cite">Kocmi et al., 2025 (WMT25 Findings)</div></div><div class="rcard"><div class="big">≠</div><h4><span class="en">Automatic scores can mislead</span><span class="zh">自動評分可能誤導</span></h4><p class="bi"><span class="en">At WMT25, Shy-hunyuan-MT ranked first in the automatic rankings for all but one language pair, yet human evaluation placed it considerably below the top systems. The organisers conclude automatic scores are biased.</span><span class="zh">WMT25 中，Shy-hunyuan-MT 在自動排名中幾乎所有語言對都居首，但人工評估顯示其表現明顯低於頂尖系統。主辦方指出自動評分存在偏差。</span></p><div class="cite">Kocmi et al., 2025</div></div><div class="rcard"><div class="big">✂️</div><h4><span class="en">AI struggles to edit minimally</span><span class="zh">AI 難以「最小幅度」修改</span></h4><p class="bi"><span class="en">The WMT25 evaluation task found LLMs strong at system-level scoring, but reference-based metrics beat them at segment level; error-span detection still struggles to balance precision and recall, and “minimal editing is challenging even when informed by quality indicators”.</span><span class="zh">WMT25 評估任務發現，LLM 在系統層級評分表現強，但在句段層級不如有參考譯文的指標；錯誤片段偵測仍難兼顧精確率與召回率，且「即使提供品質指標，最小幅度修改仍然困難」。</span></p><div class="cite">WMT25 Automated Translation Evaluation Findings</div></div><div class="rcard"><div class="big">U-shape</div><h4><span class="en">Hallucinations peak at very short and very long inputs</span><span class="zh">幻覺在極短與極長輸入時最多</span></h4><p class="bi"><span class="en">HalloMTBench evaluated 17 LLMs: hallucination rate vs. source length is U-shaped; RL-trained reasoning models show more language mixing; models have a “home-ground” advantage in their developers' languages. One-word UI strings sit at the risky short end.</span><span class="zh">HalloMTBench 評測 17 個 LLM：幻覺率與原文長度呈 U 形；經強化學習訓練的推理模型更容易語言混雜；模型在開發者母語上有「主場優勢」。單字介面字串正處於高風險的短端。</span></p><div class="cite">HalloMTBench, arXiv 2510.24073 (2025)</div></div><div class="rcard"><div class="big">+ length</div><h4><span class="en">Verbosity and ignored length limits</span><span class="zh">冗長與無視長度限制</span></h4><p class="bi"><span class="en">LLM translations tend to be longer than the source even when meaning is constant (Briakou et al., 2024; Manakhimova et al., 2024). Asking for same-length output often fails; models shortened only with extreme examples (Javorský, Bojar &amp; Yvon, 2025).</span><span class="zh">即使語意不變，LLM 譯文往往比原文長（Briakou 等，2024；Manakhimova 等，2024）。要求等長輸出常常失效，只有給極端示例時模型才會縮短（Javorský、Bojar、Yvon，2025）。</span></p><div class="cite">arXiv 2601.10187; arXiv 2506.04855</div></div><div class="rcard"><div class="big">Fluent ≠ true</div><h4><span class="en">The most dangerous errors read well</span><span class="zh">最危險的錯誤讀起來很順</span></h4><p class="bi"><span class="en">Hallucinations and omissions are mostly fluent, which misleads users into trusting them (benchmark of 18 translation directions). GPT models also produce less literal translations than NMT: good for idioms, risky for locked terms.</span><span class="zh">幻覺與漏譯多半很流暢，因而誤導使用者信任（涵蓋 18 個翻譯方向的基準）。GPT 模型的譯文也比神經機器翻譯更不直譯：利於慣用語，卻不利於鎖定術語。</span></p><div class="cite">Dale et al., 2023; Raunak et al., 2023</div></div><div class="rcard"><div class="big">¶</div><h4><span class="en">Structure is not always preserved</span><span class="zh">結構未必能保留</span></h4><p class="bi"><span class="en">WMT25 sent whole multi-paragraph documents. A summary of the WMT25 data reports intact paragraph structure for GPT-4.1 97.1%, Gemini 2.5 Pro 95.1%, Claude 4 67.5% and DeepSeek-V3 57.2% of the time; failures were re-translated paragraph by paragraph. For JSON or UI files, broken structure = broken game.</span><span class="zh">WMT25 以多段落完整文件送譯。一份 WMT25 資料摘要報告的段落結構完整率為：GPT-4.1 97.1%、Gemini 2.5 Pro 95.1%、Claude 4 67.5%、DeepSeek-V3 57.2%；失敗者改為逐段翻譯。在 JSON 或介面檔中，結構損壞＝遊戲壞掉。</span></p><div class="cite">Secondary summary of Kocmi et al., 2025 (verify in paper)</div></div></div>
+  <div class="callout warn" id="versionNote"><div class="bi"><span class="en"><b>Model versions:</b> the systems tested (Claude-3.5-Sonnet in 2024; Gemini 2.5 Pro, GPT-4.1, Claude 4 in 2025) have since been superseded. Read these results as evidence about <i>model families and persistent error patterns</i>, not a ranking of today's versions. The patterns (fluent errors, verbosity, short-string risk, format breakage, over-editing) are exactly what post-editors must check.</span><span class="zh"><b>模型版本：</b>受測系統（2024 年的 Claude-3.5-Sonnet；2025 年的 Gemini 2.5 Pro、GPT-4.1、Claude 4）均已推出更新版本。請把這些結果視為關於<i>模型家族與持續存在的錯誤模式</i>的證據，而非現行版本的排名。這些模式（流暢的錯誤、冗長、短字串風險、格式損壞、過度編輯）正是譯後編輯必須檢查的重點。</span></div></div>
+
+  <h3><span class="en">🧪 LLM error types for game UI</span><span class="zh">🧪 遊戲介面中的大模型錯誤類型</span></h3>
+  <div id="llmTable"><div class="tbl-wrap"><table class="tbl "><thead><tr><th>#</th><th><span class="en">Problem</span><span class="zh">問題</span></th><th><span class="en">What research / practice says</span><span class="zh">研究／實務發現</span></th><th><span class="en">Raw LLM ❌</span><span class="zh">大模型原稿 ❌</span></th><th><span class="en">Post-edited ✅</span><span class="zh">譯後編輯 ✅</span></th><th><span class="en">PE action</span><span class="zh">編輯對策</span></th></tr></thead><tbody><tr><td>1</td><td class="k"><span class="en">Fluent but unfaithful (hallucination / omission)</span><span class="zh">流暢但不忠實（幻覺／漏譯）</span></td><td><span class="en">Pathologies are mostly fluent and mislead readers (Dale et al., 2023); HalloMTBench (2025) documents model-specific hallucination triggers.</span><span class="zh">這類錯誤多半流暢、容易誤導讀者（Dale 等，2023）；HalloMTBench（2025）記錄各模型的幻覺觸發因素。</span><span class="pill"><span class="en">Research</span><span class="zh">研究</span></span></td><td class="bad">🔄 Retake → 🔄 再来一次！（双倍奖励）</td><td class="good">🔄 重拍</td><td><span class="en">Compare with the source segment by segment; delete invented info.</span><span class="zh">逐句對照原文；刪除無中生有的資訊。</span></td></tr><tr><td>2</td><td class="k"><span class="en">Short strings are high-risk</span><span class="zh">短字串風險高</span></td><td><span class="en">Hallucination rate vs. length is U-shaped: very short inputs are vulnerable (HalloMTBench, 2025).</span><span class="zh">幻覺率與長度呈 U 形，極短輸入特別脆弱（HalloMTBench，2025）。</span><span class="pill"><span class="en">Research</span><span class="zh">研究</span></span></td><td class="bad">Close → 靠近</td><td class="good">关闭 / 關閉</td><td><span class="en">Give context (key name, screenshot); hand-check every 1–2-word string.</span><span class="zh">提供情境（鍵名、截圖）；一至兩字的字串逐條人工檢查。</span></td></tr><tr><td>3</td><td class="k"><span class="en">Language / script mixing</span><span class="zh">語言／字形混雜</span></td><td><span class="en">RL-trained reasoning models show more language mixing (HalloMTBench, 2025).</span><span class="zh">強化學習訓練的推理模型更常出現語言混雜（HalloMTBench，2025）。</span><span class="pill"><span class="en">Research</span><span class="zh">研究</span></span></td><td class="bad">zh_tw: 杰尼龜</td><td class="good">傑尼龜</td><td><span class="en">Run a Simplified/Traditional script check plus a locale-vocabulary check.</span><span class="zh">執行繁簡字形檢查與地區用語檢查。</span></td></tr><tr><td>4</td><td class="k"><span class="en">Verbosity bias</span><span class="zh">冗長偏誤</span></td><td><span class="en">LLM output tends to be longer than the source (Briakou et al., 2024; Manakhimova et al., 2024).</span><span class="zh">LLM 譯文常比原文更長（Briakou 等，2024；Manakhimova 等，2024）。</span><span class="pill"><span class="en">Research</span><span class="zh">研究</span></span></td><td class="bad">FIRE → 火属性类型的宝可梦</td><td class="good">火</td><td><span class="en">Delete additions; translate the function, not an explanation.</span><span class="zh">刪去多餘內容；翻譯功能，而非解釋。</span></td></tr><tr><td>5</td><td class="k"><span class="en">Length limits ignored</span><span class="zh">無視長度限制</span></td><td><span class="en">Same-length prompting often fails; models shorten only with extreme examples (Javorský et al., 2025).</span><span class="zh">等長提示常失效，只有極端示例才會縮短（Javorský 等，2025）。</span><span class="pill"><span class="en">Research</span><span class="zh">研究</span></span></td><td class="bad">Capture → 捕捉寶可夢並保存至您的設備相冊</td><td class="good">拍照</td><td><span class="en">Enforce a character budget with QA tools and device tests.</span><span class="zh">以 QA 工具與真機測試強制執行字數上限。</span></td></tr><tr><td>6</td><td class="k"><span class="en">Structure / markup breakage</span><span class="zh">結構／標記損壞</span></td><td><span class="en">WMT25 had to fall back to paragraph-level translation when LLMs broke document structure (Kocmi et al., 2025).</span><span class="zh">WMT25 中 LLM 破壞文件結構時，主辦方須改為逐段翻譯（Kocmi 等，2025）。</span><span class="pill"><span class="en">Research</span><span class="zh">研究</span></span></td><td class="bad">**正在加载 Pokémon AR…**</td><td class="good">正在加载 Pokémon AR…</td><td><span class="en">Validate JSON; strip Markdown, code fences and curly quotes.</span><span class="zh">驗證 JSON；清除 Markdown、程式碼框與彎引號。</span></td></tr><tr><td>7</td><td class="k"><span class="en">Chatty preambles &amp; bracket notes</span><span class="zh">多餘前言與括號註解</span></td><td><span class="en">Chat-tuned models are built to converse, so they may add “Here is the translation:” or explanations.</span><span class="zh">對話型模型習慣「聊天」，可能加上「以下是翻譯：」或補充說明。</span><span class="pill obs"><span class="en">Practice</span><span class="zh">實務觀察</span></span></td><td class="bad">以下是翻译：拍照 / ✕ 關閉（指關閉預覽視窗）</td><td class="good">拍照 / ✕ 關閉</td><td><span class="en">Delete meta-text; demand output-only JSON in the prompt.</span><span class="zh">刪除後設文字；在提示詞中要求只輸出 JSON。</span></td></tr><tr><td>8</td><td class="k"><span class="en">Less literal, “creative” renderings</span><span class="zh">較不直譯、過度創意</span></td><td><span class="en">GPT translations are less literal than NMT (Raunak et al., 2023), so a model may invent a nice-sounding name.</span><span class="zh">GPT 譯文比神經機器翻譯更不直譯（Raunak 等，2023），模型可能自創好聽的名字。</span><span class="pill"><span class="en">Research</span><span class="zh">研究</span></span></td><td class="bad">BULBASAUR → 種子小恐龍</td><td class="good">妙蛙種子</td><td><span class="en">Lock termbase items; give the glossary in the prompt and verify.</span><span class="zh">鎖定術語；在提示詞中提供術語表並逐一核對。</span></td></tr><tr><td>9</td><td class="k"><span class="en">Outdated / legacy terminology</span><span class="zh">過時或舊有術語</span></td><td><span class="en">Training data mixes old fan names with official ones; Chinese Pokémon names were unified only in 2016.</span><span class="zh">訓練資料混雜舊稱與官方譯名；寶可夢華語譯名到 2016 年才統一。</span><span class="pill obs"><span class="en">Practice</span><span class="zh">實務觀察</span></span></td><td class="bad">使用口袋妖怪 AR 捕捉</td><td class="good">使用 Pokémon AR 捕捉</td><td><span class="en">Termbase first, model memory never.</span><span class="zh">以術語庫為準，不信模型記憶。</span></td></tr><tr><td>10</td><td class="k"><span class="en">Metric scores overrate output</span><span class="zh">自動指標高估品質</span></td><td><span class="en">Shy-hunyuan-MT topped automatic rankings at WMT25 but scored much lower with humans.</span><span class="zh">WMT25 中 Shy-hunyuan-MT 自動排名居首，人工評分卻低得多。</span><span class="pill"><span class="en">Research</span><span class="zh">研究</span></span></td><td class="bad">High score, but 拍照 label still overflows</td><td class="good">Pass only after device LQA</td><td><span class="en">Use human, on-device LQA as the final gate.</span><span class="zh">以人工真機 LQA 作為最後關卡。</span></td></tr><tr><td>11</td><td class="k"><span class="en">AI post-editing over-edits</span><span class="zh">AI 譯後編輯過度修改</span></td><td><span class="en">“Minimal editing is challenging even when informed by quality indicators” (WMT25 evaluation task).</span><span class="zh">「即使提供品質指標，最小幅度修改仍具挑戰」（WMT25 評估任務）。</span><span class="pill"><span class="en">Research</span><span class="zh">研究</span></span></td><td class="bad">💾 儲存 → 💾 保存檔案</td><td class="good">💾 儲存 (keep / 保留)</td><td><span class="en">Diff the AI's edits and reject unnecessary changes.</span><span class="zh">比對 AI 的修改，退回不必要的變更。</span></td></tr><tr><td>12</td><td class="k"><span class="en">Strong overall, weak in context</span><span class="zh">整體強，情境弱</span></td><td><span class="en">LLMs top WMT24/25, yet “MT is not solved yet”; the hardest cases are context-poor and domain-specific.</span><span class="zh">LLM 稱霸 WMT24／25，但「機器翻譯尚未解決」；最難的是缺乏情境與專業領域的內容。</span><span class="pill"><span class="en">Research</span><span class="zh">研究</span></span></td><td class="bad">Spin ON → 旋轉 在</td><td class="good">旋轉 開</td><td><span class="en">Spend PE effort where LLMs fail: context, terms, length, locale.</span><span class="zh">把編輯力氣花在 LLM 的弱點：情境、術語、長度、地區。</span></td></tr></tbody></table></div></div>
+</section>
+
+<!-- ===================== 05 POST-EDITING (CORE) ===================== -->
+<section id="strategies" data-accent="green" class="core-sec">
+  <div class="sec-head"><span class="num">05</span>
+    <h2><span class="en">★ Post-Editing Methods &amp; Strategies (Core)</span><span class="zh">★ 譯後編輯方法與策略（核心）</span></h2></div>
+  <p class="lead">
+    <span class="en"><b>Post-editing (PE)</b> means a human revises machine output (from NMT or an LLM) until it is fit for purpose. In game UI it must be <b>accurate, official, functional and on-screen</b>.</span>
+    <span class="zh"><b>譯後編輯（PE）</b>是由人工修訂機器輸出（神經機器翻譯或 LLM），直到符合用途。在遊戲介面中，譯文必須<b>準確、合乎官方、功能正常，並放得進畫面</b>。</span>
+  </p>
+
+  <h3><span class="en">A. Light vs Full post-editing (ISO 18587:2017)</span><span class="zh">A. 輕度與完整譯後編輯（ISO 18587:2017）</span></h3>
+  <div class="pe-levels" id="peLevels"><div class=""><h4><span class="en">Light post-editing</span><span class="zh">輕度譯後編輯</span></h4><p class="bi"><span class="en">Make the text understandable and accurate; fix only meaning errors. Fine for internal gisting. ❌ Not acceptable for player-facing UI.</span><span class="zh">讓譯文可理解且正確，只修語意錯誤。適用於內部參考。❌ 不適用於玩家看得到的介面。</span></p></div><div class="hl"><h4><span class="en">Full post-editing</span><span class="zh">完整譯後編輯</span></h4><p class="bi"><span class="en">Output must match human-translation quality: accuracy, terminology, style, locale, grammar, and in AR, on-screen fit. ✅ Required for game text.</span><span class="zh">成品須達到人工翻譯品質：準確、術語、文體、地區、語法，在 AR 中還要放得進畫面。✅ 遊戲文字必須採用。</span></p></div><div class="gold"><h4><span class="en">Golden rule</span><span class="zh">黃金法則</span></h4><p class="bi"><span class="en">Use as much of the raw output as possible. Do not rewrite correct strings: over-editing costs time and creates inconsistency.</span><span class="zh">盡量沿用原始輸出。不要改寫已正確的字串：過度編輯既浪費時間，又造成不一致。</span></p></div></div>
+
+  <h3><span class="en">B. Classify errors with MQM</span><span class="zh">B. 以 MQM 分類錯誤</span></h3>
+  <p class="bi"><span class="en">The Multidimensional Quality Metrics (MQM) framework is the industry and research standard for error typing. Each error gets a <b>dimension</b> and a <b>severity</b> (Minor / Major / Critical). The QA tool in this lab uses the same severities.</span><span class="zh">多維品質指標（MQM）是業界與學界通用的錯誤分類框架。每個錯誤標記一個<b>維度</b>和一個<b>嚴重度</b>（輕微／嚴重／致命）。本實驗的 QA 工具採用相同的嚴重度。</span></p>
+  <div id="mqmTable"><div class="tbl-wrap"><table class="tbl "><thead><tr><th><span class="en">MQM dimension</span><span class="zh">MQM 維度</span></th><th><span class="en">Covers</span><span class="zh">涵蓋</span></th><th><span class="en">Example from this lab</span><span class="zh">本實驗例子</span></th></tr></thead><tbody><tr><td class="k"><span class="en">Terminology</span><span class="zh">術語</span></td><td><span class="en">Wrong or inconsistent term</span><span class="zh">術語錯誤或不一致</span></td><td>鱗莖龍 → 妙蛙種子</td></tr><tr><td class="k"><span class="en">Accuracy</span><span class="zh">準確度</span></td><td><span class="en">Mistranslation, omission, addition</span><span class="zh">誤譯、漏譯、增譯</span></td><td>股份 → 分享; （双倍奖励）</td></tr><tr><td class="k"><span class="en">Linguistic conventions</span><span class="zh">語言規範</span></td><td><span class="en">Grammar, punctuation, spelling</span><span class="zh">語法、標點、拼寫</span></td><td>捕捉 {count} 寶可夢 → 隻</td></tr><tr><td class="k"><span class="en">Style</span><span class="zh">文體</span></td><td><span class="en">Register, unidiomatic wording</span><span class="zh">語域、不道地的措辭</span></td><td>被…抓住了 → 使用…捕捉</td></tr><tr><td class="k"><span class="en">Locale conventions</span><span class="zh">地區慣例</span></td><td><span class="en">Script, local terms, formats</span><span class="zh">字形、在地用語、格式</span></td><td>杰尼龜 (zh_tw) → 傑尼龜</td></tr><tr><td class="k"><span class="en">Audience appropriateness</span><span class="zh">受眾適切性</span></td><td><span class="en">Confusing or unsuitable for the target players</span><span class="zh">對目標玩家造成困惑或不合適</span></td><td>口袋妖怪 → Pokémon</td></tr><tr><td class="k"><span class="en">Design &amp; markup</span><span class="zh">設計與標記</span></td><td><span class="en">Truncation, overlap, broken tags/placeholders</span><span class="zh">截斷、重疊、標籤或佔位符損壞</span></td><td>{名字} → {n}; 拍照 overflow</td></tr></tbody></table></div><p class="tiny"><span class="en">Severity: <b>Minor</b> = noticeable but harmless · <b>Major</b> = changes meaning or hurts usability · <b>Critical</b> = breaks function, legal/IP or safety issue.</span><span class="zh">嚴重度：<b>輕微</b>＝看得出但無害 · <b>嚴重</b>＝改變語意或影響使用 · <b>致命</b>＝功能損壞、涉及法律／版權或安全。</span></p></div>
+
+  <h3><span class="en">C. Measuring post-editing effort</span><span class="zh">C. 譯後編輯工作量的衡量</span></h3>
+  <div class="grid three" id="effort"><div class="card"><div class="ico">⏱️</div><h4><span class="en">Temporal effort</span><span class="zh">時間工作量</span></h4><p class="bi"><span class="en">Time spent per segment or word. Measured in CAT tools and the main factor in pricing.</span><span class="zh">每句段或每字所花的時間。可在電腦輔助翻譯工具中測量，是計價的主要依據。</span></p></div><div class="card"><div class="ico">⌨️</div><h4><span class="en">Technical effort</span><span class="zh">技術工作量</span></h4><p class="bi"><span class="en">The number of keystrokes and edits. <b>HTER</b> = edits needed ÷ length of the final text: lower means better raw output.</span><span class="zh">按鍵與修改次數。<b>HTER</b>＝所需修改數 ÷ 最終譯文長度：數值越低，原始輸出越好。</span></p></div><div class="card"><div class="ico">🧠</div><h4><span class="en">Cognitive effort</span><span class="zh">認知工作量</span></h4><p class="bi"><span class="en">Mental effort spent detecting and deciding (Krings, 2001). Fluent LLM errors raise it, because problems are harder to spot.</span><span class="zh">偵測問題與做決定所耗的心力（Krings，2001）。流暢的 LLM 錯誤更難察覺，會提高認知負擔。</span></p></div></div>
+
+  <h3><span class="en">D. The post-editor's toolbox: 8 edit operations</span><span class="zh">D. 譯後編輯工具箱：8 種編輯操作</span></h3>
+  <div class="grid four" id="toolbox"><div class="op"><h4><span class="en">Keep</span><span class="zh">保留</span></h4><p class="bi"><span class="en">Correct output stays untouched.</span><span class="zh">正確的輸出不要動。</span></p><div class="ex"><del>💾 儲存</del> → <ins>💾 儲存</ins></div></div><div class="op"><h4><span class="en">Replace</span><span class="zh">替換</span></h4><p class="bi"><span class="en">Swap in the official termbase item.</span><span class="zh">換成官方術語。</span></p><div class="ex"><del>鱗莖龍</del> → <ins>妙蛙種子</ins></div></div><div class="op"><h4><span class="en">Restore</span><span class="zh">還原</span></h4><p class="bi"><span class="en">Put back placeholders and DNT items.</span><span class="zh">還原佔位符與不翻譯詞。</span></p><div class="ex"><del>{名字} / 英雄</del> → <ins>{n} / Hiro</ins></div></div><div class="op"><h4><span class="en">Delete</span><span class="zh">刪除</span></h4><p class="bi"><span class="en">Remove additions, preambles, notes, Markdown.</span><span class="zh">刪除增譯、前言、註解、Markdown。</span></p><div class="ex"><del>以下是翻译：拍照</del> → <ins>拍照</ins></div></div><div class="op"><h4><span class="en">Disambiguate</span><span class="zh">消歧</span></h4><p class="bi"><span class="en">Choose the sense that fits the UI context.</span><span class="zh">選擇符合介面情境的詞義。</span></p><div class="ex"><del>📤 股份</del> → <ins>📤 分享</ins></div></div><div class="op"><h4><span class="en">Condense</span><span class="zh">精簡</span></h4><p class="bi"><span class="en">Shorten to fit the space, keeping the function.</span><span class="zh">保留功能、縮短以符合空間。</span></p><div class="ex"><del>捕捉寶可夢並保存至您的設備相冊</del> → <ins>拍照</ins></div></div><div class="op"><h4><span class="en">Localise</span><span class="zh">在地化</span></h4><p class="bi"><span class="en">Fix script and regional vocabulary.</span><span class="zh">修正字形與地區用語。</span></p><div class="ex"><del>杰尼龜 / 設備</del> → <ins>傑尼龜 / 裝置</ins></div></div><div class="op"><h4><span class="en">Restructure</span><span class="zh">重組</span></h4><p class="bi"><span class="en">Rebuild grammar, voice or the franchise formula.</span><span class="zh">重組語法、語態或系列句式。</span></p><div class="ex"><del>被 Pokémon AR 抓住了</del> → <ins>使用 Pokémon AR 捕捉</ins></div></div></div>
+
+  <h3><span class="en">E. 12 strategies with live examples</span><span class="zh">E. 12 項策略與即時示例</span></h3>
+  <p class="hint"><span class="en">👆 Tap any card to flip between <b>Raw MT</b> and <b>Post-edited</b>.</span><span class="zh">👆 點擊卡片可切換<b>機翻原稿</b>與<b>譯後編輯</b>版本。</span></p>
+  <div class="strategies" id="strategyGrid"><div class="strat"><span class="tag"><span class="en">Terms</span><span class="zh">術語</span></span><h4><span class="en">1 · Lock terminology with a termbase</span><span class="zh">1 · 以術語庫鎖定術語</span></h4><p class="rule"><span class="en">Character, type, item and move names come from the IP owner's official list. Never translate them freely.</span><span class="zh">角色、屬性、道具、招式名稱一律依版權方官方清單，不得自由翻譯。</span></p><div class="ex mt"><div class="lbl"><span class="en">RAW MT ❌</span><span class="zh">機翻原稿 ❌</span></div><div class="src">Source / 原文: BULBASAUR (zh_tw)</div><div class="txt">鱗莖龍</div></div><ul><li><span class="en">Keep the glossary open while editing</span><span class="zh">編輯時隨時開著術語表</span></li><li><span class="en">Check every locale column</span><span class="zh">逐一檢查每個語言欄位</span></li><li><span class="en">Remember the 2016 unified Chinese names</span><span class="zh">留意 2016 年統一的華語譯名</span></li></ul></div><div class="strat"><span class="tag"><span class="en">Tech</span><span class="zh">技術</span></span><h4><span class="en">2 · Protect placeholders, tags &amp; emoji</span><span class="zh">2 · 保護佔位符、標籤與表情符號</span></h4><p class="rule"><span class="en">Copy {variables}, line breaks, tags and emoji exactly; move them only if grammar requires; never rename them.</span><span class="zh">{變數}、換行、標籤與表情符號須原樣保留；只在語法需要時移動，絕不改名。</span></p><div class="ex mt"><div class="lbl"><span class="en">RAW MT ❌</span><span class="zh">機翻原稿 ❌</span></div><div class="src">Source / 原文: ✨ Wild {n} appeared!</div><div class="txt">✨ 野生的 {名字} 出现了！</div></div><ul><li><span class="en">Count the {} before and after</span><span class="zh">前後比對 {} 的數量</span></li><li><span class="en">A broken placeholder = visible bug or crash</span><span class="zh">佔位符損壞＝畫面錯誤甚至當機</span></li></ul></div><div class="strat"><span class="tag"><span class="en">Meaning</span><span class="zh">語意</span></span><h4><span class="en">3 · Read the UI context first</span><span class="zh">3 · 先讀懂介面情境</span></h4><p class="rule"><span class="en">Is it a button (verb), a label (noun) or a toggle state? The key name (photo_share) is a clue.</span><span class="zh">這是按鈕（動詞）、標籤（名詞）還是開關狀態？鍵名（photo_share）就是線索。</span></p><div class="ex mt"><div class="lbl"><span class="en">RAW MT ❌</span><span class="zh">機翻原稿 ❌</span></div><div class="src">Source / 原文: 📤 Share (photo button)</div><div class="txt">📤 股份</div></div><ul><li><span class="en">Use the key name as context</span><span class="zh">把鍵名當作情境線索</span></li><li><span class="en">Watch polysemous words: Save, Close, Share, Fire, Model</span><span class="zh">注意多義詞：Save、Close、Share、Fire、Model</span></li></ul></div><div class="strat"><span class="tag"><span class="en">Length</span><span class="zh">長度</span></span><h4><span class="en">4 · Respect the character budget</span><span class="zh">4 · 遵守字數預算</span></h4><p class="rule"><span class="en">AR buttons are tiny and sit over the camera feed. Translate the function, not an explanation.</span><span class="zh">AR 按鈕很小又疊在相機畫面上。翻譯功能，不要寫成說明文。</span></p><div class="ex mt"><div class="lbl"><span class="en">RAW MT ❌</span><span class="zh">機翻原稿 ❌</span></div><div class="src">Source / 原文: Capture (64 px shutter)</div><div class="txt">捕捉寶可夢並保存至您的設備相冊</div></div><ul><li><span class="en">1 Chinese character ≈ 2 Latin letter widths</span><span class="zh">一個中文字約等於兩個英文字母寬</span></li><li><span class="en">Check truncation (…) on a real device</span><span class="zh">在真機上檢查截斷（…）</span></li></ul></div><div class="strat"><span class="tag"><span class="en">Locale</span><span class="zh">地區</span></span><h4><span class="en">5 · Match the locale &amp; script</span><span class="zh">5 · 對應地區與字形</span></h4><p class="rule"><span class="en">zh_tw = Traditional characters + Taiwan vocabulary; zh_cn = Simplified + mainland vocabulary. Never mix them.</span><span class="zh">zh_tw 用繁體字與台灣用語；zh_cn 用簡體字與大陸用語，切勿混用。</span></p><div class="ex mt"><div class="lbl"><span class="en">RAW MT ❌</span><span class="zh">機翻原稿 ❌</span></div><div class="src">Source / 原文: SQUIRTLE (zh_tw)</div><div class="txt">杰尼龜</div></div><ul><li><span class="en">TW: 設備→裝置, 相冊→相簿, 保存→儲存</span><span class="zh">台灣：設備→裝置、相冊→相簿、保存→儲存</span></li><li><span class="en">Use full-width ！ and …</span><span class="zh">使用全形！與刪節號…</span></li></ul></div><div class="strat"><span class="tag"><span class="en">Voice</span><span class="zh">風格</span></span><h4><span class="en">6 · Reuse franchise formulas</span><span class="zh">6 · 沿用系列句式</span></h4><p class="rule"><span class="en">Players expect the phrasing they know from the main games. Consistency beats creativity.</span><span class="zh">玩家期待熟悉的正傳遊戲說法。一致性勝於創意。</span></p><div class="ex mt"><div class="lbl"><span class="en">RAW MT ❌</span><span class="zh">機翻原稿 ❌</span></div><div class="src">Source / 原文: Wild {n} appeared!</div><div class="txt">狂野的 {n} 出現了！</div></div><ul><li><span class="en">Search the translation memory first</span><span class="zh">先查翻譯記憶</span></li><li><span class="en">Keep the excitement (！) without adding slang</span><span class="zh">保留驚嘆語氣（！）但不加俚語</span></li></ul></div><div class="strat"><span class="tag"><span class="en">DNT</span><span class="zh">DNT</span></span><h4><span class="en">7 · Never translate DNT items</span><span class="zh">7 · 不翻譯 DNT 項目</span></h4><p class="rule"><span class="en">Technical tokens, brand names and marker IDs stay as they are.</span><span class="zh">技術代碼、品牌名稱與標記名稱保持原樣。</span></p><div class="ex mt"><div class="lbl"><span class="en">RAW MT ❌</span><span class="zh">機翻原稿 ❌</span></div><div class="src">Source / 原文: 📷 Point camera at Hiro marker</div><div class="txt">📷 将相机指向英雄标记</div></div><ul><li><span class="en">DNT list: Hiro, Pokémon, AR, GO</span><span class="zh">DNT 清單：Hiro、Pokémon、AR、GO</span></li><li><span class="en">Also fix the verb: 对准 (aim at) beats 指向</span><span class="zh">順便修正動詞：「对准」比「指向」自然</span></li></ul></div><div class="strat"><span class="tag"><span class="en">Grammar</span><span class="zh">語法</span></span><h4><span class="en">8 · Fix grammar around variables</span><span class="zh">8 · 圍繞變數重組語法</span></h4><p class="rule"><span class="en">Chinese needs measure words and a different word order; rebuild the sentence around the variable.</span><span class="zh">中文需要量詞、語序也不同，要圍繞變數重組句子。</span></p><div class="ex mt"><div class="lbl"><span class="en">RAW MT ❌</span><span class="zh">機翻原稿 ❌</span></div><div class="src">Source / 原文: Catch {count} Pokémon</div><div class="txt">捕捉 {count} 寶可夢</div></div><ul><li><span class="en">Test with count = 1 and count = 10</span><span class="zh">以 count＝1 和 10 測試</span></li><li><span class="en">Ask developers for full sentences, not fragments</span><span class="zh">請開發者提供完整句子而非拼接片段</span></li></ul></div><div class="strat"><span class="tag"><span class="en">Style</span><span class="zh">文體</span></span><h4><span class="en">9 · Correct voice, register &amp; domain</span><span class="zh">9 · 修正語態、語域與領域</span></h4><p class="rule"><span class="en">Pick the domain sense (3-D model, not fashion model) and a friendly, active voice for players.</span><span class="zh">選擇正確領域的詞義（3D 模型而非模特兒），並使用親切的主動語態。</span></p><div class="ex mt"><div class="lbl"><span class="en">RAW MT ❌</span><span class="zh">機翻原稿 ❌</span></div><div class="src">Source / 原文: Caught with Pokémon AR</div><div class="txt">被 Pokémon AR 抓住了</div></div><ul><li><span class="en">被 passives often sound negative</span><span class="zh">「被」字句常帶負面意味</span></li><li><span class="en">装载 = cargo; 加载 = software loading</span><span class="zh">「装载」是貨物裝運；「加载」才是軟體載入</span></li></ul></div><div class="strat"><span class="tag"><span class="en">LLM</span><span class="zh">大模型</span></span><h4><span class="en">10 · Strip LLM add-ons</span><span class="zh">10 · 刪除大模型附加內容</span></h4><p class="rule"><span class="en">Remove preambles (“Here is the translation”), bracketed notes, Markdown and code fences.</span><span class="zh">刪除前言（「以下是翻譯」）、括號註解、Markdown 與程式碼框。</span></p><div class="ex mt"><div class="lbl"><span class="en">RAW MT ❌</span><span class="zh">機翻原稿 ❌</span></div><div class="src">Source / 原文: Capture (zh_cn)</div><div class="txt">以下是翻译：拍照</div></div><ul><li><span class="en">Search for ：（ ** ``` in the file</span><span class="zh">在檔案中搜尋 ：（ ** ```</span></li><li><span class="en">Ask for output-only JSON in the prompt</span><span class="zh">提示詞中要求只輸出 JSON</span></li></ul></div><div class="strat"><span class="tag"><span class="en">LLM</span><span class="zh">大模型</span></span><h4><span class="en">11 · Verify fluent output against the source</span><span class="zh">11 · 流暢譯文也要對照原文</span></h4><p class="rule"><span class="en">LLM errors are often fluent. Read source and target side by side and check for additions and omissions.</span><span class="zh">LLM 的錯誤常常很流暢。並排閱讀原文與譯文，檢查增譯與漏譯。</span></p><div class="ex mt"><div class="lbl"><span class="en">RAW MT ❌</span><span class="zh">機翻原稿 ❌</span></div><div class="src">Source / 原文: 🔄 Retake</div><div class="txt">🔄 再来一次！（双倍奖励）</div></div><ul><li><span class="en">Fluency is not accuracy</span><span class="zh">通順不等於正確</span></li><li><span class="en">Watch for invented rewards, numbers and promises</span><span class="zh">留意憑空多出的獎勵、數字與承諾</span></li></ul></div><div class="strat"><span class="tag"><span class="en">LQA</span><span class="zh">LQA</span></span><h4><span class="en">12 · Test in context &amp; don't over-edit</span><span class="zh">12 · 情境測試、不過度編輯</span></h4><p class="rule"><span class="en">Some errors only appear on a device over the camera view. Re-test after each fix, and leave correct output alone.</span><span class="zh">有些錯誤只有在真機相機畫面上才看得到。每次修正後重測，正確的輸出不要動。</span></p><div class="ex mt"><div class="lbl"><span class="en">RAW MT ❌</span><span class="zh">機翻原稿 ❌</span></div><div class="src">Source / 原文: 💾 Save (zh_tw)</div><div class="txt">💾 儲存</div></div><ul><li><span class="en">Take before/after screenshots</span><span class="zh">拍下修改前後截圖</span></li><li><span class="en">Log each change: what, why, which strategy</span><span class="zh">記錄每項修改：改了什麼、為什麼、用哪個策略</span></li></ul></div></div>
+
+  <h3><span class="en">F. Decision flow for every string</span><span class="zh">F. 每條字串的決策流程</span></h3>
+  <ol class="flow" id="flow"><li><span class="en"><b>Is it a termbase or DNT item?</b> (name, type, brand, marker) → use the official form. Never paraphrase.</span><span class="zh"><b>是術語或 DNT 項目嗎？</b>（名稱、屬性、品牌、標記）→ 使用官方形式，絕不改寫。</span></li><li><span class="en"><b>Are placeholders, emoji and markup intact?</b> <code>{n}</code> must appear exactly as in the source.</span><span class="zh"><b>佔位符、表情符號與標記完整嗎？</b><code>{n}</code> 必須與原文完全相同。</span></li><li><span class="en"><b>Did the model add anything?</b> Preambles, brackets, Markdown, invented rewards → delete.</span><span class="zh"><b>模型有沒有多加東西？</b>前言、括號、Markdown、憑空的獎勵 → 刪除。</span></li><li><span class="en"><b>Is the meaning right in this UI context?</b> Button (verb), label (noun) or toggle state?</span><span class="zh"><b>在此介面情境中語意正確嗎？</b>按鈕（動詞）、標籤（名詞）還是開關狀態？</span></li><li><span class="en"><b>Does it fit?</b> Check the character budget, then test on a device over the camera.</span><span class="zh"><b>放得下嗎？</b>先檢查字數預算，再在真機相機畫面上測試。</span></li><li><span class="en"><b>Is it the right locale?</b> Script, TW vs CN vocabulary, full-width punctuation ！…</span><span class="zh"><b>地區正確嗎？</b>字形、台灣與大陸用語、全形標點 ！…</span></li><li><span class="en"><b>Does it sound like the game?</b> Franchise formulas and the player's register.</span><span class="zh"><b>聽起來像這款遊戲嗎？</b>系列句式與玩家語域。</span></li><li><span class="en"><b>Already correct?</b> → leave it alone.</span><span class="zh"><b>已經正確？</b>→ 不要動它。</span></li></ol>
+
+  <h3><span class="en">G. Using LLMs responsibly in a PE workflow</span><span class="zh">G. 在譯後編輯流程中負責任地使用 LLM</span></h3>
+  <div class="pipeline" id="llmFlow"><div class="step"><span class="sn">1</span><h5><span class="en">Pre-edit &amp; add context</span><span class="zh">譯前編輯與補充情境</span></h5><p><span class="en">Give key names, screenshots, character limits.</span><span class="zh">提供鍵名、截圖、字數上限。</span></p></div><div class="step"><span class="sn">2</span><h5><span class="en">Constrained prompt</span><span class="zh">限制式提示詞</span></h5><p><span class="en">Glossary + DNT list + locale + output-only JSON.</span><span class="zh">術語表＋DNT 清單＋地區＋只輸出 JSON。</span></p></div><div class="step"><span class="sn">3</span><h5><span class="en">Automatic QA</span><span class="zh">自動 QA</span></h5><p><span class="en">Placeholders, script, length, MT/LLM patterns.</span><span class="zh">佔位符、字形、長度、機翻／大模型錯誤模式。</span></p></div><div class="step core"><span class="sn">4</span><h5><span class="en">Human full PE ★</span><span class="zh">人工完整譯後編輯 ★</span></h5><p><span class="en">Apply the 12 strategies; edit minimally.</span><span class="zh">套用 12 項策略；最小幅度修改。</span></p></div><div class="step"><span class="sn">5</span><h5><span class="en">Device LQA</span><span class="zh">真機 LQA</span></h5><p><span class="en">Over the camera, every language, peer review.</span><span class="zh">在相機畫面上、逐一語言、同儕互審。</span></p></div></div>
+  <p class="bi"><span class="en">Example of a <b>constrained prompt</b>: it reduces errors but <b>never</b> replaces human post-editing.</span><span class="zh"><b>限制式提示詞</b>示例：可減少錯誤，但<b>絕不能</b>取代人工譯後編輯。</span></p>
+<pre class="code" id="promptBox">You are a game localiser for Pokémon GO, target locale zh-TW (Taiwan).
+RULES
+1. Official names ONLY: BULBASAUR=妙蛙種子, CHARMANDER=小火龍, SQUIRTLE=傑尼龜
+2. Do NOT translate: Hiro, Pokémon, AR, {n}
+3. Button labels: max 4 Chinese characters. Toggle states: 開 / 關
+4. Traditional Chinese + Taiwan vocabulary (裝置, 相簿, 儲存, 載入)
+5. Franchise formula: "Wild {n} appeared!" = "野生的 {n} 出現了！"
+6. Output valid JSON only. No explanations, no brackets, no Markdown.
+INPUT
+{"capture":"Capture","photo_share":"📤 Share","spin_on":"Spin ON"}</pre>
+  <button class="btn sm copy" data-copy="promptBox"><span class="en">Copy prompt</span><span class="zh">複製提示詞</span></button>
+</section>
+
+<!-- ===================== 06 SANDBOX ===================== -->
+<section id="sandbox" class="alt" data-accent="navy">
+  <div class="sec-head"><span class="num">06</span>
+    <h2><span class="en">Post-Editing Sandbox</span><span class="zh">譯後編輯沙盒</span></h2></div>
+  <p class="lead">
+    <span class="en">The editor holds the <b>raw MT/LLM draft</b> of the AR game's localisation JSON. Edit it, run QA, and watch the phone preview update. When QA passes, export it to Liveweave and play in AR.</span>
+    <span class="zh">編輯器內是 AR 遊戲在地化 JSON 的<b>機翻／大模型初稿</b>。修改後執行 QA，手機預覽會即時更新。QA 通過後匯出到 Liveweave，用 AR 實際遊玩。</span>
+  </p>
+
+  <div class="sandbox">
+    <div class="editor-col">
+      <div class="toolbar">
+        <button class="btn sm primary" id="btnQA"><span class="en">▶ Run QA</span><span class="zh">執行 QA</span></button>
+        <button class="btn sm" id="btnReset"><span class="en">↺ Reset draft</span><span class="zh">重設初稿</span></button>
+        <button class="btn sm" id="btnAnswer"><span class="en">🔑 Model answer</span><span class="zh">參考答案</span></button>
+        <button class="btn sm" id="btnCSV"><span class="en">⬇ QA report CSV</span><span class="zh">下載報告</span></button>
+      </div>
+      <textarea id="jsonEditor" spellcheck="false" aria-label="JSON editor"></textarea>
+      <div id="jsonStatus" class="status ok"><span class="en">✔ Valid JSON</span><span class="zh">✔ JSON 格式正確</span></div>
+    </div>
+
+    <div class="preview-col">
+      <div class="lang-tabs">
+        <button data-l="en">EN</button>
+        <button data-l="zh_tw" class="active">繁體</button>
+        <button data-l="zh_cn">简体</button>
+      </div>
+      <div class="opts">
+        <label><input type="checkbox" id="optLost"> <span class="en">Marker lost</span><span class="zh">標記遺失</span></label>
+        <label><input type="checkbox" id="optPhoto"> <span class="en">Photo preview</span><span class="zh">照片預覽</span></label>
+        <label><input type="checkbox" id="optSpin" checked=""> <span class="en">Spin ON</span><span class="zh">旋轉開</span></label>
+      </div>
+      <div class="phone" id="phone"><div class="marker">Hiro</div><div class="poke3d ">🦖</div><div class="p-btns"><button data-i="0" class="active" style="background:#4CAF50">⭐ 鱗莖龍</button><button data-i="1" class="" style="background:#FF5722">⭐ 小火龍</button><button data-i="2" class="" style="background:#2196F3">⭐ 杰尼龜</button></div><div class="p-lang">繁體</div><div class="p-ctrl"><i>+</i><span>0.50x</span><i>−</i><i>🔄</i><span>旋轉 在</span><i>🎯</i></div><div class="p-info"><div class="pname">鱗莖龍</div><div class="pdex">#001</div><div class="ptype" style="color:#4CAF50">草地 / 毒</div><div class="pstatus flag">✨ 狂野的 鱗莖龍 出現了！</div></div><div class="p-shutter"><i>📸</i><span class="flag">捕捉寶可夢並保存至您的設備相冊</span></div></div>
+      <p class="tiny"><span class="en">The simulator copies the real app's CSS (nowrap, ellipsis, fixed button sizes), so overflow here will also happen on your phone. Red dashed outline = overflow detected.</span><span class="zh">模擬器沿用真實 App 的 CSS（不換行、省略號、固定按鈕尺寸），這裡溢出的文字在手機上同樣會溢出。紅色虛線＝偵測到溢出。</span></p>
+    </div>
+  </div>
+
+  <div class="qa-panel">
+    <h3><span class="en">🔍 QA Report</span><span class="zh">🔍 品質檢查報告</span> <span id="qaScore" class="score fail"><span class="en">43 issues · 9 critical</span><span class="zh">43 個問題 · 9 個致命</span></span></h3>
+    <div class="tbl-wrap"><table class="tbl" id="qaTable"><thead><tr>
+      <th>#</th><th><span class="en">Severity</span><span class="zh">嚴重度</span></th>
+      <th><span class="en">Location</span><span class="zh">位置</span></th>
+      <th><span class="en">Found</span><span class="zh">現有譯文</span></th>
+      <th><span class="en">Problem</span><span class="zh">問題</span></th>
+      <th><span class="en">Suggestion</span><span class="zh">建議</span></th>
+    </tr></thead><tbody><tr><td>1</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.appeared.zh_tw</code></td><td>✨ 狂野的 {n} 出現了！</td><td><span class="en">Likely MT/LLM error: Franchise formula broken (“Wild” ≠ crazy)</span><span class="zh">疑似機翻／大模型錯誤：破壞系列句式（wild ≠ 狂野）</span></td><td>野生的</td></tr><tr><td>2</td><td><span class="sev critical"><span class="en">CRITICAL</span><span class="zh">致命</span></span></td><td><code>ui.appeared.zh_cn</code></td><td>✨ 野生的 {名字} 出现了！</td><td><span class="en">Placeholder mismatch ({n} ≠ {名字})</span><span class="zh">佔位符不一致（{n} ≠ {名字}）</span></td><td>{n}</td></tr><tr><td>3</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.point_camera.zh_tw</code></td><td>📷 請將您的行動裝置的相機鏡頭對準印在紙上的 Hiro 標記圖案以開始遊戲</td><td><span class="en">Too long: width 67 &gt; budget 32 (truncation / overlap)</span><span class="zh">過長：寬度 67 &gt; 上限 32（截斷／重疊）</span></td><td>Shorten, keep the function / 精簡並保留功能</td></tr><tr><td>4</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.point_camera.zh_cn</code></td><td>📷 将相机指向英雄标记</td><td><span class="en">DNT term “Hiro” missing</span><span class="zh">不翻譯詞「Hiro」遺失</span></td><td>Hiro</td></tr><tr><td>5</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.point_camera.zh_cn</code></td><td>📷 将相机指向英雄标记</td><td><span class="en">Likely MT/LLM error: DNT marker name “Hiro” translated</span><span class="zh">疑似機翻／大模型錯誤：不翻譯詞 Hiro 被譯成「英雄」</span></td><td>Hiro</td></tr><tr><td>6</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.loading_name.zh_cn</code></td><td>⏳ 装载 {n}…</td><td><span class="en">Likely MT/LLM error: Wrong register (cargo loading)</span><span class="zh">疑似機翻／大模型錯誤：語域錯誤（貨物裝載）</span></td><td>正在載入 / 正在加载</td></tr><tr><td>7</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.model_failed.zh_tw</code></td><td>❌ 模特兒載入失敗</td><td><span class="en">Likely MT/LLM error: “Model” read as a fashion model</span><span class="zh">疑似機翻／大模型錯誤：把 Model 誤解為模特兒</span></td><td>模型</td></tr><tr><td>8</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.spin_on.zh_tw</code></td><td>旋轉 在</td><td><span class="en">Likely MT/LLM error: “ON” read as a preposition</span><span class="zh">疑似機翻／大模型錯誤：把 ON 當成介詞「在」</span></td><td>旋轉 開 / 旋转 开</td></tr><tr><td>9</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.spin_off.zh_cn</code></td><td>旋转 离开</td><td><span class="en">Likely MT/LLM error: “OFF” read as “leave”</span><span class="zh">疑似機翻／大模型錯誤：把 OFF 當成「離開」</span></td><td>關 / 关</td></tr><tr><td>10</td><td><span class="sev minor"><span class="en">MINOR</span><span class="zh">輕微</span></span></td><td><code>ui.capture.zh_tw</code></td><td>捕捉寶可夢並保存至您的設備相冊</td><td><span class="en">Mainland term in Taiwan copy</span><span class="zh">台灣版使用大陸用語</span></td><td>→ 裝置</td></tr><tr><td>11</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.capture.zh_tw</code></td><td>捕捉寶可夢並保存至您的設備相冊</td><td><span class="en">Too long: width 30 &gt; budget 8 (truncation / overlap)</span><span class="zh">過長：寬度 30 &gt; 上限 8（截斷／重疊）</span></td><td>Shorten, keep the function / 精簡並保留功能</td></tr><tr><td>12</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.capture.zh_cn</code></td><td>以下是翻译：拍照</td><td><span class="en">Likely MT/LLM error: LLM chat preamble left in the string</span><span class="zh">疑似機翻／大模型錯誤：殘留大模型前言</span></td><td>Delete preamble / 刪除前言</td></tr><tr><td>13</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.capture.zh_cn</code></td><td>以下是翻译：拍照</td><td><span class="en">Too long: width 16 &gt; budget 8 (truncation / overlap)</span><span class="zh">過長：寬度 16 &gt; 上限 8（截斷／重疊）</span></td><td>Shorten, keep the function / 精簡並保留功能</td></tr><tr><td>14</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.photo_save.zh_cn</code></td><td>💾 救</td><td><span class="en">Likely MT/LLM error: “Save” read as “rescue”</span><span class="zh">疑似機翻／大模型錯誤：把 Save 誤解為拯救</span></td><td>儲存 (TW) / 保存 (CN)</td></tr><tr><td>15</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.photo_share.zh_tw</code></td><td>📤 股份</td><td><span class="en">Likely MT/LLM error: “Share” read as stock shares</span><span class="zh">疑似機翻／大模型錯誤：把 Share 誤解為股份</span></td><td>分享</td></tr><tr><td>16</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.photo_close.zh_tw</code></td><td>✕ 關閉（指關閉預覽視窗）</td><td><span class="en">Explanation added in brackets (LLM verbosity)</span><span class="zh">以括號加入解釋（大模型冗長）</span></td><td>Delete bracket / 刪除括號內容</td></tr><tr><td>17</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.photo_close.zh_tw</code></td><td>✕ 關閉（指關閉預覽視窗）</td><td><span class="en">Too long: width 24 &gt; budget 12 (truncation / overlap)</span><span class="zh">過長：寬度 24 &gt; 上限 12（截斷／重疊）</span></td><td>Shorten, keep the function / 精簡並保留功能</td></tr><tr><td>18</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.photo_close.zh_cn</code></td><td>✕ 靠近</td><td><span class="en">Likely MT/LLM error: “Close” read as “near”</span><span class="zh">疑似機翻／大模型錯誤：把 Close 誤解為靠近</span></td><td>關閉 / 关闭</td></tr><tr><td>19</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.photo_retake.zh_tw</code></td><td>🔄 奪回</td><td><span class="en">Likely MT/LLM error: “Retake” read as “recapture territory”</span><span class="zh">疑似機翻／大模型錯誤：把 Retake 誤解為奪回</span></td><td>重拍</td></tr><tr><td>20</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.photo_retake.zh_cn</code></td><td>🔄 再来一次！（双倍奖励）</td><td><span class="en">Likely MT/LLM error: Information not in the source (hallucination)</span><span class="zh">疑似機翻／大模型錯誤：原文沒有的資訊（幻覺）</span></td><td>Delete addition / 刪除增譯</td></tr><tr><td>21</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.photo_retake.zh_cn</code></td><td>🔄 再来一次！（双倍奖励）</td><td><span class="en">Explanation added in brackets (LLM verbosity)</span><span class="zh">以括號加入解釋（大模型冗長）</span></td><td>Delete bracket / 刪除括號內容</td></tr><tr><td>22</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.photo_retake.zh_cn</code></td><td>🔄 再来一次！（双倍奖励）</td><td><span class="en">Too long: width 25 &gt; budget 12 (truncation / overlap)</span><span class="zh">過長：寬度 25 &gt; 上限 12（截斷／重疊）</span></td><td>Shorten, keep the function / 精簡並保留功能</td></tr><tr><td>23</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.photo_watermark.zh_tw</code></td><td>使用口袋妖怪 AR 捕捉</td><td><span class="en">DNT term “Pokémon” missing</span><span class="zh">不翻譯詞「Pokémon」遺失</span></td><td>Pokémon</td></tr><tr><td>24</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.photo_watermark.zh_tw</code></td><td>使用口袋妖怪 AR 捕捉</td><td><span class="en">Likely MT/LLM error: Legacy / unofficial brand name</span><span class="zh">疑似機翻／大模型錯誤：舊稱或非官方品牌名</span></td><td>Pokémon / 寶可夢</td></tr><tr><td>25</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.photo_watermark.zh_cn</code></td><td>被 Pokémon AR 抓住了</td><td><span class="en">Likely MT/LLM error: Passive voice sounds like “got arrested”</span><span class="zh">疑似機翻／大模型錯誤：被動句聽起來像「被逮捕」</span></td><td>使用 Pokémon AR 捕捉</td></tr><tr><td>26</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>ui.loading_title.zh_cn</code></td><td>**正在加载 Pokémon AR…**</td><td><span class="en">Likely MT/LLM error: Markdown formatting leaked into UI text</span><span class="zh">疑似機翻／大模型錯誤：Markdown 格式混入介面文字</span></td><td>Remove ** ` # / 移除符號</td></tr><tr><td>27</td><td><span class="sev critical"><span class="en">CRITICAL</span><span class="zh">致命</span></span></td><td><code>pokemon[0].name.zh_tw</code></td><td>鱗莖龍</td><td><span class="en">Not the official termbase name</span><span class="zh">非官方術語庫譯名</span></td><td>妙蛙種子</td></tr><tr><td>28</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>pokemon[0].name.zh_tw</code></td><td>鱗莖龍</td><td><span class="en">Likely MT/LLM error: Literal, phonetic or invented name</span><span class="zh">疑似機翻／大模型錯誤：直譯、音譯或自創名稱</span></td><td>Termbase / 術語庫</td></tr><tr><td>29</td><td><span class="sev critical"><span class="en">CRITICAL</span><span class="zh">致命</span></span></td><td><code>pokemon[0].type.zh_tw</code></td><td>草地 / 毒</td><td><span class="en">Type not in termbase form</span><span class="zh">屬性不符術語庫</span></td><td>草 / 毒</td></tr><tr><td>30</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>pokemon[0].type.zh_tw</code></td><td>草地 / 毒</td><td><span class="en">Likely MT/LLM error: Grass type ≠ lawn</span><span class="zh">疑似機翻／大模型錯誤：草屬性 ≠ 草地</span></td><td>草</td></tr><tr><td>31</td><td><span class="sev critical"><span class="en">CRITICAL</span><span class="zh">致命</span></span></td><td><code>pokemon[0].type.zh_cn</code></td><td>草 / 毒药</td><td><span class="en">Type not in termbase form</span><span class="zh">屬性不符術語庫</span></td><td>草 / 毒</td></tr><tr><td>32</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>pokemon[0].type.zh_cn</code></td><td>草 / 毒药</td><td><span class="en">Likely MT/LLM error: Type must be the single character 毒</span><span class="zh">疑似機翻／大模型錯誤：屬性應為單字「毒」</span></td><td>毒</td></tr><tr><td>33</td><td><span class="sev critical"><span class="en">CRITICAL</span><span class="zh">致命</span></span></td><td><code>pokemon[1].type.zh_tw</code></td><td>開火</td><td><span class="en">Type not in termbase form</span><span class="zh">屬性不符術語庫</span></td><td>火</td></tr><tr><td>34</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>pokemon[1].type.zh_tw</code></td><td>開火</td><td><span class="en">Likely MT/LLM error: Fire type read as “open fire”</span><span class="zh">疑似機翻／大模型錯誤：火屬性被誤解為「開火」</span></td><td>火</td></tr><tr><td>35</td><td><span class="sev critical"><span class="en">CRITICAL</span><span class="zh">致命</span></span></td><td><code>pokemon[1].name.zh_cn</code></td><td>查曼德</td><td><span class="en">Not the official termbase name</span><span class="zh">非官方術語庫譯名</span></td><td>小火龙</td></tr><tr><td>36</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>pokemon[1].name.zh_cn</code></td><td>查曼德</td><td><span class="en">Likely MT/LLM error: Literal, phonetic or invented name</span><span class="zh">疑似機翻／大模型錯誤：直譯、音譯或自創名稱</span></td><td>Termbase / 術語庫</td></tr><tr><td>37</td><td><span class="sev critical"><span class="en">CRITICAL</span><span class="zh">致命</span></span></td><td><code>pokemon[1].type.zh_cn</code></td><td>火属性类型的宝可梦</td><td><span class="en">Type not in termbase form</span><span class="zh">屬性不符術語庫</span></td><td>火</td></tr><tr><td>38</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>pokemon[1].type.zh_cn</code></td><td>火属性类型的宝可梦</td><td><span class="en">Likely MT/LLM error: Explanatory words added to a label (verbosity)</span><span class="zh">疑似機翻／大模型錯誤：標籤加入解釋性字詞（冗長）</span></td><td>Type name only / 只保留屬性名</td></tr><tr><td>39</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>pokemon[1].type.zh_cn</code></td><td>火属性类型的宝可梦</td><td><span class="en">Too long: width 18 &gt; budget 12 (truncation / overlap)</span><span class="zh">過長：寬度 18 &gt; 上限 12（截斷／重疊）</span></td><td>Shorten, keep the function / 精簡並保留功能</td></tr><tr><td>40</td><td><span class="sev critical"><span class="en">CRITICAL</span><span class="zh">致命</span></span></td><td><code>pokemon[2].name.zh_tw</code></td><td>杰尼龜</td><td><span class="en">Not the official termbase name</span><span class="zh">非官方術語庫譯名</span></td><td>傑尼龜</td></tr><tr><td>41</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>pokemon[2].name.zh_tw</code></td><td>杰尼龜</td><td><span class="en">Simplified characters in zh_tw: 杰</span><span class="zh">zh_tw 中混入簡體字：杰</span></td><td>Convert to Traditional / 改為繁體</td></tr><tr><td>42</td><td><span class="sev critical"><span class="en">CRITICAL</span><span class="zh">致命</span></span></td><td><code>pokemon[2].name.zh_cn</code></td><td>傑尼龜</td><td><span class="en">Not the official termbase name</span><span class="zh">非官方術語庫譯名</span></td><td>杰尼龟</td></tr><tr><td>43</td><td><span class="sev major"><span class="en">MAJOR</span><span class="zh">嚴重</span></span></td><td><code>pokemon[2].name.zh_cn</code></td><td>傑尼龜</td><td><span class="en">Traditional characters in zh_cn: 傑龜</span><span class="zh">zh_cn 中混入繁體字：傑龜</span></td><td>Convert to Simplified / 改為簡體</td></tr></tbody></table></div>
+    <p class="tiny"><span class="en">⚠️ Automatic QA catches typical patterns only. Human review and real-device testing are still required.</span><span class="zh">⚠️ 自動 QA 只能找出常見模式，仍需人工審閱與真機測試。</span></p>
+  </div>
+</section>
+
+<!-- ===================== 07 LAB ===================== -->
+<section id="lab" data-accent="orange">
+  <div class="sec-head"><span class="num">07</span>
+    <h2><span class="en">Hands-on Lab: Post-Edit &amp; Play on Your Phone</span><span class="zh">實作：譯後編輯並在手機上遊玩</span></h2></div>
+  <p class="lead">
+    <span class="en">Run the <b>PokemonAR.js</b> sample on <a href="https://liveweave.com" target="_blank" rel="noopener">Liveweave</a>, see the MT bugs live in AR, fix the JSON, and test again.</span>
+    <span class="zh">在 <a href="https://liveweave.com" target="_blank" rel="noopener">Liveweave</a> 執行 <b>PokemonAR.js</b> 範例，在 AR 中親眼看到機翻錯誤，修正 JSON 後再次測試。</span>
+  </p>
+
+  <div class="steps">
+    <div class="lstep"><span class="sn">0</span><div>
+      <h4><span class="en">Print or display the Hiro marker</span><span class="zh">列印或顯示 Hiro 標記</span></h4>
+      <p class="bi"><span class="en">Show it on a laptop screen or print it. Your phone camera will look at it.</span><span class="zh">在筆電螢幕上顯示或列印出來，用手機相機對準它。</span></p>
+      <img class="hiro" src="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/hiro.png" alt="Hiro marker">
+      <p><a href="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/hiro.png" target="_blank" rel="noopener"><span class="en">Open full-size marker ↗</span><span class="zh">開啟原尺寸標記 ↗</span></a></p>
+    </div></div>
+
+    <div class="lstep"><span class="sn">1</span><div>
+      <h4><span class="en">JS panel: paste <code>code.js</code> + 2 small patches</span><span class="zh">JS 面板：貼上 <code>code.js</code>＋兩個小修改</span></h4>
+      <p class="bi"><span class="en">Paste the <b>PokemonAR.js v5</b> library into Liveweave's <b>JS</b> panel, then apply:</span><span class="zh">把 <b>PokemonAR.js v5</b> 貼到 Liveweave 的 <b>JS</b> 面板，然後修改：</span></p>
+      <p class="bi"><span class="en"><b>Patch A</b> (in <code>loadDeps()</code>): Liveweave cannot see local files, so load libraries from a CDN:</span><span class="zh"><b>修改 A</b>（在 <code>loadDeps()</code> 內）：Liveweave 讀不到本機檔案，改用 CDN 載入函式庫：</span></p>
+<pre class="code" id="patchA">await loadScript("https://aframe.io/releases/1.3.0/aframe.min.js");
+// ...
+await loadScript(
+  "https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"
+);</pre>
+      <button class="btn sm copy" data-copy="patchA"><span class="en">Copy</span><span class="zh">複製</span></button>
+      <p class="bi"><span class="en"><b>Patch B</b> (in <code>init</code>, right after <code>_lang = opts.lang || "en";</code>) lets the JSON override UI strings, so all translatable text lives in one file:</span><span class="zh"><b>修改 B</b>（在 <code>init</code> 內、<code>_lang = opts.lang || "en";</code> 之後）：讓 JSON 覆寫介面字串，所有待譯文字集中在同一檔案：</span></p>
+<pre class="code" id="patchB">/* L10n Lab: allow config to override UI strings */
+if (opts.ui) {
+  for (var key in opts.ui) {
+    UI[key] = Object.assign({}, UI[key] || {}, opts.ui[key]);
+  }
+}</pre>
+      <button class="btn sm copy" data-copy="patchB"><span class="en">Copy</span><span class="zh">複製</span></button>
+    </div></div>
+
+    <div class="lstep"><span class="sn">2</span><div>
+      <h4><span class="en">HTML panel: paste the generated page</span><span class="zh">HTML 面板：貼上自動產生的頁面</span></h4>
+      <p class="bi"><span class="en">The <code>&lt;script src="code.js"&gt;</code> line is removed because the library now lives in the JS panel. A small <code>boot()</code> loop waits until <code>PokemonAR</code> exists.</span><span class="zh">已移除 <code>&lt;script src="code.js"&gt;</code>，因為函式庫已放在 JS 面板。<code>boot()</code> 小迴圈會等待 <code>PokemonAR</code> 載入完成。</span></p>
+<pre class="code tall" id="lwHTML">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" /&gt;
+    &lt;title&gt;Pokémon AR – L10n Lab&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- code.js (PokemonAR v5 + patches A &amp; B) is in Liveweave's JS panel --&gt;
+    &lt;script&gt;
+      var CONFIG = {
+        "lang": "zh_tw",
+        "maxCache": 6,
+        "ui": {
+          "appeared": {
+            "en": "✨ Wild {n} appeared!",
+            "zh_tw": "✨ 狂野的 {n} 出現了！",
+            "zh_cn": "✨ 野生的 {名字} 出现了！"
+          },
+          "point_camera": {
+            "en": "📷 Point camera at Hiro marker",
+            "zh_tw": "📷 請將您的行動裝置的相機鏡頭對準印在紙上的 Hiro 標記圖案以開始遊戲",
+            "zh_cn": "📷 将相机指向英雄标记"
+          },
+          "loading_name": {
+            "en": "⏳ Loading {n}…",
+            "zh_tw": "⏳ 正在載入 {n}…",
+            "zh_cn": "⏳ 装载 {n}…"
+          },
+          "model_failed": {
+            "en": "❌ Model failed to load",
+            "zh_tw": "❌ 模特兒載入失敗",
+            "zh_cn": "❌ 模型加载失败"
+          },
+          "spin_on": {
+            "en": "Spin ON",
+            "zh_tw": "旋轉 在",
+            "zh_cn": "旋转 开"
+          },
+          "spin_off": {
+            "en": "Spin OFF",
+            "zh_tw": "旋轉 關",
+            "zh_cn": "旋转 离开"
+          },
+          "capture": {
+            "en": "Capture",
+            "zh_tw": "捕捉寶可夢並保存至您的設備相冊",
+            "zh_cn": "以下是翻译：拍照"
+          },
+          "photo_save": {
+            "en": "💾 Save",
+            "zh_tw": "💾 儲存",
+            "zh_cn": "💾 救"
+          },
+          "photo_share": {
+            "en": "📤 Share",
+            "zh_tw": "📤 股份",
+            "zh_cn": "📤 分享"
+          },
+          "photo_close": {
+            "en": "✕ Close",
+            "zh_tw": "✕ 關閉（指關閉預覽視窗）",
+            "zh_cn": "✕ 靠近"
+          },
+          "photo_retake": {
+            "en": "🔄 Retake",
+            "zh_tw": "🔄 奪回",
+            "zh_cn": "🔄 再来一次！（双倍奖励）"
+          },
+          "photo_watermark": {
+            "en": "Caught with Pokémon AR",
+            "zh_tw": "使用口袋妖怪 AR 捕捉",
+            "zh_cn": "被 Pokémon AR 抓住了"
+          },
+          "loading_title": {
+            "en": "Loading Pokémon AR…",
+            "zh_tw": "正在載入 Pokémon AR…",
+            "zh_cn": "**正在加载 Pokémon AR…**"
+          }
+        },
+        "pokemon": [
+          {
+            "name": {
+              "en": "BULBASAUR",
+              "zh_tw": "鱗莖龍",
+              "zh_cn": "妙蛙种子"
+            },
+            "dex": "#001",
+            "type": {
+              "en": "GRASS / POISON",
+              "zh_tw": "草地 / 毒",
+              "zh_cn": "草 / 毒药"
+            },
+            "color": "#4CAF50",
+            "model": "https://digimarketingai.github.io/pokemon3d/bulbasaur_s.glb"
+          },
+          {
+            "name": {
+              "en": "CHARMANDER",
+              "zh_tw": "小火龍",
+              "zh_cn": "查曼德"
+            },
+            "dex": "#004",
+            "type": {
+              "en": "FIRE",
+              "zh_tw": "開火",
+              "zh_cn": "火属性类型的宝可梦"
+            },
+            "color": "#FF5722",
+            "model": "https://digimarketingai.github.io/pokemon3d/charmander_s.glb"
+          },
+          {
+            "name": {
+              "en": "SQUIRTLE",
+              "zh_tw": "杰尼龜",
+              "zh_cn": "傑尼龜"
+            },
+            "dex": "#007",
+            "type": {
+              "en": "WATER",
+              "zh_tw": "水",
+              "zh_cn": "水"
+            },
+            "color": "#2196F3",
+            "model": "https://digimarketingai.github.io/pokemon3d/squirtle_s.glb"
+          }
+        ]
+      };
+
+      (function boot() {
+        if (window.PokemonAR) { PokemonAR.init(CONFIG); }
+        else { setTimeout(boot, 100); }
+      })();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+      <button class="btn sm copy" data-copy="lwHTML"><span class="en">Copy HTML</span><span class="zh">複製 HTML</span></button>
+      <button class="btn sm" id="btnExport"><span class="en">⟳ Regenerate from my edits</span><span class="zh">依我的修改重新產生</span></button>
+      <button class="btn sm" id="btnDownload"><span class="en">⬇ Download .html</span><span class="zh">下載 .html</span></button>
+    </div></div>
+
+    <div class="lstep"><span class="sn">3</span><div>
+      <h4><span class="en">Run it on your phone</span><span class="zh">在手機上執行</span></h4>
+      <p class="bi"><span class="en">Save the weave and open its preview link on your phone (it must be <b>https</b> for the camera). Allow camera access, aim at the Hiro marker, and tap <b>繁體 / 简体</b> to switch languages.</span><span class="zh">儲存作品後，用手機開啟預覽連結（必須是 <b>https</b> 才能使用相機）。允許相機權限、對準 Hiro 標記，點擊 <b>繁體／简体</b> 切換語言。</span></p>
+      <p class="tiny"><span class="en">If the camera does not start in the embedded preview, open the full-screen preview in a new tab.</span><span class="zh">若嵌入式預覽無法啟動相機，請在新分頁開啟全螢幕預覽。</span></p>
+    </div></div>
+  </div>
+
+  <h3><span class="en">🕵️ Your missions</span><span class="zh">🕵️ 你的任務</span></h3>
+  <div class="grid three missions" id="missions"><div class="card"><h4><span class="en">🔤 Mission 1: Names &amp; Terms</span><span class="zh">🔤 任務一：名稱與術語</span></h4><p class="bi"><span class="en">Check every Pokémon name and type against the termbase: literal, phonetic, invented and mixed-script names.</span><span class="zh">對照術語庫檢查每個寶可夢名稱與屬性：直譯、音譯、自創與繁簡混用。</span></p></div><div class="card"><h4><span class="en">📏 Mission 2: Too Long!</span><span class="zh">📏 任務二：太長了！</span></h4><p class="bi"><span class="en">Find labels that overflow or cover the Pokémon: the shutter label, the “marker lost” status, type lines, photo buttons.</span><span class="zh">找出溢出或遮住寶可夢的文字：快門標籤、「標記遺失」狀態、屬性行、照片按鈕。</span></p></div><div class="card"><h4><span class="en">🖲️ Mission 3: UI Mistranslation</span><span class="zh">🖲️ 任務三：介面誤譯</span></h4><p class="bi"><span class="en">Open the photo preview and toggle Spin. Do Save, Share, Close, Retake mean the right thing?</span><span class="zh">開啟照片預覽並切換旋轉。儲存、分享、關閉、重拍的意思對嗎？</span></p></div><div class="card"><h4><span class="en">🧷 Mission 4: Variables &amp; DNT</span><span class="zh">🧷 任務四：變數與 DNT</span></h4><p class="bi"><span class="en">Is {n} filled in? Are Hiro and Pokémon preserved?</span><span class="zh">{n} 有正確代入嗎？Hiro 與 Pokémon 有保留嗎？</span></p></div><div class="card"><h4><span class="en">🤖 Mission 5: LLM Leftovers</span><span class="zh">🤖 任務五：大模型殘留物</span></h4><p class="bi"><span class="en">Find preambles, bracketed notes, Markdown ** and invented rewards.</span><span class="zh">找出前言、括號註解、Markdown ** 與憑空出現的獎勵。</span></p></div><div class="card"><h4><span class="en">🪤 Mission 6: Don't Over-edit</span><span class="zh">🪤 任務六：不要過度編輯</span></h4><p class="bi"><span class="en">Some strings are already correct. Changing them is flagged by QA.</span><span class="zh">有些字串已經正確，修改它們會被 QA 標記。</span></p></div><div class="card"><h4><span class="en">🧪 Bonus: an i18n bug</span><span class="zh">🧪 加分題：國際化程式錯誤</span></h4><p class="bi"><span class="en">In 繁體/简体 every button shows ⭐ instead of 🌿🔥💧. Why? <code>refreshButtons()</code> looks up the emoji with the <i>translated</i> type. This is a developer bug, not a translator error, but report it!</span><span class="zh">切換到繁體／简体後，所有按鈕都顯示 ⭐ 而非 🌿🔥💧。為什麼？<code>refreshButtons()</code> 用<i>翻譯後</i>的屬性查找表情符號。這是開發者的錯誤，不是譯者的錯，但仍要回報！</span></p><details><summary><span class="en">Developer fix</span><span class="zh">開發者修正</span></summary><pre class="code">var typeEN = p.type &amp;&amp; p.type.en ? p.type.en : getF(p, "type");
+var ft = typeEN.split("/")[0].trim().toUpperCase();</pre></details></div></div>
+
+  <h3><span class="en">⏱️ Suggested 60-minute class flow</span><span class="zh">⏱️ 建議 60 分鐘課堂流程</span></h3>
+  <div id="classFlow"><div class="tbl-wrap"><table class="tbl "><thead><tr><th><span class="en">Minutes</span><span class="zh">分鐘</span></th><th><span class="en">Activity</span><span class="zh">活動</span></th><th><span class="en">Output</span><span class="zh">成果</span></th></tr></thead><tbody><tr><td class="k">0–10</td><td><span class="en">Set up Liveweave + marker; play the raw draft in 繁體 and 简体</span><span class="zh">設定 Liveweave 與標記；以繁體、简体遊玩原始初稿</span></td><td><span class="en">Bug screenshots (use the app's 📸)</span><span class="zh">錯誤截圖（使用 App 的 📸）</span></td></tr><tr><td class="k">10–30</td><td><span class="en">Post-edit in the Sandbox; run QA until clean</span><span class="zh">在沙盒中譯後編輯；執行 QA 直到通過</span></td><td><span class="en">Edited JSON + QA CSV</span><span class="zh">修改後 JSON＋QA 報告</span></td></tr><tr><td class="k">30–40</td><td><span class="en">Export → Liveweave → re-test on device</span><span class="zh">匯出 → Liveweave → 真機重測</span></td><td><span class="en">“After” screenshots</span><span class="zh">修改後截圖</span></td></tr><tr><td class="k">40–50</td><td><span class="en">Peer LQA: swap phones and review each other's build</span><span class="zh">同儕 LQA：交換手機互相審查</span></td><td><span class="en">Peer error log (MQM categories)</span><span class="zh">同儕錯誤紀錄（MQM 分類）</span></td></tr><tr><td class="k">50–60</td><td><span class="en">Debrief: which errors did QA miss? Which were LLM-specific?</span><span class="zh">總結：哪些錯誤 QA 沒抓到？哪些是大模型特有？</span></td><td><span class="en">Short reflection</span><span class="zh">簡短反思</span></td></tr></tbody></table></div></div>
+
+  <h3><span class="en">📊 Assessment rubric</span><span class="zh">📊 評分準則</span></h3>
+  <div id="rubric"><div class="tbl-wrap"><table class="tbl "><thead><tr><th><span class="en">Criterion</span><span class="zh">評分項目</span></th><th><span class="en">Weight</span><span class="zh">比重</span></th><th><span class="en">Excellent</span><span class="zh">優秀表現</span></th></tr></thead><tbody><tr><td class="k"><span class="en">Accuracy &amp; UI meaning</span><span class="zh">準確度與介面語意</span></td><td>25%</td><td><span class="en">Every button and label means the right thing in context</span><span class="zh">每個按鈕與標籤在情境中意思正確</span></td></tr><tr><td class="k"><span class="en">Terminology &amp; DNT</span><span class="zh">術語與 DNT</span></td><td>20%</td><td><span class="en">100% termbase match; Hiro and Pokémon preserved</span><span class="zh">完全符合術語庫；保留 Hiro 與 Pokémon</span></td></tr><tr><td class="k"><span class="en">Fit on screen</span><span class="zh">畫面適配</span></td><td>20%</td><td><span class="en">No truncation or overlap on a real device</span><span class="zh">真機上無截斷或重疊</span></td></tr><tr><td class="k"><span class="en">Locale conventions</span><span class="zh">地區慣例</span></td><td>15%</td><td><span class="en">No script mixing; correct TW vs CN vocabulary</span><span class="zh">無繁簡混用；台灣與大陸用語正確</span></td></tr><tr><td class="k"><span class="en">Functional integrity</span><span class="zh">功能完整性</span></td><td>10%</td><td><span class="en">Valid JSON; placeholders intact; no LLM leftovers</span><span class="zh">JSON 有效；佔位符完整；無大模型殘留</span></td></tr><tr><td class="k"><span class="en">Minimal editing</span><span class="zh">最小幅度修改</span></td><td>10%</td><td><span class="en">Correct strings left untouched</span><span class="zh">正確字串保持不動</span></td></tr></tbody></table></div></div>
+
+  <details class="answer"><summary><span class="en">🔑 Teacher's answer key (planted errors)</span><span class="zh">🔑 教師答案（預埋錯誤）</span></summary><div id="answerKey"><p class="bi"><span class="en">The draft contains <b>27</b> faulty strings. Traps (already correct, must NOT change): </span><span class="zh">初稿共有 <b>27</b> 條錯誤字串。陷阱（已正確，不可修改）：</span><code>ui.loading_name.zh_tw</code> <code>ui.model_failed.zh_cn</code> <code>ui.spin_on.zh_cn</code> <code>ui.spin_off.zh_tw</code> <code>ui.photo_save.zh_tw</code> <code>ui.photo_share.zh_cn</code> <code>ui.loading_title.zh_tw</code> <code>pokemon[0].name.zh_cn</code> <code>pokemon[1].name.zh_tw</code> <code>pokemon[2].type.zh_tw</code> <code>pokemon[2].type.zh_cn</code></p><div class="tbl-wrap"><table class="tbl "><thead><tr><th><span class="en">Location</span><span class="zh">位置</span></th><th><span class="en">Draft</span><span class="zh">初稿</span></th><th><span class="en">Model answer</span><span class="zh">參考答案</span></th></tr></thead><tbody><tr><td><code>ui.appeared.zh_tw</code></td><td class="bad">✨ 狂野的 {n} 出現了！</td><td class="good">✨ 野生的 {n} 出現了！</td></tr><tr><td><code>ui.appeared.zh_cn</code></td><td class="bad">✨ 野生的 {名字} 出现了！</td><td class="good">✨ 野生的 {n} 出现了！</td></tr><tr><td><code>ui.point_camera.zh_tw</code></td><td class="bad">📷 請將您的行動裝置的相機鏡頭對準印在紙上的 Hiro 標記圖案以開始遊戲</td><td class="good">📷 將相機對準 Hiro 標記</td></tr><tr><td><code>ui.point_camera.zh_cn</code></td><td class="bad">📷 将相机指向英雄标记</td><td class="good">📷 将相机对准 Hiro 标记</td></tr><tr><td><code>ui.loading_name.zh_cn</code></td><td class="bad">⏳ 装载 {n}…</td><td class="good">⏳ 正在加载 {n}…</td></tr><tr><td><code>ui.model_failed.zh_tw</code></td><td class="bad">❌ 模特兒載入失敗</td><td class="good">❌ 模型載入失敗</td></tr><tr><td><code>ui.spin_on.zh_tw</code></td><td class="bad">旋轉 在</td><td class="good">旋轉 開</td></tr><tr><td><code>ui.spin_off.zh_cn</code></td><td class="bad">旋转 离开</td><td class="good">旋转 关</td></tr><tr><td><code>ui.capture.zh_tw</code></td><td class="bad">捕捉寶可夢並保存至您的設備相冊</td><td class="good">拍照</td></tr><tr><td><code>ui.capture.zh_cn</code></td><td class="bad">以下是翻译：拍照</td><td class="good">拍照</td></tr><tr><td><code>ui.photo_save.zh_cn</code></td><td class="bad">💾 救</td><td class="good">💾 保存</td></tr><tr><td><code>ui.photo_share.zh_tw</code></td><td class="bad">📤 股份</td><td class="good">📤 分享</td></tr><tr><td><code>ui.photo_close.zh_tw</code></td><td class="bad">✕ 關閉（指關閉預覽視窗）</td><td class="good">✕ 關閉</td></tr><tr><td><code>ui.photo_close.zh_cn</code></td><td class="bad">✕ 靠近</td><td class="good">✕ 关闭</td></tr><tr><td><code>ui.photo_retake.zh_tw</code></td><td class="bad">🔄 奪回</td><td class="good">🔄 重拍</td></tr><tr><td><code>ui.photo_retake.zh_cn</code></td><td class="bad">🔄 再来一次！（双倍奖励）</td><td class="good">🔄 重拍</td></tr><tr><td><code>ui.photo_watermark.zh_tw</code></td><td class="bad">使用口袋妖怪 AR 捕捉</td><td class="good">使用 Pokémon AR 捕捉</td></tr><tr><td><code>ui.photo_watermark.zh_cn</code></td><td class="bad">被 Pokémon AR 抓住了</td><td class="good">使用 Pokémon AR 捕捉</td></tr><tr><td><code>ui.loading_title.zh_cn</code></td><td class="bad">**正在加载 Pokémon AR…**</td><td class="good">正在加载 Pokémon AR…</td></tr><tr><td><code>pokemon[0].name.zh_tw</code></td><td class="bad">鱗莖龍</td><td class="good">妙蛙種子</td></tr><tr><td><code>pokemon[0].type.zh_tw</code></td><td class="bad">草地 / 毒</td><td class="good">草 / 毒</td></tr><tr><td><code>pokemon[0].type.zh_cn</code></td><td class="bad">草 / 毒药</td><td class="good">草 / 毒</td></tr><tr><td><code>pokemon[1].type.zh_tw</code></td><td class="bad">開火</td><td class="good">火</td></tr><tr><td><code>pokemon[1].name.zh_cn</code></td><td class="bad">查曼德</td><td class="good">小火龙</td></tr><tr><td><code>pokemon[1].type.zh_cn</code></td><td class="bad">火属性类型的宝可梦</td><td class="good">火</td></tr><tr><td><code>pokemon[2].name.zh_tw</code></td><td class="bad">杰尼龜</td><td class="good">傑尼龜</td></tr><tr><td><code>pokemon[2].name.zh_cn</code></td><td class="bad">傑尼龜</td><td class="good">杰尼龟</td></tr></tbody></table></div></div></details>
+</section>
+
+<!-- ===================== 08 REFERENCES ===================== -->
+<section id="refs" class="alt" data-accent="navy">
+  <div class="sec-head"><span class="num">08</span>
+    <h2><span class="en">Sources &amp; Further Reading</span><span class="zh">參考文獻與延伸閱讀</span></h2></div>
+  <ol class="refs" id="refList"><li>Kocmi, T. et al. (2024). Findings of the WMT24 General Machine Translation Shared Task: The LLM Era Is Here but MT Is Not Solved Yet. <i>Proc. WMT 2024</i>, 1–46. <a href="https://aclanthology.org/2024.wmt-1.1/" target="_blank" rel="noopener">↗</a></li><li>Kocmi, T. et al. (2025). Findings of the WMT25 General Machine Translation Shared Task: Time to Stop Evaluating on Easy Test Sets. <i>Proc. WMT 2025</i>. <a href="https://aclanthology.org/2025.wmt-1.22/" target="_blank" rel="noopener">↗</a></li><li>Preliminary Ranking of WMT25 General Machine Translation Systems (2025). arXiv 2508.14909. <a href="https://arxiv.org/abs/2508.14909" target="_blank" rel="noopener">↗</a></li><li>Findings of the WMT25 Shared Task on Automated Translation Evaluation Systems: Linguistic Diversity is Challenging and References Still Help (2025). <a href="https://aclanthology.org/2025.wmt-1.24/" target="_blank" rel="noopener">↗</a></li><li>Manakhimova, S. et al. (2024). Investigating the Linguistic Performance of Large Language Models in Machine Translation. <i>Proc. WMT 2024</i>. <a href="https://www2.statmt.org/wmt24/pdf/2024.wmt-1.28.pdf" target="_blank" rel="noopener">↗</a></li><li>A New Taxonomy and Benchmark for Unraveling Hallucination in Translation (HalloMTBench) (2025). arXiv 2510.24073. <a href="https://arxiv.org/abs/2510.24073" target="_blank" rel="noopener">↗</a></li><li>Dale, D. et al. (2023). A Manually Annotated Benchmark for Multilingual Hallucination and Omission Detection in Machine Translation. arXiv 2305.11746. <a href="https://arxiv.org/abs/2305.11746" target="_blank" rel="noopener">↗</a></li><li>Javorský, D., Bojar, O. &amp; Yvon, F. (2025). Prompting LLMs: Length Control for Isometric Machine Translation. arXiv 2506.04855. <a href="https://arxiv.org/abs/2506.04855" target="_blank" rel="noopener">↗</a></li><li>Taming the Sand-Glass for Time-Constrained LLM Translation via Reinforcement Learning (2026), which summarises the verbosity bias reported by Briakou et al. (2024) and Manakhimova et al. (2024). arXiv 2601.10187. <a href="https://arxiv.org/abs/2601.10187" target="_blank" rel="noopener">↗</a></li><li>Raunak, V. et al. (2023). Do GPTs Produce Less Literal Translations? <i>Proc. ACL 2023</i>. <a href="https://scholar.google.com/scholar?q=Do+GPTs+Produce+Less+Literal+Translations" target="_blank" rel="noopener">↗</a></li><li>ISO 18587:2017 Translation services: Post-editing of machine translation output: Requirements. <a href="https://www.iso.org/standard/62970.html" target="_blank" rel="noopener">↗</a></li><li>MQM: Multidimensional Quality Metrics framework. <a href="https://themqm.org/" target="_blank" rel="noopener">↗</a></li><li>Krings, H. P. (2001). <i>Repairing Texts: Empirical Investigations of Machine Translation Post-Editing Processes</i>. Kent State University Press.</li><li>BBC News (2016). Why the plan to rename Pikachu has made Hong Kong angry. <a href="https://www.bbc.com/news/world-asia-china-36414978" target="_blank" rel="noopener">↗</a></li><li>Bulbanews (2017). Pokémon GO update adds Chinese, changes scroll bar. <a href="http://bulbanews.bulbagarden.net/wiki/Pok%C3%A9mon_GO_update_adds_Chinese,_changes_scroll_bar" target="_blank" rel="noopener">↗</a></li><li>Wikipedia: Pokémon Go (launch, developers, publisher history). <a href="https://en.wikipedia.org/wiki/Pok%C3%A9mon_Go" target="_blank" rel="noopener">↗</a></li></ol>
+</section>
+
+</main>
+
+<footer class="site-foot">
+  <p><span class="en">Educational resource. Pokémon and character names are trademarks of Nintendo / Creatures / GAME FREAK / The Pokémon Company. Pokémon GO © Niantic / Scopely. 3-D models from the course sample.</span><span class="zh">教學用途。寶可夢及角色名稱為任天堂、Creatures、GAME FREAK、寶可夢公司之商標。Pokémon GO © Niantic／Scopely。3D 模型取自課程範例。</span></p>
+</footer>
+
+<div id="toast"></div>
+<script src="script.js"></script>
+
+
+                <script>/* =========================================================
+   AR L10n Lab · AR 遊戲在地化實驗室 — script.js
+   ========================================================= */
+(function () {
+  "use strict";
+
+  /* =======================================================
+     0. HELPERS
+     ======================================================= */
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function B(en, zh) { return '<span class="en">' + en + '</span><span class="zh">' + zh + "</span>"; }
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+  function width(s) {
+    var w = 0;
+    Array.from(String(s)).forEach(function (ch) { w += ch.codePointAt(0) > 0x2e80 ? 2 : 1; });
+    return w;
+  }
+  function getF(obj, lang) {
+    if (!obj) return "";
+    if (typeof obj === "string") return obj;
+    return obj[lang] || obj.en || "";
+  }
+  function getPath(o, path) {
+    return path.replace(/\[(\d+)\]/g, ".$1").split(".").reduce(function (v, k) { return v == null ? v : v[k]; }, o);
+  }
+  function table(heads, rows, cls) {
+    return '<div class="tbl-wrap"><table class="tbl ' + (cls || "") + '"><thead><tr>' +
+      heads.map(function (h) { return "<th>" + h + "</th>"; }).join("") +
+      "</tr></thead><tbody>" + rows.join("") + "</tbody></table></div>";
+  }
+  var toastTimer;
+  function toast(en, zh) {
+    var t = $("#toast");
+    t.innerHTML = B(en, zh);
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.classList.remove("show"); }, 2000);
+  }
+
+  /* =======================================================
+     1. CONTENT DATA (bilingual)
+     ======================================================= */
+  var INTRO_CARDS = [
+    ["🧩", "UI strings", "介面字串", "Buttons, menus, toasts and loading text. Space is tiny, so every character counts.", "按鈕、選單、提示與載入文字。空間極小，每一個字都要精打細算。"],
+    ["🏷️", "In-world AR labels", "AR 場景標籤", "Name tags and info cards float over a live camera feed and must stay readable on any background.", "名稱標籤與資訊卡疊在即時相機畫面上，任何背景下都必須清楚易讀。"],
+    ["📖", "Narrative & lore", "敘事與世界觀", "Pokédex entries, research tasks and event text: tone and franchise voice matter.", "圖鑑說明、調查任務與活動文案：語氣與系列風格至關重要。"],
+    ["™️", "Terminology & IP", "術語與智慧財產", "Official character, item and move names belong to the licence holder; translators may not invent their own.", "角色、道具、招式的官方譯名屬於版權方，譯者不得自創。"],
+    ["🌏", "Locale variants", "地區變體", "zh-TW, zh-HK and zh-CN differ in script, vocabulary and cultural memory.", "台灣、香港與中國大陸在字形、用詞與文化記憶上各有不同。"],
+    ["⚙️", "i18n engineering", "國際化工程", "String keys, placeholders, fonts and text expansion: the code must be ready for every language.", "字串鍵值、佔位符、字型、文字長度伸縮——程式必須先為多語言做好準備。"]
+  ];
+
+  var KEY_TERMS = B(
+    "<b>Key terms:</b> <code>i18n</code> = making code ready for many languages · <code>L10n</code> = adapting content for one locale · <code>MT</code> = machine translation · <code>LLM</code> = large language model · <code>MTPE</code> = MT + post-editing · <code>LQA</code> = linguistic quality assurance in context · <code>DNT</code> = do-not-translate · <code>TM</code> = translation memory",
+    "<b>關鍵詞：</b><code>i18n</code>＝國際化（讓程式支援多語言）· <code>L10n</code>＝在地化（為特定地區調整內容）· <code>MT</code>＝機器翻譯 · <code>LLM</code>＝大型語言模型 · <code>MTPE</code>＝機器翻譯＋譯後編輯 · <code>LQA</code>＝情境語言品質檢測 · <code>DNT</code>＝不翻譯詞 · <code>TM</code>＝翻譯記憶"
+  );
+
+  var TIMELINE = [
+    ["Jul 2016", "2016 年 7 月", "Global launch by Niantic with Nintendo and The Pokémon Company (TPC), rolled out country by country.", "Niantic 與任天堂、寶可夢公司（TPC）合作推出，逐國陸續上架。"],
+    ["2016", "2016 年", "TPC unifies Chinese names across regions: “Pokémon” becomes 精靈寶可夢 and Hong Kong's 比卡超 becomes 皮卡丘. Hong Kong fans protest, because the Mandarin-based name sounds nothing like “Pikachu” in Cantonese.", "TPC 統一華語地區譯名：「Pokémon」定為「精靈寶可夢」，香港的「比卡超」改為「皮卡丘」。香港玩家抗議，因為以普通話為基礎的新名稱用粵語讀起來與「Pikachu」相去甚遠。"],
+    ["Apr 2017", "2017 年 4 月", "Update 0.61.0 (iOS 1.31.0) adds Traditional Chinese and includes “minor text fixes”.", "0.61.0 版（iOS 1.31.0）新增繁體中文，並附「細部文字修正」。"],
+    ["Today", "現今", "The official site lists 14 languages including Traditional Chinese. There is no Simplified Chinese because the game is not released in mainland China; the lab's zh_cn column is a training extension.", "官方列出 14 種語言，包含繁體中文。由於未在中國大陸上架，並無簡體中文版；本實驗的 zh_cn 欄位僅作練習延伸。"]
+  ];
+
+  var PIPELINE = [
+    ["String externalisation", "字串外部化", "Text lives outside the code as key → value pairs, e.g. <code>appeared: “Wild {n} appeared!”</code>", "文字以「鍵 → 值」形式存放在程式之外，例如 <code>appeared：“Wild {n} appeared!”</code>", false],
+    ["Official termbase", "官方術語庫", "The IP owner supplies locked names (妙蛙種子, 小火龍, 傑尼龜…).", "版權方提供鎖定譯名（妙蛙種子、小火龍、傑尼龜……），不得更動。", false],
+    ["TM + MT / LLM draft", "翻譯記憶＋機翻／大模型初稿", "Recurring event text and UI strings are pre-filled automatically.", "重複出現的活動文字與介面字串由系統自動預填。", false],
+    ["Human post-editing ★", "人工譯後編輯 ★", "Fix meaning, terms, placeholders, length and locale.", "修正語意、術語、佔位符、長度與地區用語。", true],
+    ["In-context LQA", "情境語言品質檢測", "Test on real devices, over the camera view, in every language.", "在真機與真實相機畫面上，逐一語言測試。", false],
+    ["Live-ops release", "營運上線", "Weekly events mean tight deadlines; the cycle repeats constantly.", "每週都有活動、時程緊迫，流程不斷循環。", false]
+  ];
+
+  var FEATURES = [
+    ["AR camera overlay", "AR 相機疊加", "Short, high-contrast text; long strings cover the Pokémon.", "文字須簡短清楚；過長會遮住寶可夢。", "Encounter text, AR+ prompts", "遭遇訊息、AR+ 提示"],
+    ["Fixed franchise formulas", "系列固定句式", "Reuse canonical phrasing from the main games.", "沿用正傳遊戲的既有說法。", "“Wild {Pokémon} appeared!” → 野生的 {寶可夢} 出現了！", "同左"],
+    ["IP-owned terminology", "版權方術語", "Follow the TPC termbase, even when fans disagree.", "即使玩家反對，也須依從 TPC 術語。", "比卡超 → 皮卡丘 (2016)", "比卡超 → 皮卡丘（2016）"],
+    ["Player-generated locations", "玩家提交的地點內容", "PokéStop and Gym names are submitted by players and usually stay in the original language.", "補給站與道館名稱多由玩家提交，通常保留原文。", "An English-titled PokéStop in Hong Kong", "香港的英文名補給站"],
+    ["Live service", "持續營運", "Fast turnaround suits TM + MT + post-editing.", "交期短，適合「翻譯記憶＋機翻＋譯後編輯」。", "Community Day news", "社群日公告"],
+    ["Variables everywhere", "大量變數", "Placeholders, plurals and measure words.", "佔位符、複數與量詞。", "Catch {count} Pokémon → 捕捉 {count} 隻寶可夢", "同左"]
+  ];
+
+  var MT_ERRORS = [
+    ["term", "Character name literalised", "角色名被拆字直譯", "BULBASAUR", "鱗莖龍", "妙蛙種子", "Translated the word parts “bulb + saur” instead of using the official name.", "拆字直譯「球莖＋龍」，沒有使用官方譯名。"],
+    ["term", "Name transliterated", "角色名被音譯", "CHARMANDER", "查曼德", "小火龙", "Guessed a phonetic form; official names are not phonetic.", "自行音譯；官方譯名並非音譯。"],
+    ["term", "Legacy / unofficial brand name", "使用舊稱或非官方品牌名", "Pokémon", "口袋妖怪", "Pokémon / 寶可夢", "Picked an old fan name from its training data.", "取用了訓練資料中的舊稱。"],
+    ["term", "DNT term translated", "不翻譯詞被翻譯", "Point camera at Hiro marker", "将相机指向英雄标记", "将相机对准 Hiro 标记", "“Hiro” is a marker ID, not “hero”.", "「Hiro」是標記名稱，不是「英雄」。"],
+    ["sense", "Polysemy", "一詞多義", "Share", "股份", "分享", "“Share” read as stock shares.", "把 Share 誤解為股票的「股份」。"],
+    ["sense", "Polysemy", "一詞多義", "Close", "靠近", "关闭", "Read as the adjective “near”, not the verb “shut”.", "把動詞「關閉」誤解為形容詞「接近」。"],
+    ["sense", "Polysemy", "一詞多義", "Save", "救", "保存 / 儲存", "“Save a life” instead of “save a file”.", "誤解為「拯救」而非「儲存檔案」。"],
+    ["sense", "Wrong domain sense", "領域意義錯誤", "Model failed to load", "模特兒載入失敗", "模型載入失敗", "Fashion model instead of 3-D model.", "誤譯為時裝模特兒，而非 3D 模型。"],
+    ["sense", "Toggle state taken literally", "開關狀態被直譯", "Spin ON / OFF", "旋轉 在 / 旋转 离开", "旋轉 開 / 旋转 关", "“On” read as a preposition, “off” as “leave”.", "把 on 當介詞「在」、off 當「離開」。"],
+    ["sense", "Game type mistranslated", "屬性被誤譯", "FIRE (type)", "開火", "火", "Read as the command “open fire”.", "誤為射擊指令「開火」。"],
+    ["sense", "Wrong voice / agency", "語態錯誤", "Caught with Pokémon AR", "被 Pokémon AR 抓住了", "使用 Pokémon AR 捕捉", "The 被 passive sounds like “you got arrested”.", "「被」字句聽起來像「被逮捕了」。"],
+    ["sense", "Broken franchise formula", "破壞系列固定句式", "Wild {n} appeared!", "狂野的 {n} 出現了！", "野生的 {n} 出現了！", "“Wild” read as “crazy”; MT does not know the canonical phrase.", "把 wild 譯成「狂野」；機翻不知道系列慣用說法。"],
+    ["tech", "Placeholder corruption", "佔位符損毀", "Wild {n} appeared!", "野生的 {名字} 出现了！", "野生的 {n} 出现了！", "Variable translated; the code cannot fill it and players see {名字}.", "變數被翻譯，程式無法代入，玩家會看到「{名字}」。"],
+    ["tech", "Missing measure word", "缺少量詞", "Catch {count} Pokémon", "捕捉 {count} 寶可夢", "捕捉 {count} 隻寶可夢", "Chinese needs a classifier between number and noun.", "中文數詞與名詞之間需要量詞。"],
+    ["locale", "Length expansion → overflow", "文字膨脹 → 溢出", "Capture", "捕捉寶可夢並保存至您的設備相冊", "拍照", "A 7-letter button label became a sentence that overflows the 64 px shutter.", "7 個字母的按鈕變成整句話，塞不進 64 px 快門鈕。"],
+    ["locale", "Script & vocabulary mixing", "字形與用詞混用", "SQUIRTLE (zh_tw) / device album", "杰尼龜 / 設備相冊", "傑尼龜 / 裝置相簿", "Simplified characters and mainland terms leaked into Taiwan copy.", "台灣版混入簡體字與大陸用語。"]
+  ];
+
+  var RESEARCH = [
+    { big: "WMT24", t: ["“The LLM Era Is Here but MT Is Not Solved Yet”", "「LLM 時代已來，但機器翻譯尚未解決」"],
+      p: ["Claude-3.5-Sonnet was the best system overall, winning 9 language pairs; Unbabel Tower70B was the best participant (8 pairs). English→Spanish was near-flawless, while other pairs and domains were not. Human evaluation used the new Error Span Annotation (ESA) protocol.",
+          "Claude-3.5-Sonnet 整體表現最佳，贏得 9 個語言對；最佳參賽系統為 Unbabel Tower70B（8 個語言對）。英譯西班牙文近乎完美，其他語言對與領域則不然。人工評估採用新的錯誤片段標註（ESA）協定。"],
+      c: "Kocmi et al., 2024 (WMT24 Findings)" },
+    { big: "WMT25", t: ["Gemini 2.5 Pro best overall, on harder tests", "更難的測試中，Gemini 2.5 Pro 整體最佳"],
+      p: ["60 systems, 30 language pairs, test sets deliberately sampled to be difficult. Gemini 2.5 Pro was in the top cluster for 14 language pairs. Human reference translations reached the winning cluster in only 6 of 15 pairs. Speech-domain texts were the hardest.",
+          "共 60 個系統、30 個語言對，測試集刻意挑選難譯文本。Gemini 2.5 Pro 在 14 個語言對名列第一群組。人工參考譯文僅在 15 個語言對中的 6 個進入勝出群組。語音領域文本最難。"],
+      c: "Kocmi et al., 2025 (WMT25 Findings)" },
+    { big: "≠", t: ["Automatic scores can mislead", "自動評分可能誤導"],
+      p: ["At WMT25, Shy-hunyuan-MT ranked first in the automatic rankings for all but one language pair, yet human evaluation placed it considerably below the top systems. The organisers conclude automatic scores are biased.",
+          "WMT25 中，Shy-hunyuan-MT 在自動排名中幾乎所有語言對都居首，但人工評估顯示其表現明顯低於頂尖系統。主辦方指出自動評分存在偏差。"],
+      c: "Kocmi et al., 2025" },
+    { big: "✂️", t: ["AI struggles to edit minimally", "AI 難以「最小幅度」修改"],
+      p: ["The WMT25 evaluation task found LLMs strong at system-level scoring, but reference-based metrics beat them at segment level; error-span detection still struggles to balance precision and recall, and “minimal editing is challenging even when informed by quality indicators”.",
+          "WMT25 評估任務發現，LLM 在系統層級評分表現強，但在句段層級不如有參考譯文的指標；錯誤片段偵測仍難兼顧精確率與召回率，且「即使提供品質指標，最小幅度修改仍然困難」。"],
+      c: "WMT25 Automated Translation Evaluation Findings" },
+    { big: "U-shape", t: ["Hallucinations peak at very short and very long inputs", "幻覺在極短與極長輸入時最多"],
+      p: ["HalloMTBench evaluated 17 LLMs: hallucination rate vs. source length is U-shaped; RL-trained reasoning models show more language mixing; models have a “home-ground” advantage in their developers' languages. One-word UI strings sit at the risky short end.",
+          "HalloMTBench 評測 17 個 LLM：幻覺率與原文長度呈 U 形；經強化學習訓練的推理模型更容易語言混雜；模型在開發者母語上有「主場優勢」。單字介面字串正處於高風險的短端。"],
+      c: "HalloMTBench, arXiv 2510.24073 (2025)" },
+    { big: "+ length", t: ["Verbosity and ignored length limits", "冗長與無視長度限制"],
+      p: ["LLM translations tend to be longer than the source even when meaning is constant (Briakou et al., 2024; Manakhimova et al., 2024). Asking for same-length output often fails; models shortened only with extreme examples (Javorský, Bojar & Yvon, 2025).",
+          "即使語意不變，LLM 譯文往往比原文長（Briakou 等，2024；Manakhimova 等，2024）。要求等長輸出常常失效，只有給極端示例時模型才會縮短（Javorský、Bojar、Yvon，2025）。"],
+      c: "arXiv 2601.10187; arXiv 2506.04855" },
+    { big: "Fluent ≠ true", t: ["The most dangerous errors read well", "最危險的錯誤讀起來很順"],
+      p: ["Hallucinations and omissions are mostly fluent, which misleads users into trusting them (benchmark of 18 translation directions). GPT models also produce less literal translations than NMT: good for idioms, risky for locked terms.",
+          "幻覺與漏譯多半很流暢，因而誤導使用者信任（涵蓋 18 個翻譯方向的基準）。GPT 模型的譯文也比神經機器翻譯更不直譯：利於慣用語，卻不利於鎖定術語。"],
+      c: "Dale et al., 2023; Raunak et al., 2023" },
+    { big: "¶", t: ["Structure is not always preserved", "結構未必能保留"],
+      p: ["WMT25 sent whole multi-paragraph documents. A summary of the WMT25 data reports intact paragraph structure for GPT-4.1 97.1%, Gemini 2.5 Pro 95.1%, Claude 4 67.5% and DeepSeek-V3 57.2% of the time; failures were re-translated paragraph by paragraph. For JSON or UI files, broken structure = broken game.",
+          "WMT25 以多段落完整文件送譯。一份 WMT25 資料摘要報告的段落結構完整率為：GPT-4.1 97.1%、Gemini 2.5 Pro 95.1%、Claude 4 67.5%、DeepSeek-V3 57.2%；失敗者改為逐段翻譯。在 JSON 或介面檔中，結構損壞＝遊戲壞掉。"],
+      c: "Secondary summary of Kocmi et al., 2025 (verify in paper)" }
+  ];
+
+  var VERSION_NOTE = B(
+    "<b>Model versions:</b> the systems tested (Claude-3.5-Sonnet in 2024; Gemini 2.5 Pro, GPT-4.1, Claude 4 in 2025) have since been superseded. Read these results as evidence about <i>model families and persistent error patterns</i>, not a ranking of today's versions. The patterns (fluent errors, verbosity, short-string risk, format breakage, over-editing) are exactly what post-editors must check.",
+    "<b>模型版本：</b>受測系統（2024 年的 Claude-3.5-Sonnet；2025 年的 Gemini 2.5 Pro、GPT-4.1、Claude 4）均已推出更新版本。請把這些結果視為關於<i>模型家族與持續存在的錯誤模式</i>的證據，而非現行版本的排名。這些模式（流暢的錯誤、冗長、短字串風險、格式損壞、過度編輯）正是譯後編輯必須檢查的重點。"
+  );
+
+  /* [problem en, zh, evidence en, zh, source-type, bad, good, fix en, zh] */
+  var LLM_ISSUES = [
+    ["Fluent but unfaithful (hallucination / omission)", "流暢但不忠實（幻覺／漏譯）", "Pathologies are mostly fluent and mislead readers (Dale et al., 2023); HalloMTBench (2025) documents model-specific hallucination triggers.", "這類錯誤多半流暢、容易誤導讀者（Dale 等，2023）；HalloMTBench（2025）記錄各模型的幻覺觸發因素。", "r", "🔄 Retake → 🔄 再来一次！（双倍奖励）", "🔄 重拍", "Compare with the source segment by segment; delete invented info.", "逐句對照原文；刪除無中生有的資訊。"],
+    ["Short strings are high-risk", "短字串風險高", "Hallucination rate vs. length is U-shaped: very short inputs are vulnerable (HalloMTBench, 2025).", "幻覺率與長度呈 U 形，極短輸入特別脆弱（HalloMTBench，2025）。", "r", "Close → 靠近", "关闭 / 關閉", "Give context (key name, screenshot); hand-check every 1–2-word string.", "提供情境（鍵名、截圖）；一至兩字的字串逐條人工檢查。"],
+    ["Language / script mixing", "語言／字形混雜", "RL-trained reasoning models show more language mixing (HalloMTBench, 2025).", "強化學習訓練的推理模型更常出現語言混雜（HalloMTBench，2025）。", "r", "zh_tw: 杰尼龜", "傑尼龜", "Run a Simplified/Traditional script check plus a locale-vocabulary check.", "執行繁簡字形檢查與地區用語檢查。"],
+    ["Verbosity bias", "冗長偏誤", "LLM output tends to be longer than the source (Briakou et al., 2024; Manakhimova et al., 2024).", "LLM 譯文常比原文更長（Briakou 等，2024；Manakhimova 等，2024）。", "r", "FIRE → 火属性类型的宝可梦", "火", "Delete additions; translate the function, not an explanation.", "刪去多餘內容；翻譯功能，而非解釋。"],
+    ["Length limits ignored", "無視長度限制", "Same-length prompting often fails; models shorten only with extreme examples (Javorský et al., 2025).", "等長提示常失效，只有極端示例才會縮短（Javorský 等，2025）。", "r", "Capture → 捕捉寶可夢並保存至您的設備相冊", "拍照", "Enforce a character budget with QA tools and device tests.", "以 QA 工具與真機測試強制執行字數上限。"],
+    ["Structure / markup breakage", "結構／標記損壞", "WMT25 had to fall back to paragraph-level translation when LLMs broke document structure (Kocmi et al., 2025).", "WMT25 中 LLM 破壞文件結構時，主辦方須改為逐段翻譯（Kocmi 等，2025）。", "r", "**正在加载 Pokémon AR…**", "正在加载 Pokémon AR…", "Validate JSON; strip Markdown, code fences and curly quotes.", "驗證 JSON；清除 Markdown、程式碼框與彎引號。"],
+    ["Chatty preambles & bracket notes", "多餘前言與括號註解", "Chat-tuned models are built to converse, so they may add “Here is the translation:” or explanations.", "對話型模型習慣「聊天」，可能加上「以下是翻譯：」或補充說明。", "o", "以下是翻译：拍照 / ✕ 關閉（指關閉預覽視窗）", "拍照 / ✕ 關閉", "Delete meta-text; demand output-only JSON in the prompt.", "刪除後設文字；在提示詞中要求只輸出 JSON。"],
+    ["Less literal, “creative” renderings", "較不直譯、過度創意", "GPT translations are less literal than NMT (Raunak et al., 2023), so a model may invent a nice-sounding name.", "GPT 譯文比神經機器翻譯更不直譯（Raunak 等，2023），模型可能自創好聽的名字。", "r", "BULBASAUR → 種子小恐龍", "妙蛙種子", "Lock termbase items; give the glossary in the prompt and verify.", "鎖定術語；在提示詞中提供術語表並逐一核對。"],
+    ["Outdated / legacy terminology", "過時或舊有術語", "Training data mixes old fan names with official ones; Chinese Pokémon names were unified only in 2016.", "訓練資料混雜舊稱與官方譯名；寶可夢華語譯名到 2016 年才統一。", "o", "使用口袋妖怪 AR 捕捉", "使用 Pokémon AR 捕捉", "Termbase first, model memory never.", "以術語庫為準，不信模型記憶。"],
+    ["Metric scores overrate output", "自動指標高估品質", "Shy-hunyuan-MT topped automatic rankings at WMT25 but scored much lower with humans.", "WMT25 中 Shy-hunyuan-MT 自動排名居首，人工評分卻低得多。", "r", "High score, but 拍照 label still overflows", "Pass only after device LQA", "Use human, on-device LQA as the final gate.", "以人工真機 LQA 作為最後關卡。"],
+    ["AI post-editing over-edits", "AI 譯後編輯過度修改", "“Minimal editing is challenging even when informed by quality indicators” (WMT25 evaluation task).", "「即使提供品質指標，最小幅度修改仍具挑戰」（WMT25 評估任務）。", "r", "💾 儲存 → 💾 保存檔案", "💾 儲存 (keep / 保留)", "Diff the AI's edits and reject unnecessary changes.", "比對 AI 的修改，退回不必要的變更。"],
+    ["Strong overall, weak in context", "整體強，情境弱", "LLMs top WMT24/25, yet “MT is not solved yet”; the hardest cases are context-poor and domain-specific.", "LLM 稱霸 WMT24／25，但「機器翻譯尚未解決」；最難的是缺乏情境與專業領域的內容。", "r", "Spin ON → 旋轉 在", "旋轉 開", "Spend PE effort where LLMs fail: context, terms, length, locale.", "把編輯力氣花在 LLM 的弱點：情境、術語、長度、地區。"]
+  ];
+
+  var PE_LEVELS = [
+    ["", "Light post-editing", "輕度譯後編輯", "Make the text understandable and accurate; fix only meaning errors. Fine for internal gisting. ❌ Not acceptable for player-facing UI.", "讓譯文可理解且正確，只修語意錯誤。適用於內部參考。❌ 不適用於玩家看得到的介面。"],
+    ["hl", "Full post-editing", "完整譯後編輯", "Output must match human-translation quality: accuracy, terminology, style, locale, grammar, and in AR, on-screen fit. ✅ Required for game text.", "成品須達到人工翻譯品質：準確、術語、文體、地區、語法，在 AR 中還要放得進畫面。✅ 遊戲文字必須採用。"],
+    ["gold", "Golden rule", "黃金法則", "Use as much of the raw output as possible. Do not rewrite correct strings: over-editing costs time and creates inconsistency.", "盡量沿用原始輸出。不要改寫已正確的字串：過度編輯既浪費時間，又造成不一致。"]
+  ];
+
+  var MQM = [
+    ["Terminology", "術語", "Wrong or inconsistent term", "術語錯誤或不一致", "鱗莖龍 → 妙蛙種子"],
+    ["Accuracy", "準確度", "Mistranslation, omission, addition", "誤譯、漏譯、增譯", "股份 → 分享; （双倍奖励）"],
+    ["Linguistic conventions", "語言規範", "Grammar, punctuation, spelling", "語法、標點、拼寫", "捕捉 {count} 寶可夢 → 隻"],
+    ["Style", "文體", "Register, unidiomatic wording", "語域、不道地的措辭", "被…抓住了 → 使用…捕捉"],
+    ["Locale conventions", "地區慣例", "Script, local terms, formats", "字形、在地用語、格式", "杰尼龜 (zh_tw) → 傑尼龜"],
+    ["Audience appropriateness", "受眾適切性", "Confusing or unsuitable for the target players", "對目標玩家造成困惑或不合適", "口袋妖怪 → Pokémon"],
+    ["Design & markup", "設計與標記", "Truncation, overlap, broken tags/placeholders", "截斷、重疊、標籤或佔位符損壞", "{名字} → {n}; 拍照 overflow"]
+  ];
+
+  var EFFORT = [
+    ["⏱️", "Temporal effort", "時間工作量", "Time spent per segment or word. Measured in CAT tools and the main factor in pricing.", "每句段或每字所花的時間。可在電腦輔助翻譯工具中測量，是計價的主要依據。"],
+    ["⌨️", "Technical effort", "技術工作量", "The number of keystrokes and edits. <b>HTER</b> = edits needed ÷ length of the final text: lower means better raw output.", "按鍵與修改次數。<b>HTER</b>＝所需修改數 ÷ 最終譯文長度：數值越低，原始輸出越好。"],
+    ["🧠", "Cognitive effort", "認知工作量", "Mental effort spent detecting and deciding (Krings, 2001). Fluent LLM errors raise it, because problems are harder to spot.", "偵測問題與做決定所耗的心力（Krings，2001）。流暢的 LLM 錯誤更難察覺，會提高認知負擔。"]
+  ];
+
+  var TOOLBOX = [
+    ["Keep", "保留", "Correct output stays untouched.", "正確的輸出不要動。", "💾 儲存", "💾 儲存"],
+    ["Replace", "替換", "Swap in the official termbase item.", "換成官方術語。", "鱗莖龍", "妙蛙種子"],
+    ["Restore", "還原", "Put back placeholders and DNT items.", "還原佔位符與不翻譯詞。", "{名字} / 英雄", "{n} / Hiro"],
+    ["Delete", "刪除", "Remove additions, preambles, notes, Markdown.", "刪除增譯、前言、註解、Markdown。", "以下是翻译：拍照", "拍照"],
+    ["Disambiguate", "消歧", "Choose the sense that fits the UI context.", "選擇符合介面情境的詞義。", "📤 股份", "📤 分享"],
+    ["Condense", "精簡", "Shorten to fit the space, keeping the function.", "保留功能、縮短以符合空間。", "捕捉寶可夢並保存至您的設備相冊", "拍照"],
+    ["Localise", "在地化", "Fix script and regional vocabulary.", "修正字形與地區用語。", "杰尼龜 / 設備", "傑尼龜 / 裝置"],
+    ["Restructure", "重組", "Rebuild grammar, voice or the franchise formula.", "重組語法、語態或系列句式。", "被 Pokémon AR 抓住了", "使用 Pokémon AR 捕捉"]
+  ];
+
+  var STRATEGIES = [
+    { t: ["1 · Lock terminology with a termbase", "1 · 以術語庫鎖定術語"], tag: ["Terms", "術語"],
+      r: ["Character, type, item and move names come from the IP owner's official list. Never translate them freely.", "角色、屬性、道具、招式名稱一律依版權方官方清單，不得自由翻譯。"],
+      src: "BULBASAUR (zh_tw)", mt: "鱗莖龍", pe: "妙蛙種子",
+      tips: [["Keep the glossary open while editing", "編輯時隨時開著術語表"], ["Check every locale column", "逐一檢查每個語言欄位"], ["Remember the 2016 unified Chinese names", "留意 2016 年統一的華語譯名"]] },
+    { t: ["2 · Protect placeholders, tags & emoji", "2 · 保護佔位符、標籤與表情符號"], tag: ["Tech", "技術"],
+      r: ["Copy {variables}, line breaks, tags and emoji exactly; move them only if grammar requires; never rename them.", "{變數}、換行、標籤與表情符號須原樣保留；只在語法需要時移動，絕不改名。"],
+      src: "✨ Wild {n} appeared!", mt: "✨ 野生的 {名字} 出现了！", pe: "✨ 野生的 {n} 出现了！",
+      tips: [["Count the {} before and after", "前後比對 {} 的數量"], ["A broken placeholder = visible bug or crash", "佔位符損壞＝畫面錯誤甚至當機"]] },
+    { t: ["3 · Read the UI context first", "3 · 先讀懂介面情境"], tag: ["Meaning", "語意"],
+      r: ["Is it a button (verb), a label (noun) or a toggle state? The key name (photo_share) is a clue.", "這是按鈕（動詞）、標籤（名詞）還是開關狀態？鍵名（photo_share）就是線索。"],
+      src: "📤 Share (photo button)", mt: "📤 股份", pe: "📤 分享",
+      tips: [["Use the key name as context", "把鍵名當作情境線索"], ["Watch polysemous words: Save, Close, Share, Fire, Model", "注意多義詞：Save、Close、Share、Fire、Model"]] },
+    { t: ["4 · Respect the character budget", "4 · 遵守字數預算"], tag: ["Length", "長度"],
+      r: ["AR buttons are tiny and sit over the camera feed. Translate the function, not an explanation.", "AR 按鈕很小又疊在相機畫面上。翻譯功能，不要寫成說明文。"],
+      src: "Capture (64 px shutter)", mt: "捕捉寶可夢並保存至您的設備相冊", pe: "拍照",
+      tips: [["1 Chinese character ≈ 2 Latin letter widths", "一個中文字約等於兩個英文字母寬"], ["Check truncation (…) on a real device", "在真機上檢查截斷（…）"]] },
+    { t: ["5 · Match the locale & script", "5 · 對應地區與字形"], tag: ["Locale", "地區"],
+      r: ["zh_tw = Traditional characters + Taiwan vocabulary; zh_cn = Simplified + mainland vocabulary. Never mix them.", "zh_tw 用繁體字與台灣用語；zh_cn 用簡體字與大陸用語，切勿混用。"],
+      src: "SQUIRTLE (zh_tw)", mt: "杰尼龜", pe: "傑尼龜",
+      tips: [["TW: 設備→裝置, 相冊→相簿, 保存→儲存", "台灣：設備→裝置、相冊→相簿、保存→儲存"], ["Use full-width ！ and …", "使用全形！與刪節號…"]] },
+    { t: ["6 · Reuse franchise formulas", "6 · 沿用系列句式"], tag: ["Voice", "風格"],
+      r: ["Players expect the phrasing they know from the main games. Consistency beats creativity.", "玩家期待熟悉的正傳遊戲說法。一致性勝於創意。"],
+      src: "Wild {n} appeared!", mt: "狂野的 {n} 出現了！", pe: "野生的 {n} 出現了！",
+      tips: [["Search the translation memory first", "先查翻譯記憶"], ["Keep the excitement (！) without adding slang", "保留驚嘆語氣（！）但不加俚語"]] },
+    { t: ["7 · Never translate DNT items", "7 · 不翻譯 DNT 項目"], tag: ["DNT", "DNT"],
+      r: ["Technical tokens, brand names and marker IDs stay as they are.", "技術代碼、品牌名稱與標記名稱保持原樣。"],
+      src: "📷 Point camera at Hiro marker", mt: "📷 将相机指向英雄标记", pe: "📷 将相机对准 Hiro 标记",
+      tips: [["DNT list: Hiro, Pokémon, AR, GO", "DNT 清單：Hiro、Pokémon、AR、GO"], ["Also fix the verb: 对准 (aim at) beats 指向", "順便修正動詞：「对准」比「指向」自然"]] },
+    { t: ["8 · Fix grammar around variables", "8 · 圍繞變數重組語法"], tag: ["Grammar", "語法"],
+      r: ["Chinese needs measure words and a different word order; rebuild the sentence around the variable.", "中文需要量詞、語序也不同，要圍繞變數重組句子。"],
+      src: "Catch {count} Pokémon", mt: "捕捉 {count} 寶可夢", pe: "捕捉 {count} 隻寶可夢",
+      tips: [["Test with count = 1 and count = 10", "以 count＝1 和 10 測試"], ["Ask developers for full sentences, not fragments", "請開發者提供完整句子而非拼接片段"]] },
+    { t: ["9 · Correct voice, register & domain", "9 · 修正語態、語域與領域"], tag: ["Style", "文體"],
+      r: ["Pick the domain sense (3-D model, not fashion model) and a friendly, active voice for players.", "選擇正確領域的詞義（3D 模型而非模特兒），並使用親切的主動語態。"],
+      src: "Caught with Pokémon AR", mt: "被 Pokémon AR 抓住了", pe: "使用 Pokémon AR 捕捉",
+      tips: [["被 passives often sound negative", "「被」字句常帶負面意味"], ["装载 = cargo; 加载 = software loading", "「装载」是貨物裝運；「加载」才是軟體載入"]] },
+    { t: ["10 · Strip LLM add-ons", "10 · 刪除大模型附加內容"], tag: ["LLM", "大模型"],
+      r: ["Remove preambles (“Here is the translation”), bracketed notes, Markdown and code fences.", "刪除前言（「以下是翻譯」）、括號註解、Markdown 與程式碼框。"],
+      src: "Capture (zh_cn)", mt: "以下是翻译：拍照", pe: "拍照",
+      tips: [["Search for ：（ ** ``` in the file", "在檔案中搜尋 ：（ ** ```"], ["Ask for output-only JSON in the prompt", "提示詞中要求只輸出 JSON"]] },
+    { t: ["11 · Verify fluent output against the source", "11 · 流暢譯文也要對照原文"], tag: ["LLM", "大模型"],
+      r: ["LLM errors are often fluent. Read source and target side by side and check for additions and omissions.", "LLM 的錯誤常常很流暢。並排閱讀原文與譯文，檢查增譯與漏譯。"],
+      src: "🔄 Retake", mt: "🔄 再来一次！（双倍奖励）", pe: "🔄 重拍",
+      tips: [["Fluency is not accuracy", "通順不等於正確"], ["Watch for invented rewards, numbers and promises", "留意憑空多出的獎勵、數字與承諾"]] },
+    { t: ["12 · Test in context & don't over-edit", "12 · 情境測試、不過度編輯"], tag: ["LQA", "LQA"],
+      r: ["Some errors only appear on a device over the camera view. Re-test after each fix, and leave correct output alone.", "有些錯誤只有在真機相機畫面上才看得到。每次修正後重測，正確的輸出不要動。"],
+      src: "💾 Save (zh_tw)", mt: "💾 儲存", pe: "💾 儲存 (no change ✔ 無需修改)",
+      tips: [["Take before/after screenshots", "拍下修改前後截圖"], ["Log each change: what, why, which strategy", "記錄每項修改：改了什麼、為什麼、用哪個策略"]] }
+  ];
+
+  var FLOW = [
+    ["<b>Is it a termbase or DNT item?</b> (name, type, brand, marker) → use the official form. Never paraphrase.", "<b>是術語或 DNT 項目嗎？</b>（名稱、屬性、品牌、標記）→ 使用官方形式，絕不改寫。"],
+    ["<b>Are placeholders, emoji and markup intact?</b> <code>{n}</code> must appear exactly as in the source.", "<b>佔位符、表情符號與標記完整嗎？</b><code>{n}</code> 必須與原文完全相同。"],
+    ["<b>Did the model add anything?</b> Preambles, brackets, Markdown, invented rewards → delete.", "<b>模型有沒有多加東西？</b>前言、括號、Markdown、憑空的獎勵 → 刪除。"],
+    ["<b>Is the meaning right in this UI context?</b> Button (verb), label (noun) or toggle state?", "<b>在此介面情境中語意正確嗎？</b>按鈕（動詞）、標籤（名詞）還是開關狀態？"],
+    ["<b>Does it fit?</b> Check the character budget, then test on a device over the camera.", "<b>放得下嗎？</b>先檢查字數預算，再在真機相機畫面上測試。"],
+    ["<b>Is it the right locale?</b> Script, TW vs CN vocabulary, full-width punctuation ！…", "<b>地區正確嗎？</b>字形、台灣與大陸用語、全形標點 ！…"],
+    ["<b>Does it sound like the game?</b> Franchise formulas and the player's register.", "<b>聽起來像這款遊戲嗎？</b>系列句式與玩家語域。"],
+    ["<b>Already correct?</b> → leave it alone.", "<b>已經正確？</b>→ 不要動它。"]
+  ];
+
+  var LLM_FLOW = [
+    ["Pre-edit & add context", "譯前編輯與補充情境", "Give key names, screenshots, character limits.", "提供鍵名、截圖、字數上限。"],
+    ["Constrained prompt", "限制式提示詞", "Glossary + DNT list + locale + output-only JSON.", "術語表＋DNT 清單＋地區＋只輸出 JSON。"],
+    ["Automatic QA", "自動 QA", "Placeholders, script, length, MT/LLM patterns.", "佔位符、字形、長度、機翻／大模型錯誤模式。"],
+    ["Human full PE ★", "人工完整譯後編輯 ★", "Apply the 12 strategies; edit minimally.", "套用 12 項策略；最小幅度修改。"],
+    ["Device LQA", "真機 LQA", "Over the camera, every language, peer review.", "在相機畫面上、逐一語言、同儕互審。"]
+  ];
+
+  var MISSIONS = [
+    ["🔤 Mission 1: Names & Terms", "🔤 任務一：名稱與術語", "Check every Pokémon name and type against the termbase: literal, phonetic, invented and mixed-script names.", "對照術語庫檢查每個寶可夢名稱與屬性：直譯、音譯、自創與繁簡混用。"],
+    ["📏 Mission 2: Too Long!", "📏 任務二：太長了！", "Find labels that overflow or cover the Pokémon: the shutter label, the “marker lost” status, type lines, photo buttons.", "找出溢出或遮住寶可夢的文字：快門標籤、「標記遺失」狀態、屬性行、照片按鈕。"],
+    ["🖲️ Mission 3: UI Mistranslation", "🖲️ 任務三：介面誤譯", "Open the photo preview and toggle Spin. Do Save, Share, Close, Retake mean the right thing?", "開啟照片預覽並切換旋轉。儲存、分享、關閉、重拍的意思對嗎？"],
+    ["🧷 Mission 4: Variables & DNT", "🧷 任務四：變數與 DNT", "Is {n} filled in? Are Hiro and Pokémon preserved?", "{n} 有正確代入嗎？Hiro 與 Pokémon 有保留嗎？"],
+    ["🤖 Mission 5: LLM Leftovers", "🤖 任務五：大模型殘留物", "Find preambles, bracketed notes, Markdown ** and invented rewards.", "找出前言、括號註解、Markdown ** 與憑空出現的獎勵。"],
+    ["🪤 Mission 6: Don't Over-edit", "🪤 任務六：不要過度編輯", "Some strings are already correct. Changing them is flagged by QA.", "有些字串已經正確，修改它們會被 QA 標記。"]
+  ];
+
+  var CLASS_FLOW = [
+    ["0–10", "Set up Liveweave + marker; play the raw draft in 繁體 and 简体", "設定 Liveweave 與標記；以繁體、简体遊玩原始初稿", "Bug screenshots (use the app's 📸)", "錯誤截圖（使用 App 的 📸）"],
+    ["10–30", "Post-edit in the Sandbox; run QA until clean", "在沙盒中譯後編輯；執行 QA 直到通過", "Edited JSON + QA CSV", "修改後 JSON＋QA 報告"],
+    ["30–40", "Export → Liveweave → re-test on device", "匯出 → Liveweave → 真機重測", "“After” screenshots", "修改後截圖"],
+    ["40–50", "Peer LQA: swap phones and review each other's build", "同儕 LQA：交換手機互相審查", "Peer error log (MQM categories)", "同儕錯誤紀錄（MQM 分類）"],
+    ["50–60", "Debrief: which errors did QA miss? Which were LLM-specific?", "總結：哪些錯誤 QA 沒抓到？哪些是大模型特有？", "Short reflection", "簡短反思"]
+  ];
+
+  var RUBRIC = [
+    ["Accuracy & UI meaning", "準確度與介面語意", "25%", "Every button and label means the right thing in context", "每個按鈕與標籤在情境中意思正確"],
+    ["Terminology & DNT", "術語與 DNT", "20%", "100% termbase match; Hiro and Pokémon preserved", "完全符合術語庫；保留 Hiro 與 Pokémon"],
+    ["Fit on screen", "畫面適配", "20%", "No truncation or overlap on a real device", "真機上無截斷或重疊"],
+    ["Locale conventions", "地區慣例", "15%", "No script mixing; correct TW vs CN vocabulary", "無繁簡混用；台灣與大陸用語正確"],
+    ["Functional integrity", "功能完整性", "10%", "Valid JSON; placeholders intact; no LLM leftovers", "JSON 有效；佔位符完整；無大模型殘留"],
+    ["Minimal editing", "最小幅度修改", "10%", "Correct strings left untouched", "正確字串保持不動"]
+  ];
+
+  var REFS = [
+    ["Kocmi, T. et al. (2024). Findings of the WMT24 General Machine Translation Shared Task: The LLM Era Is Here but MT Is Not Solved Yet. <i>Proc. WMT 2024</i>, 1–46.", "https://aclanthology.org/2024.wmt-1.1/"],
+    ["Kocmi, T. et al. (2025). Findings of the WMT25 General Machine Translation Shared Task: Time to Stop Evaluating on Easy Test Sets. <i>Proc. WMT 2025</i>.", "https://aclanthology.org/2025.wmt-1.22/"],
+    ["Preliminary Ranking of WMT25 General Machine Translation Systems (2025). arXiv 2508.14909.", "https://arxiv.org/abs/2508.14909"],
+    ["Findings of the WMT25 Shared Task on Automated Translation Evaluation Systems: Linguistic Diversity is Challenging and References Still Help (2025).", "https://aclanthology.org/2025.wmt-1.24/"],
+    ["Manakhimova, S. et al. (2024). Investigating the Linguistic Performance of Large Language Models in Machine Translation. <i>Proc. WMT 2024</i>.", "https://www2.statmt.org/wmt24/pdf/2024.wmt-1.28.pdf"],
+    ["A New Taxonomy and Benchmark for Unraveling Hallucination in Translation (HalloMTBench) (2025). arXiv 2510.24073.", "https://arxiv.org/abs/2510.24073"],
+    ["Dale, D. et al. (2023). A Manually Annotated Benchmark for Multilingual Hallucination and Omission Detection in Machine Translation. arXiv 2305.11746.", "https://arxiv.org/abs/2305.11746"],
+    ["Javorský, D., Bojar, O. & Yvon, F. (2025). Prompting LLMs: Length Control for Isometric Machine Translation. arXiv 2506.04855.", "https://arxiv.org/abs/2506.04855"],
+    ["Taming the Sand-Glass for Time-Constrained LLM Translation via Reinforcement Learning (2026), which summarises the verbosity bias reported by Briakou et al. (2024) and Manakhimova et al. (2024). arXiv 2601.10187.", "https://arxiv.org/abs/2601.10187"],
+    ["Raunak, V. et al. (2023). Do GPTs Produce Less Literal Translations? <i>Proc. ACL 2023</i>.", "https://scholar.google.com/scholar?q=Do+GPTs+Produce+Less+Literal+Translations"],
+    ["ISO 18587:2017 Translation services: Post-editing of machine translation output: Requirements.", "https://www.iso.org/standard/62970.html"],
+    ["MQM: Multidimensional Quality Metrics framework.", "https://themqm.org/"],
+    ["Krings, H. P. (2001). <i>Repairing Texts: Empirical Investigations of Machine Translation Post-Editing Processes</i>. Kent State University Press.", ""],
+    ["BBC News (2016). Why the plan to rename Pikachu has made Hong Kong angry.", "https://www.bbc.com/news/world-asia-china-36414978"],
+    ["Bulbanews (2017). Pokémon GO update adds Chinese, changes scroll bar.", "http://bulbanews.bulbagarden.net/wiki/Pok%C3%A9mon_GO_update_adds_Chinese,_changes_scroll_bar"],
+    ["Wikipedia: Pokémon Go (launch, developers, publisher history).", "https://en.wikipedia.org/wiki/Pok%C3%A9mon_Go"]
+  ];
+
+  /* =======================================================
+     2. RENDER CONTENT
+     ======================================================= */
+  function renderContent() {
+    $("#introCards").innerHTML = INTRO_CARDS.map(function (c) {
+      return '<div class="card"><div class="ico">' + c[0] + "</div><h4>" + B(c[1], c[2]) + "</h4><p>" + B(c[3], c[4]) + "</p></div>";
+    }).join("");
+    $("#keyTerms").innerHTML = '<div class="bi">' + KEY_TERMS + "</div>";
+
+    $("#timeline").innerHTML = TIMELINE.map(function (t) {
+      return '<div class="tl"><b>' + B(t[0], t[1]) + '</b><div class="tl-body">' + B(t[2], t[3]) + "</div></div>";
+    }).join("");
+
+    $("#pipeline").innerHTML = PIPELINE.map(function (s, i) {
+      return '<div class="step' + (s[4] ? " core" : "") + '"><span class="sn">' + (i + 1) + "</span><h5>" + B(s[0], s[1]) + "</h5><p>" + B(s[2], s[3]) + "</p></div>";
+    }).join("");
+
+    $("#featTable").innerHTML = table(
+      [B("Feature", "特點"), B("Localisation impact", "在地化影響"), B("Example", "例子")],
+      FEATURES.map(function (f) {
+        return '<tr><td class="k">' + B(f[0], f[1]) + "</td><td>" + B(f[2], f[3]) + "</td><td>" + B(f[4], f[5]) + "</td></tr>";
+      })
+    );
+
+    $("#mtTable").innerHTML = table(
+      ["#", B("Error type", "錯誤類型"), B("Source (EN)", "原文"), B("Raw MT ❌", "機翻原稿 ❌"), B("Post-edited ✅", "譯後編輯 ✅"), B("Why MT failed", "失誤原因")],
+      MT_ERRORS.map(function (e, i) {
+        return '<tr data-c="' + e[0] + '"><td>' + (i + 1) + '</td><td class="k">' + B(e[1], e[2]) + "</td><td>" + esc(e[3]) +
+          '</td><td class="bad">' + esc(e[4]) + '</td><td class="good">' + esc(e[5]) + "</td><td>" + B(e[6], e[7]) + "</td></tr>";
+      }), "errors"
+    );
+
+    $("#research").innerHTML = RESEARCH.map(function (r) {
+      return '<div class="rcard"><div class="big">' + r.big + "</div><h4>" + B(r.t[0], r.t[1]) + '</h4><p class="bi">' + B(r.p[0], r.p[1]) + '</p><div class="cite">' + esc(r.c) + "</div></div>";
+    }).join("");
+    $("#versionNote").innerHTML = '<div class="bi">' + VERSION_NOTE + "</div>";
+
+    $("#llmTable").innerHTML = table(
+      ["#", B("Problem", "問題"), B("What research / practice says", "研究／實務發現"), B("Raw LLM ❌", "大模型原稿 ❌"), B("Post-edited ✅", "譯後編輯 ✅"), B("PE action", "編輯對策")],
+      LLM_ISSUES.map(function (x, i) {
+        var pill = x[4] === "r"
+          ? '<span class="pill">' + B("Research", "研究") + "</span>"
+          : '<span class="pill obs">' + B("Practice", "實務觀察") + "</span>";
+        return "<tr><td>" + (i + 1) + '</td><td class="k">' + B(x[0], x[1]) + "</td><td>" + B(x[2], x[3]) + pill +
+          '</td><td class="bad">' + esc(x[5]) + '</td><td class="good">' + esc(x[6]) + "</td><td>" + B(x[7], x[8]) + "</td></tr>";
+      })
+    );
+
+    $("#peLevels").innerHTML = PE_LEVELS.map(function (l) {
+      return '<div class="' + l[0] + '"><h4>' + B(l[1], l[2]) + '</h4><p class="bi">' + B(l[3], l[4]) + "</p></div>";
+    }).join("");
+
+    $("#mqmTable").innerHTML = table(
+      [B("MQM dimension", "MQM 維度"), B("Covers", "涵蓋"), B("Example from this lab", "本實驗例子")],
+      MQM.map(function (m) {
+        return '<tr><td class="k">' + B(m[0], m[1]) + "</td><td>" + B(m[2], m[3]) + "</td><td>" + esc(m[4]) + "</td></tr>";
+      })
+    ) + '<p class="tiny">' + B("Severity: <b>Minor</b> = noticeable but harmless · <b>Major</b> = changes meaning or hurts usability · <b>Critical</b> = breaks function, legal/IP or safety issue.", "嚴重度：<b>輕微</b>＝看得出但無害 · <b>嚴重</b>＝改變語意或影響使用 · <b>致命</b>＝功能損壞、涉及法律／版權或安全。") + "</p>";
+
+    $("#effort").innerHTML = EFFORT.map(function (e) {
+      return '<div class="card"><div class="ico">' + e[0] + "</div><h4>" + B(e[1], e[2]) + '</h4><p class="bi">' + B(e[3], e[4]) + "</p></div>";
+    }).join("");
+
+    $("#toolbox").innerHTML = TOOLBOX.map(function (o) {
+      return '<div class="op"><h4>' + B(o[0], o[1]) + '</h4><p class="bi">' + B(o[2], o[3]) + '</p><div class="ex"><del>' + esc(o[4]) + "</del> → <ins>" + esc(o[5]) + "</ins></div></div>";
+    }).join("");
+
+    var g = $("#strategyGrid");
+    g.innerHTML = "";
+    STRATEGIES.forEach(function (s) {
+      var d = document.createElement("div");
+      d.className = "strat";
+      d.innerHTML = '<span class="tag">' + B(s.tag[0], s.tag[1]) + "</span><h4>" + B(s.t[0], s.t[1]) + '</h4><p class="rule">' + B(s.r[0], s.r[1]) + "</p>" +
+        '<div class="ex mt"><div class="lbl">' + B("RAW MT ❌", "機翻原稿 ❌") + '</div><div class="src">Source / 原文: ' + esc(s.src) +
+        '</div><div class="txt">' + esc(s.mt) + "</div></div><ul>" +
+        s.tips.map(function (x) { return "<li>" + B(esc(x[0]), esc(x[1])) + "</li>"; }).join("") + "</ul>";
+      var flipped = false;
+      d.addEventListener("click", function () {
+        flipped = !flipped;
+        var ex = d.querySelector(".ex");
+        ex.className = "ex " + (flipped ? "pe" : "mt");
+        ex.querySelector(".lbl").innerHTML = flipped ? B("POST-EDITED ✅", "譯後編輯 ✅") : B("RAW MT ❌", "機翻原稿 ❌");
+        ex.querySelector(".txt").textContent = flipped ? s.pe : s.mt;
+      });
+      g.appendChild(d);
+    });
+
+    $("#flow").innerHTML = FLOW.map(function (f) { return "<li>" + B(f[0], f[1]) + "</li>"; }).join("");
+
+    $("#llmFlow").innerHTML = LLM_FLOW.map(function (s, i) {
+      return '<div class="step' + (i === 3 ? " core" : "") + '"><span class="sn">' + (i + 1) + "</span><h5>" + B(s[0], s[1]) + "</h5><p>" + B(s[2], s[3]) + "</p></div>";
+    }).join("");
+
+    $("#missions").innerHTML = MISSIONS.map(function (m) {
+      return '<div class="card"><h4>' + B(m[0], m[1]) + '</h4><p class="bi">' + B(m[2], m[3]) + "</p></div>";
+    }).join("") +
+      '<div class="card"><h4>' + B("🧪 Bonus: an i18n bug", "🧪 加分題：國際化程式錯誤") + '</h4><p class="bi">' +
+      B("In 繁體/简体 every button shows ⭐ instead of 🌿🔥💧. Why? <code>refreshButtons()</code> looks up the emoji with the <i>translated</i> type. This is a developer bug, not a translator error, but report it!",
+        "切換到繁體／简体後，所有按鈕都顯示 ⭐ 而非 🌿🔥💧。為什麼？<code>refreshButtons()</code> 用<i>翻譯後</i>的屬性查找表情符號。這是開發者的錯誤，不是譯者的錯，但仍要回報！") +
+      '</p><details><summary>' + B("Developer fix", "開發者修正") + '</summary><pre class="code">var typeEN = p.type &amp;&amp; p.type.en ? p.type.en : getF(p, "type");\nvar ft = typeEN.split("/")[0].trim().toUpperCase();</pre></details></div>';
+
+    $("#classFlow").innerHTML = table(
+      [B("Minutes", "分鐘"), B("Activity", "活動"), B("Output", "成果")],
+      CLASS_FLOW.map(function (c) { return '<tr><td class="k">' + c[0] + "</td><td>" + B(c[1], c[2]) + "</td><td>" + B(c[3], c[4]) + "</td></tr>"; })
+    );
+
+    $("#rubric").innerHTML = table(
+      [B("Criterion", "評分項目"), B("Weight", "比重"), B("Excellent", "優秀表現")],
+      RUBRIC.map(function (r) { return '<tr><td class="k">' + B(r[0], r[1]) + "</td><td>" + r[2] + "</td><td>" + B(r[3], r[4]) + "</td></tr>"; })
+    );
+
+    $("#refList").innerHTML = REFS.map(function (r) {
+      return "<li>" + r[0] + (r[1] ? ' <a href="' + r[1] + '" target="_blank" rel="noopener">↗</a>' : "") + "</li>";
+    }).join("");
+  }
+
+  /* =======================================================
+     3. LAB DATA: raw MT/LLM draft + model answer
+     ======================================================= */
+  var MT_DRAFT = {
+    lang: "zh_tw",
+    maxCache: 6,
+    ui: {
+      appeared:        { en: "✨ Wild {n} appeared!", zh_tw: "✨ 狂野的 {n} 出現了！", zh_cn: "✨ 野生的 {名字} 出现了！" },
+      point_camera:    { en: "📷 Point camera at Hiro marker", zh_tw: "📷 請將您的行動裝置的相機鏡頭對準印在紙上的 Hiro 標記圖案以開始遊戲", zh_cn: "📷 将相机指向英雄标记" },
+      loading_name:    { en: "⏳ Loading {n}…", zh_tw: "⏳ 正在載入 {n}…", zh_cn: "⏳ 装载 {n}…" },
+      model_failed:    { en: "❌ Model failed to load", zh_tw: "❌ 模特兒載入失敗", zh_cn: "❌ 模型加载失败" },
+      spin_on:         { en: "Spin ON", zh_tw: "旋轉 在", zh_cn: "旋转 开" },
+      spin_off:        { en: "Spin OFF", zh_tw: "旋轉 關", zh_cn: "旋转 离开" },
+      capture:         { en: "Capture", zh_tw: "捕捉寶可夢並保存至您的設備相冊", zh_cn: "以下是翻译：拍照" },
+      photo_save:      { en: "💾 Save", zh_tw: "💾 儲存", zh_cn: "💾 救" },
+      photo_share:     { en: "📤 Share", zh_tw: "📤 股份", zh_cn: "📤 分享" },
+      photo_close:     { en: "✕ Close", zh_tw: "✕ 關閉（指關閉預覽視窗）", zh_cn: "✕ 靠近" },
+      photo_retake:    { en: "🔄 Retake", zh_tw: "🔄 奪回", zh_cn: "🔄 再来一次！（双倍奖励）" },
+      photo_watermark: { en: "Caught with Pokémon AR", zh_tw: "使用口袋妖怪 AR 捕捉", zh_cn: "被 Pokémon AR 抓住了" },
+      loading_title:   { en: "Loading Pokémon AR…", zh_tw: "正在載入 Pokémon AR…", zh_cn: "**正在加载 Pokémon AR…**" }
+    },
+    pokemon: [
+      { name: { en: "BULBASAUR", zh_tw: "鱗莖龍", zh_cn: "妙蛙种子" },
+        dex: "#001",
+        type: { en: "GRASS / POISON", zh_tw: "草地 / 毒", zh_cn: "草 / 毒药" },
+        color: "#4CAF50",
+        model: "https://digimarketingai.github.io/pokemon3d/bulbasaur_s.glb" },
+      { name: { en: "CHARMANDER", zh_tw: "小火龍", zh_cn: "查曼德" },
+        dex: "#004",
+        type: { en: "FIRE", zh_tw: "開火", zh_cn: "火属性类型的宝可梦" },
+        color: "#FF5722",
+        model: "https://digimarketingai.github.io/pokemon3d/charmander_s.glb" },
+      { name: { en: "SQUIRTLE", zh_tw: "杰尼龜", zh_cn: "傑尼龜" },
+        dex: "#007",
+        type: { en: "WATER", zh_tw: "水", zh_cn: "水" },
+        color: "#2196F3",
+        model: "https://digimarketingai.github.io/pokemon3d/squirtle_s.glb" }
+    ]
+  };
+
+  var MODEL_ANSWER = JSON.parse(JSON.stringify(MT_DRAFT));
+  (function (a) {
+    var u = a.ui, p = a.pokemon;
+    u.appeared.zh_tw = "✨ 野生的 {n} 出現了！";        u.appeared.zh_cn = "✨ 野生的 {n} 出现了！";
+    u.point_camera.zh_tw = "📷 將相機對準 Hiro 標記";   u.point_camera.zh_cn = "📷 将相机对准 Hiro 标记";
+    u.loading_name.zh_cn = "⏳ 正在加载 {n}…";
+    u.model_failed.zh_tw = "❌ 模型載入失敗";
+    u.spin_on.zh_tw = "旋轉 開";                       u.spin_off.zh_cn = "旋转 关";
+    u.capture.zh_tw = "拍照";                          u.capture.zh_cn = "拍照";
+    u.photo_save.zh_cn = "💾 保存";                    u.photo_share.zh_tw = "📤 分享";
+    u.photo_close.zh_tw = "✕ 關閉";                    u.photo_close.zh_cn = "✕ 关闭";
+    u.photo_retake.zh_tw = "🔄 重拍";                  u.photo_retake.zh_cn = "🔄 重拍";
+    u.photo_watermark.zh_tw = "使用 Pokémon AR 捕捉";  u.photo_watermark.zh_cn = "使用 Pokémon AR 捕捉";
+    u.loading_title.zh_cn = "正在加载 Pokémon AR…";
+    p[0].name.zh_tw = "妙蛙種子"; p[0].type.zh_tw = "草 / 毒"; p[0].type.zh_cn = "草 / 毒";
+    p[1].name.zh_cn = "小火龙";   p[1].type.zh_tw = "火";      p[1].type.zh_cn = "火";
+    p[2].name.zh_tw = "傑尼龜";   p[2].name.zh_cn = "杰尼龟";
+  })(MODEL_ANSWER);
+
+  /* Strings that are ALREADY correct in the draft (over-editing traps) */
+  var TRAPS = ["ui.loading_name.zh_tw", "ui.model_failed.zh_cn", "ui.spin_on.zh_cn", "ui.spin_off.zh_tw",
+    "ui.photo_save.zh_tw", "ui.photo_share.zh_cn", "ui.loading_title.zh_tw",
+    "pokemon[0].name.zh_cn", "pokemon[1].name.zh_tw", "pokemon[2].type.zh_tw", "pokemon[2].type.zh_cn"];
+
+  var TERMBASE = {
+    names: {
+      "#001": { en: "BULBASAUR", zh_tw: "妙蛙種子", zh_cn: "妙蛙种子" },
+      "#004": { en: "CHARMANDER", zh_tw: "小火龍", zh_cn: "小火龙" },
+      "#007": { en: "SQUIRTLE", zh_tw: "傑尼龜", zh_cn: "杰尼龟" },
+      "#025": { en: "PIKACHU", zh_tw: "皮卡丘", zh_cn: "皮卡丘" }
+    },
+    types: {
+      GRASS: "草", POISON: "毒", FIRE: "火", WATER: "水", ELECTRIC: "電|电",
+      NORMAL: "一般", FLYING: "飛行|飞行", BUG: "蟲|虫", ROCK: "岩石", GROUND: "地面",
+      PSYCHIC: "超能力", ICE: "冰", DRAGON: "龍|龙", DARK: "惡|恶", FAIRY: "妖精",
+      FIGHTING: "格鬥|格斗", GHOST: "幽靈|幽灵", STEEL: "鋼|钢"
+    }
+  };
+  var DNT = ["Hiro", "Pokémon"];
+  var LIMITS = {
+    name: 12, type: 12, spin_on: 10, spin_off: 10, capture: 8,
+    photo_save: 12, photo_share: 12, photo_close: 12, photo_retake: 12,
+    appeared: 30, loading_name: 30, point_camera: 32, model_failed: 30,
+    photo_watermark: 28, loading_title: 34, _default: 34
+  };
+
+  var PAIRS = "龍龙龜龟傑杰種种載载設设備备冊册關关開开轉转現现機机請请權权據据儲储體体擊击氣气寶宝夢梦屬属類类將将對对標标記记動动鏡镜頭头圖图紙纸戲戏護护號号們们這这個个為为時时間间實实裝装離离誤误錯错飛飞鳥鸟蟲虫鋼钢靈灵電电獎奖勵励雙双譯译";
+  var TRAD = "", SIMP = "";
+  for (var pi = 0; pi < PAIRS.length; pi += 2) { TRAD += PAIRS[pi]; SIMP += PAIRS[pi + 1]; }
+
+  var MT_RULES = [
+    { re: /股份/, en: "“Share” read as stock shares", zh: "把 Share 誤解為股份", fix: "分享" },
+    { re: /靠近/, en: "“Close” read as “near”", zh: "把 Close 誤解為靠近", fix: "關閉 / 关闭" },
+    { re: /^\W*救\W*$|💾\s*救/, en: "“Save” read as “rescue”", zh: "把 Save 誤解為拯救", fix: "儲存 (TW) / 保存 (CN)" },
+    { re: /奪回|夺回/, en: "“Retake” read as “recapture territory”", zh: "把 Retake 誤解為奪回", fix: "重拍" },
+    { re: /旋[轉转]\s*在/, en: "“ON” read as a preposition", zh: "把 ON 當成介詞「在」", fix: "旋轉 開 / 旋转 开" },
+    { re: /離開|离开/, en: "“OFF” read as “leave”", zh: "把 OFF 當成「離開」", fix: "關 / 关" },
+    { re: /模特/, en: "“Model” read as a fashion model", zh: "把 Model 誤解為模特兒", fix: "模型" },
+    { re: /狂野/, en: "Franchise formula broken (“Wild” ≠ crazy)", zh: "破壞系列句式（wild ≠ 狂野）", fix: "野生的" },
+    { re: /英雄/, en: "DNT marker name “Hiro” translated", zh: "不翻譯詞 Hiro 被譯成「英雄」", fix: "Hiro" },
+    { re: /開火|开火/, en: "Fire type read as “open fire”", zh: "火屬性被誤解為「開火」", fix: "火" },
+    { re: /毒藥|毒药/, en: "Type must be the single character 毒", zh: "屬性應為單字「毒」", fix: "毒" },
+    { re: /草地/, en: "Grass type ≠ lawn", zh: "草屬性 ≠ 草地", fix: "草" },
+    { re: /裝載|装载/, en: "Wrong register (cargo loading)", zh: "語域錯誤（貨物裝載）", fix: "正在載入 / 正在加载" },
+    { re: /抓住了|^被/, en: "Passive voice sounds like “got arrested”", zh: "被動句聽起來像「被逮捕」", fix: "使用 Pokémon AR 捕捉" },
+    { re: /口袋妖怪|寵物小精靈|宠物小精灵|神奇寶貝|神奇宝贝/, en: "Legacy / unofficial brand name", zh: "舊稱或非官方品牌名", fix: "Pokémon / 寶可夢" },
+    { re: /鱗莖|鳞茎|查曼德|種子小恐龍/, en: "Literal, phonetic or invented name", zh: "直譯、音譯或自創名稱", fix: "Termbase / 術語庫" },
+    { re: /以下是|翻[譯译][:：]|^\s*(translation|here is)/i, en: "LLM chat preamble left in the string", zh: "殘留大模型前言", fix: "Delete preamble / 刪除前言" },
+    { re: /\*\*|`|^#+\s/, en: "Markdown formatting leaked into UI text", zh: "Markdown 格式混入介面文字", fix: "Remove ** ` # / 移除符號" },
+    { re: /屬性|属性|類型|类型/, en: "Explanatory words added to a label (verbosity)", zh: "標籤加入解釋性字詞（冗長）", fix: "Type name only / 只保留屬性名" },
+    { re: /獎勵|奖励|雙倍|双倍/, en: "Information not in the source (hallucination)", zh: "原文沒有的資訊（幻覺）", fix: "Delete addition / 刪除增譯" }
+  ];
+  var TW_TERMS = [
+    { re: /設備/, fix: "裝置" }, { re: /相冊/, fix: "相簿" }, { re: /保存/, fix: "儲存" },
+    { re: /加載/, fix: "載入" }, { re: /視頻/, fix: "影片" }, { re: /默認/, fix: "預設" }
+  ];
+
+  /* =======================================================
+     4. QA ENGINE
+     ======================================================= */
+  var lastIssues = [];
+
+  function runQA(cfg) {
+    var issues = [];
+    function add(sev, loc, found, en, zh, sug) { issues.push({ sev: sev, loc: loc, found: found, en: en, zh: zh, sug: sug }); }
+
+    function check(loc, en, val, lang, limKey) {
+      if (val === undefined || val === null || val === "") { add("critical", loc, "(empty)", "Missing translation", "缺少譯文", en); return; }
+      val = String(val);
+
+      var ph = (en.match(/\{[^}]+\}/g) || []).sort().join(",");
+      var pt = (val.match(/\{[^}]+\}/g) || []).sort().join(",");
+      if (ph !== pt) add("critical", loc, val, "Placeholder mismatch (" + (ph || "none") + " ≠ " + (pt || "none") + ")", "佔位符不一致（" + (ph || "無") + " ≠ " + (pt || "無") + "）", ph || "—");
+
+      DNT.forEach(function (d) {
+        if (en.indexOf(d) > -1 && val.indexOf(d) === -1) add("major", loc, val, "DNT term “" + d + "” missing", "不翻譯詞「" + d + "」遺失", d);
+      });
+
+      MT_RULES.forEach(function (r) { if (r.re.test(val)) add("major", loc, val, "Likely MT/LLM error: " + r.en, "疑似機翻／大模型錯誤：" + r.zh, r.fix); });
+
+      if (!/[（(]/.test(en) && /[（(][^）)]*[）)]/.test(val)) add("major", loc, val, "Explanation added in brackets (LLM verbosity)", "以括號加入解釋（大模型冗長）", "Delete bracket / 刪除括號內容");
+
+      var wrong = lang === "zh_tw" ? SIMP : TRAD;
+      var hits = Array.from(val).filter(function (c) { return wrong.indexOf(c) > -1; });
+      if (hits.length) add("major", loc, val,
+        (lang === "zh_tw" ? "Simplified" : "Traditional") + " characters in " + lang + ": " + hits.join(""),
+        lang + " 中混入" + (lang === "zh_tw" ? "簡體" : "繁體") + "字：" + hits.join(""),
+        lang === "zh_tw" ? "Convert to Traditional / 改為繁體" : "Convert to Simplified / 改為簡體");
+
+      if (lang === "zh_tw") TW_TERMS.forEach(function (r) {
+        if (r.re.test(val)) add("minor", loc, val, "Mainland term in Taiwan copy", "台灣版使用大陸用語", "→ " + r.fix);
+      });
+
+      var lim = LIMITS[limKey] || LIMITS._default;
+      var w = width(val.replace("{n}", "妙蛙種子"));
+      if (w > lim) add("major", loc, val, "Too long: width " + w + " > budget " + lim + " (truncation / overlap)", "過長：寬度 " + w + " > 上限 " + lim + "（截斷／重疊）", "Shorten, keep the function / 精簡並保留功能");
+    }
+
+    var ui = cfg.ui || {};
+    Object.keys(ui).forEach(function (k) {
+      var o = ui[k] || {}, en = o.en || "";
+      ["zh_tw", "zh_cn"].forEach(function (l) { check("ui." + k + "." + l, en, o[l], l, k); });
+    });
+
+    (cfg.pokemon || []).forEach(function (p, i) {
+      var tb = TERMBASE.names[p.dex];
+      ["zh_tw", "zh_cn"].forEach(function (l) {
+        var loc = "pokemon[" + i + "].name." + l, v = getF(p.name, l);
+        if (tb && v !== tb[l]) add("critical", loc, v, "Not the official termbase name", "非官方術語庫譯名", tb[l]);
+        check(loc, getF(p.name, "en"), v, l, "name");
+
+        var tl = "pokemon[" + i + "].type." + l, tv = getF(p.type, l);
+        var expected = getF(p.type, "en").split("/").map(function (x) {
+          var key = x.trim().toUpperCase(), alts = (TERMBASE.types[key] || key).split("|");
+          return l === "zh_cn" ? alts[alts.length - 1] : alts[0];
+        }).join(" / ");
+        if (String(tv).replace(/\s/g, "") !== expected.replace(/\s/g, "")) add("critical", tl, tv, "Type not in termbase form", "屬性不符術語庫", expected);
+        check(tl, getF(p.type, "en"), tv, l, "type");
+      });
+    });
+
+    if (cfg !== MT_DRAFT) TRAPS.forEach(function (path) {
+      var now = getPath(cfg, path), orig = getPath(MT_DRAFT, path);
+      if (now !== undefined && now !== orig) add("minor", path, now, "Changed a string that was already correct; was it necessary? (over-editing)", "修改了原本正確的字串，有必要嗎？（過度編輯）", orig);
+    });
+
+    var seen = {};
+    return issues.filter(function (x) { var k = x.loc + x.en; if (seen[k]) return false; seen[k] = 1; return true; });
+  }
+
+  function renderQA(issues) {
+    lastIssues = issues;
+    var tb = $("#qaTable tbody"), sc = $("#qaScore");
+    if (!issues.length) {
+      tb.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#166534;font-weight:800">' +
+        B("🎉 No automatic issues found. Now test on a real device!", "🎉 未發現自動檢查問題，接著請在真機上測試！") + "</td></tr>";
+      sc.innerHTML = B("PASS", "通過"); sc.className = "score pass"; return;
+    }
+    var crit = issues.filter(function (i) { return i.sev === "critical"; }).length;
+    sc.innerHTML = B(issues.length + " issues · " + crit + " critical", issues.length + " 個問題 · " + crit + " 個致命");
+    sc.className = "score fail";
+    var SEV = { critical: ["CRITICAL", "致命"], major: ["MAJOR", "嚴重"], minor: ["MINOR", "輕微"] };
+    tb.innerHTML = issues.map(function (x, n) {
+      return "<tr><td>" + (n + 1) + '</td><td><span class="sev ' + x.sev + '">' + B(SEV[x.sev][0], SEV[x.sev][1]) +
+        "</span></td><td><code>" + esc(x.loc) + "</code></td><td>" + esc(x.found) + "</td><td>" + B(esc(x.en), esc(x.zh)) +
+        "</td><td>" + esc(x.sug) + "</td></tr>";
+    }).join("");
+  }
+
+  /* =======================================================
+     5. PHONE SIMULATOR (mirrors PokemonAR.js behaviour)
+     ======================================================= */
+  var simLang = "zh_tw", simIdx = 0;
+  var POKE_EMOJI = ["🦖", "🦎", "🐢"];
+  var EMOJI = { GRASS: "🌿", FIRE: "🔥", WATER: "💧", ELECTRIC: "⚡", POISON: "☠️" };
+  var LANG_LABELS = { en: "EN", zh_tw: "繁體", zh_cn: "简体" };
+  var current = null;
+
+  function T(cfg, key, rep) {
+    var o = (cfg.ui || {})[key]; if (!o) return key;
+    var s = o[simLang] || o.en || key;
+    if (rep) for (var k in rep) s = s.replace("{" + k + "}", rep[k]);
+    return s;
+  }
+
+  function renderPhone(cfg) {
+    var ph = $("#phone"), P = cfg.pokemon || [];
+    if (!P.length) { ph.innerHTML = ""; return; }
+    if (simIdx >= P.length) simIdx = 0;
+    var p = P[simIdx];
+    var lost = $("#optLost").checked, photo = $("#optPhoto").checked, spin = $("#optSpin").checked;
+    var name = getF(p.name, simLang);
+
+    var btns = P.map(function (q, i) {
+      var ft = getF(q.type, simLang).split("/")[0].trim().toUpperCase(); /* real bug replicated */
+      return '<button data-i="' + i + '" class="' + (i === simIdx ? "active" : "") + '" style="background:' + q.color + '">' +
+        (EMOJI[ft] || "⭐") + " " + esc(getF(q.name, simLang)) + "</button>";
+    }).join("");
+
+    var status = lost ? T(cfg, "point_camera") : T(cfg, "appeared", { n: name });
+    var html =
+      '<div class="marker">Hiro</div>' +
+      (lost ? "" : '<div class="poke3d ' + (spin ? "" : "still") + '">' + (POKE_EMOJI[simIdx] || "❓") + "</div>") +
+      '<div class="p-btns">' + btns + "</div>" +
+      '<div class="p-lang">' + LANG_LABELS[simLang] + "</div>" +
+      '<div class="p-ctrl"><i>+</i><span>0.50x</span><i>−</i><i>' + (spin ? "🔄" : "⏸️") + "</i><span>" +
+      esc(spin ? T(cfg, "spin_on") : T(cfg, "spin_off")) + "</span><i>🎯</i></div>" +
+      '<div class="p-info"><div class="pname">' + esc(name) + '</div><div class="pdex">' + esc(p.dex) +
+      '</div><div class="ptype" style="color:' + p.color + '">' + esc(getF(p.type, simLang)) +
+      '</div><div class="pstatus">' + esc(status) + "</div></div>" +
+      '<div class="p-shutter"><i>📸</i><span>' + esc(T(cfg, "capture")) + "</span></div>";
+
+    if (photo) {
+      html += '<div class="p-preview"><div class="shot">' + (POKE_EMOJI[simIdx] || "❓") +
+        '<div class="wm">' + esc(name) + "  " + esc(p.dex) + "<small>" + esc(T(cfg, "photo_watermark")) + "  •  2025/01/01 12:00</small></div></div>" +
+        '<div class="actions"><b style="background:#4CAF50">' + esc(T(cfg, "photo_save")) + '</b><b style="background:#2196F3">' +
+        esc(T(cfg, "photo_share")) + '</b><b style="background:#FF9800">' + esc(T(cfg, "photo_retake")) +
+        '</b><b style="background:#666">' + esc(T(cfg, "photo_close")) + "</b></div></div>";
+    }
+    ph.innerHTML = html;
+
+    $$(".p-btns button", ph).forEach(function (b) {
+      b.addEventListener("click", function () { simIdx = +b.dataset.i; renderPhone(cfg); });
+    });
+
+    var nm = $(".pname", ph); if (nm && nm.scrollWidth > nm.clientWidth) nm.classList.add("flag");
+    var tp = $(".ptype", ph); if (tp && tp.offsetHeight > 22) tp.classList.add("flag");
+    var row = $(".p-btns", ph); if (row && row.offsetHeight > 50) row.classList.add("flag");
+    var sh = $(".p-shutter span", ph); if (sh && sh.offsetWidth > 70) sh.classList.add("flag");
+    var st = $(".pstatus", ph); if (st && st.offsetHeight > 30) st.classList.add("flag");
+    $$(".p-ctrl span", ph).forEach(function (s) { if (s.offsetWidth > 70) s.classList.add("flag"); });
+    var acts = $(".p-preview .actions", ph); if (acts && acts.offsetHeight > 40) acts.classList.add("flag");
+  }
+
+  /* =======================================================
+     6. EDITOR
+     ======================================================= */
+  var ed, timer;
+
+  function parseEditor() {
+    var st = $("#jsonStatus"), txt = ed.value;
+    try {
+      current = JSON.parse(txt);
+      st.innerHTML = B("✔ Valid JSON", "✔ JSON 格式正確"); st.className = "status ok";
+      renderPhone(current);
+      return current;
+    } catch (e) {
+      var curly = /[“”‘’]/.test(txt);
+      st.innerHTML = B("✖ JSON error: " + esc(e.message) + (curly ? " Curly quotes found; JSON needs straight quotes." : ""),
+        "✖ JSON 錯誤：" + esc(e.message) + (curly ? " 發現彎引號，JSON 必須使用直引號。" : ""));
+      st.className = "status err";
+      return null;
+    }
+  }
+
+  function loadConfig(cfg) {
+    ed.value = JSON.stringify(cfg, null, 2);
+    parseEditor();
+    renderQA(runQA(current));
+    refreshLW();
+  }
+
+  /* =======================================================
+     7. LIVEWEAVE EXPORT
+     ======================================================= */
+  function buildLW(cfg) {
+    return '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n' +
+      '    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />\n' +
+      "    <title>Pokémon AR – L10n Lab</title>\n  </head>\n  <body>\n" +
+      "    <!-- code.js (PokemonAR v5 + patches A & B) is in Liveweave's JS panel -->\n" +
+      "    <script>\n      var CONFIG = " + JSON.stringify(cfg, null, 2).replace(/\n/g, "\n      ") + ";\n\n" +
+      "      (function boot() {\n        if (window.PokemonAR) { PokemonAR.init(CONFIG); }\n" +
+      "        else { setTimeout(boot, 100); }\n      })();\n    </scr" + "ipt>\n  </body>\n</html>";
+  }
+  function refreshLW() { $("#lwHTML").textContent = buildLW(current || MT_DRAFT); }
+
+  /* =======================================================
+     8. ANSWER KEY
+     ======================================================= */
+  function buildAnswerKey() {
+    var rows = runQA(MT_DRAFT), seen = {}, body = "";
+    rows.forEach(function (r) {
+      if (seen[r.loc]) return; seen[r.loc] = 1;
+      body += "<tr><td><code>" + esc(r.loc) + '</code></td><td class="bad">' + esc(r.found) + '</td><td class="good">' + esc(getPath(MODEL_ANSWER, r.loc)) + "</td></tr>";
+    });
+    $("#answerKey").innerHTML =
+      '<p class="bi">' + B("The draft contains <b>" + Object.keys(seen).length + "</b> faulty strings. Traps (already correct, must NOT change): ",
+        "初稿共有 <b>" + Object.keys(seen).length + "</b> 條錯誤字串。陷阱（已正確，不可修改）：") +
+      TRAPS.map(function (t) { return "<code>" + t + "</code>"; }).join(" ") + "</p>" +
+      table([B("Location", "位置"), B("Draft", "初稿"), B("Model answer", "參考答案")], [body]);
+  }
+
+  /* =======================================================
+     9. LANGUAGE MODE
+     ======================================================= */
+  function setMode(m) {
+    document.body.classList.remove("m-en", "m-zh", "m-both");
+    document.body.classList.add("m-" + m);
+    document.documentElement.lang = m === "zh" ? "zh-Hant" : "en";
+    $$(".lang-switch button").forEach(function (b) { b.classList.toggle("on", b.dataset.m === m); });
+    try { localStorage.setItem("l10nLabMode", m); } catch (e) { /* private mode */ }
+  }
+
+  /* =======================================================
+     10. INIT
+     ======================================================= */
+  function init() {
+    renderContent();
+
+    var saved = "both";
+    try { saved = localStorage.getItem("l10nLabMode") || "both"; } catch (e) { /* ignore */ }
+    setMode(saved);
+    $$(".lang-switch button").forEach(function (b) { b.onclick = function () { setMode(b.dataset.m); }; });
+
+    ed = $("#jsonEditor");
+    ed.addEventListener("input", function () { clearTimeout(timer); timer = setTimeout(parseEditor, 250); });
+    ed.addEventListener("keydown", function (e) {
+      if (e.key === "Tab") { e.preventDefault(); ed.setRangeText("  ", ed.selectionStart, ed.selectionEnd, "end"); }
+    });
+
+    $("#btnQA").onclick = function () {
+      var c = parseEditor();
+      if (c) { renderQA(runQA(c)); refreshLW(); $(".qa-panel").scrollIntoView({ behavior: "smooth" }); }
+    };
+    $("#btnReset").onclick = function () { if (confirm("Reset to the raw draft? / 重設為原始初稿？")) loadConfig(MT_DRAFT); };
+    $("#btnAnswer").onclick = function () { if (confirm("Load the model answer? Your edits will be replaced. / 載入參考答案？你的修改將被取代。")) loadConfig(MODEL_ANSWER); };
+    $("#btnCSV").onclick = function () {
+      var csv = "No,Severity,Location,Found,Problem,問題,Suggestion\n" + lastIssues.map(function (x, i) {
+        return [i + 1, x.sev, x.loc, x.found, x.en, x.zh, x.sug].map(function (c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(",");
+      }).join("\n");
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob(["\ufeff" + csv], { type: "text/csv" }));
+      a.download = "QA_report.csv"; a.click();
+    };
+    $("#btnExport").onclick = function () { if (parseEditor()) { refreshLW(); toast("Liveweave HTML regenerated ✔", "已依你的修改重新產生 ✔"); } };
+    $("#btnDownload").onclick = function () {
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([buildLW(current || MT_DRAFT)], { type: "text/html" }));
+      a.download = "pokemon_ar_l10n.html"; a.click();
+    };
+
+    $$(".lang-tabs button").forEach(function (b) {
+      b.onclick = function () {
+        $$(".lang-tabs button").forEach(function (x) { x.classList.remove("active"); });
+        b.classList.add("active"); simLang = b.dataset.l;
+        if (current) renderPhone(current);
+      };
+    });
+    ["optLost", "optPhoto", "optSpin"].forEach(function (id) {
+      $("#" + id).onchange = function () { if (current) renderPhone(current); };
+    });
+
+    $$(".copy").forEach(function (b) {
+      b.onclick = function () {
+        var txt = $("#" + b.dataset.copy).textContent;
+        if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function () { toast("Copied ✔", "已複製 ✔"); });
+      };
+    });
+
+    $$("#mtFilter .chip").forEach(function (c) {
+      c.onclick = function () {
+        $$("#mtFilter .chip").forEach(function (x) { x.classList.remove("active"); });
+        c.classList.add("active");
+        $$(".errors tbody tr").forEach(function (r) {
+          r.style.display = c.dataset.f === "all" || r.dataset.c === c.dataset.f ? "" : "none";
+        });
+      };
+    });
+
+    var links = $$("#nav a");
+    window.addEventListener("scroll", function () {
+      var y = window.scrollY + 140;
+      links.forEach(function (a) {
+        var s = $(a.getAttribute("href"));
+        a.classList.toggle("on", !!s && s.offsetTop <= y && s.offsetTop + s.offsetHeight > y);
+      });
+    });
+
+    loadConfig(MT_DRAFT);
+    buildAnswerKey();
+  }
+
+  /* Works whether the script runs before or after DOM is ready (Liveweave-safe) */
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();</script>
+            
+        
+    </body>
